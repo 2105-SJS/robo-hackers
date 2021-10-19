@@ -30,6 +30,7 @@ In a second terminal navigate back to the local repo and run `npm run client:dev
 This is set up to run on a proxy, so that you can make calls back to your `api` without needing absolute paths. You can instead `axios.get('/api/posts')` or whatever without needing to know the root URL.
 
 Once both dev commands are running, you can start developing... the server restarts thanks to `nodemon`, and the client restarts thanks to `react-scripts`.
+(secret chicken)
 
 ### Project Structure
 
