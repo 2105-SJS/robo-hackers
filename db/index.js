@@ -4,6 +4,8 @@ const DB_NAME = 'robo-hacker'
 const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${ DB_NAME }`
 const client = new Client(DB_URL);
 
+const bcrypt = require('bcrypt');
+
 // database methods
 
 const createProduct = async ({description, price, imageURL, inStock, category}) => {
@@ -23,11 +25,15 @@ const createProduct = async ({description, price, imageURL, inStock, category}) 
 
 const createUser = async ({firstName, lastName, email, imageURL, username, password, isAdmin}) => {
   try {
+    const SALT_COUNT = 10;
+    const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     const {rows: [user] } = await client.query(`
     INSERT INTO users("firstName", "lastName", email, "imageURL", username, password, "isAdmin")
     VALUES($1, $2, $3, $4, $5, $6, $7)
+    ON CONFLICT (username) DO NOTHING
     RETURNING *;
-    `, [firstName, lastName, email, imageURL, username, password, isAdmin]);
+    `, [firstName, lastName, email, imageURL, username, hashedPassword, isAdmin]);
+    // delete user.password;
     return user;
     
   } catch (error) {
