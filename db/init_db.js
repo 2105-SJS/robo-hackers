@@ -17,13 +17,15 @@ async function buildTables() {
   }
 }
 
-async function populateInitialData() {
-  try {
-    // create useful starting data
-  } catch (error) {
-    throw error;
-  }
-}
+// async function populateInitialData() {
+//   try {
+//     // create useful starting data
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+
 
 buildTables()
   .then(populateInitialData)
