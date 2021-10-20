@@ -61,6 +61,33 @@ const createOrderProducts = async ({productId, orderId, price, quantity}) => {
   }
 }
 
+/*-----------PRODUCTS-----------*/
+
+const getAllProducts = async () => {
+  try {
+    const {rows: products} = await client.query(`
+      SELECT *
+      FROM products;
+    `);
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const getProductById = async (productId) => {
+  try {
+    const {rows: [product]} = await client.query(`
+      SELECT * 
+      FROM products
+      WHERE id = $1
+    `, [productId]);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // export
 module.exports = {
   client,
@@ -68,5 +95,7 @@ module.exports = {
   createProduct,
   createUser,
   createOrder,
-  createOrderProducts
+  createOrderProducts,
+  getAllProducts,
+  getProductById
 }
