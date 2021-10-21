@@ -1,3 +1,4 @@
+const { client } = require('./client');
 const bcrypt = require('bcrypt');
 
 const createUser = async ({firstName, lastName, email, imageURL, username, password, isAdmin}) => {

@@ -1,3 +1,5 @@
+const { client } = require('./client');
+
 const createProduct = async ({description, price, imageURL, inStock, category}) => {
   try {
     const {rows: [product] } = await client.query(`

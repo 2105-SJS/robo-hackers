@@ -1,3 +1,5 @@
+const { client } = require('./client');
+
 const createOrderProducts = async ({productId, orderId, price, quantity}) => {
   try {
     const {rows: [orderProduct]} = await client.query(`
