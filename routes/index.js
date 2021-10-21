@@ -6,4 +6,11 @@ apiRouter.get("/", (req, res, next) => {
   });
 });
 
+const productsRouter = require('./products');
+apiRouter.use('./products', productsRouter);
+
+apiRouter.use((error, req, res, next) => {
+  res.send(error);
+});
+
 module.exports = apiRouter;
