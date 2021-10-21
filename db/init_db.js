@@ -87,7 +87,6 @@ async function populateInitialData() {
 }
 
 
-
 buildTables()
   .then(populateInitialData)
   .catch(console.error)
