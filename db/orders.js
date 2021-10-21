@@ -1,5 +1,3 @@
-const { client } = require('./index');
-
 const createOrder = async ({status, userId, datePlaced}) => {
   try {
     const {rows: [order]} = await client.query(`
