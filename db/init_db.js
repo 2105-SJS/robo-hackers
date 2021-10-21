@@ -2,6 +2,19 @@
 const {
   client
   // other db methods 
+} = require('./client');
+
+const {
+  createProduct,
+  createUser,
+  getUserByUsername,
+  getUserById,
+  getAllUsers,
+  getUser,
+  createOrder,
+  createOrderProducts,
+  getAllProducts,
+  getProductById
 } = require('./index');
 
 async function buildTables() {
