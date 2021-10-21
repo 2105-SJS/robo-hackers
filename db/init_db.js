@@ -40,7 +40,7 @@ async function buildTables() {
         id SERIAL PRIMARY KEY,
         description VARCHAR(255) NOT NULL,
         price NUMERIC(10, 2) NOT NULL,
-        "imageURL" VARCHAR(255) DEFAULT 'https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg',
+        "imageURL" VARCHAR(255) NOT NULL,
         "inStock" BOOLEAN DEFAULT false,
         "category" VARCHAR(255) NOT NULL
       );
@@ -50,7 +50,7 @@ async function buildTables() {
         "firstName" VARCHAR(255) NOT NULL,
         "lastName" VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
-        "imageURL" VARCHAR(255) DEFAULT 'https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg',
+        "imageURL" VARCHAR(255) NOT NULL,
         username VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) UNIQUE NOT NULL,
         "isAdmin" BOOLEAN NOT NULL DEFAULT false
