@@ -12,7 +12,7 @@ const createUser = async ({firstName, lastName, email, imageURL, username, passw
     ON CONFLICT (username) DO NOTHING
     RETURNING *;
     `, [firstName, lastName, email, imageURL, username, hashedPassword, isAdmin]);
-    // delete user.password;
+    delete user.password;
     return user;
     
   } catch (error) {
