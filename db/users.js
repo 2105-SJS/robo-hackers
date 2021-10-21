@@ -29,7 +29,11 @@ const getUser = async({username, password}) => {
         WHERE username=($1)
         AND password=($2)
       `,[username, password])
+    } else {
+      const user = "bad password";
     }
+
+    return user;
 
   } catch(error) {
     throw(error);
