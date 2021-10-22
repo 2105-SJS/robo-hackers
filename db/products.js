@@ -1,6 +1,11 @@
 const { client } = require('./client');
 
 const createProduct = async ({description, price, imageURL, inStock, category}) => {
+
+  if (!imageURL) {
+    imageURL = "placeholder picture";
+  }
+  
   try {
     const {rows: [product] } = await client.query(`
     INSERT INTO products(description, price, "imageURL", "inStock", "category")

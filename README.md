@@ -1,5 +1,4 @@
 # The Smallest Starting Point 
-//Hello there
 
 So, you want to build a full-stack JavaScript application with:
 
@@ -30,7 +29,6 @@ In a second terminal navigate back to the local repo and run `npm run client:dev
 This is set up to run on a proxy, so that you can make calls back to your `api` without needing absolute paths. You can instead `axios.get('/api/posts')` or whatever without needing to know the root URL.
 
 Once both dev commands are running, you can start developing... the server restarts thanks to `nodemon`, and the client restarts thanks to `react-scripts`.
-(secret chicken)
 
 ### Project Structure
 
@@ -95,6 +93,3 @@ heroku run npm run db:build
 Which will run `npm run db:build` on the heroku server.
 
 Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
-
-
-test

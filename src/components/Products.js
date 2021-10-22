@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { SingleProduct} from './'
 
-const Products = async ({products, getProducts}) => {
+const Products = async ({products, fetchProducts}) => {
 
     return <>
     {

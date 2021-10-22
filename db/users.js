@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
 const createUser = async ({firstName, lastName, email, imageURL, username, password, isAdmin}) => {
+
+  if (!imageURL) {
+    imageURL = "placeholder picture";
+  }
+
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     const {rows: [user] } = await client.query(`
@@ -22,14 +27,13 @@ const createUser = async ({firstName, lastName, email, imageURL, username, passw
 
 const getUser = async({username, password}) => {
   try {
-    const user = await getUserByUsername(username);
-    if (bcrypt.compare(password, user.password)){
-      const{rows:[user]} = await client.query(`
-        SELECT * FROM users
-        WHERE username=($1)
-        AND password=($2)
-      `,[username, password])
+    const comparedUser = await getUserByUsername(username);
+    if (!await bcrypt.compare(password, comparedUser.password)){
+      return null;
     }
+
+    delete(comparedUser.password);
+    return comparedUser;
 
   } catch(error) {
     throw(error);
