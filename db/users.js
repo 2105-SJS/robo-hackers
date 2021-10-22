@@ -22,14 +22,13 @@ const createUser = async ({firstName, lastName, email, imageURL, username, passw
 
 const getUser = async({username, password}) => {
   try {
-    const user = await getUserByUsername(username);
-    if (bcrypt.compare(password, user.password)){
-      const{rows:[user]} = await client.query(`
-        SELECT * FROM users
-        WHERE username=($1)
-        AND password=($2)
-      `,[username, password])
+    const comparedUser = await getUserByUsername(username);
+    if (!await bcrypt.compare(password, comparedUser.password)){
+      return null;
     }
+
+    delete(comparedUser.password);
+    return comparedUser;
 
   } catch(error) {
     throw(error);
