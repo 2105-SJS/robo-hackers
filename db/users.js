@@ -4,10 +4,15 @@ const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
 const createUser = async ({firstName, lastName, email, imageURL, username, password, isAdmin}) => {
+
+  if (!imageURL) {
+    imageURL = "placeholder picture";
+  }
+
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     const {rows: [user] } = await client.query(`
-    INSERT INTO users("firstName", "lastName", email, "imageURL" = 'https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg', username, password, "isAdmin")
+    INSERT INTO users("firstName", "lastName", email, "imageURL", username, password, "isAdmin")
     VALUES($1, $2, $3, $4, $5, $6, $7)
     ON CONFLICT (username) DO NOTHING
     RETURNING *;

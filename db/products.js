@@ -1,9 +1,14 @@
 const { client } = require('./client');
 
 const createProduct = async ({description, price, imageURL, inStock, category}) => {
+
+  if (!imageURL) {
+    imageURL = "placeholder picture";
+  }
+  
   try {
     const {rows: [product] } = await client.query(`
-    INSERT INTO products(description, price, "imageURL" = 'https://cdn.britannica.com/18/137318-050-29F7072E/rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg', "inStock", "category")
+    INSERT INTO products(description, price, "imageURL", "inStock", "category")
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;
     `, [description, price, imageURL, inStock, category]);
