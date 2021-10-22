@@ -13,7 +13,7 @@ productsRouter.get('/', async (req, res, next) => {
 
 
 
-products.get('/:productid', async (req, res, next) => {
+productsRouter.get('/:productid', async (req, res, next) => {
     try {
         const {productId} = req.params;
         const product = await getProductById(productId);
