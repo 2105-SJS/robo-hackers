@@ -55,6 +55,7 @@ const App = () => {
     <div className="App">
       <h1>Hello, World!</h1>
       <h2>{ message }</h2>
+      <Navigation username={username} token={token} setUsername = {setUsername} setToken= {setToken}/>
       <div>
         <Switch>
           <Route exact path = "/products">
