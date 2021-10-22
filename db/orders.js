@@ -1,5 +1,8 @@
 const { client } = require('./client');
 
+const { getProductById } = require("./products");
+const { getOrderProductsByOrder} = require("./order_products");
+
 const createOrder = async ({status, userId, datePlaced}) => {
   try {
     const {rows: [order]} = await client.query(`
@@ -15,6 +18,27 @@ const createOrder = async ({status, userId, datePlaced}) => {
   }
 }
 
+const _attachProducts = async (id) => {
+  const order = await getOrderById(id);
+  const allOrderProducts = await getOrderProductsByOrder({id: order.id});
+
+  order.products = []
+  await Promise.all(allOrderProducts.map(async(orderProduct) => {
+      const product = await getProductById(orderProduct.productId);
+      product.price = orderProduct.price;
+      product.quantity = orderProduct.quantity;
+      const {id, name, description, price, quantity} = product;
+      const productColumns = {price, description, quantity, id, name};
+      order.products.push(productColumns);
+      return product;
+  }));
+
+//<<<<<<<<<<<
+//This should get all orders in general
+//Can make a helper function that should grab all orders with their products by specific user
+
+};
+
 const getOrderById = async (id) => {
   try {
     const {rows: [order]} = await client.query(`
@@ -27,12 +51,17 @@ const getOrderById = async (id) => {
   }
 }
 
-getAllOrders = async () => {
+const getAllOrders = async () => {
   try {
     const {rows: orders} = await client.query(`
     SELECT * from orders;
     `);
-    return orders;
+
+    const attachProductsToOrder = await Promise.all(routines.map(async(routine) => {
+      const attachedOrder = await _attachProducts(order.id);
+      return attachedOrder
+    }));
+    return attachProductsToOrder;
   } catch (error) {
     throw error;
   }
