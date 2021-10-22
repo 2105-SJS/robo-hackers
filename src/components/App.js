@@ -16,6 +16,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
+  const [user, setUser] = useState('');
   const [userId, setUserId] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -55,11 +56,18 @@ const App = () => {
     <div className="App">
       <h1>Hello, World!</h1>
       <h2>{ message }</h2>
+      <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword}/>
       <div>
         <Switch>
+
+          <Route exact path = "/login">
+            <Login setToken= {setToken} token={token} setUsername = {setUsername} setPassword = {setPassword} username = {username} password = {password} setLoggedIn = {setLoggedIn} setUser = {setUser} user = {user} />
+          </Route>
+
           <Route exact path = "/products">
             <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts}/>
           </Route>
+          
         </Switch>
       </div>
     </div>
