@@ -66,6 +66,10 @@ const App = () => {
             <Login setToken= {setToken} token={token} setUsername = {setUsername} setPassword = {setPassword} username = {username} password = {password} setLoggedIn = {setLoggedIn} setUser = {setUser} user = {user} />
           </Route>
 
+          <Route exact path = "/register">
+              <Register setToken= {setToken} token={token} setUsername = {setUsername} setPassword = {setPassword} username = {username} password = {password} setLoggedIn = {setLoggedIn} setUser = {setUser} user = {user}/>
+          </Route>
+
           <Route exact path = "/products">
             <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts}/>
           </Route>
