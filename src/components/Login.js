@@ -35,6 +35,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
                 <hr></hr>
 
             </div>
+            <div>New? Click here to <Link to = '/register'>register</Link> </div>
         </form>
     </>
 }
