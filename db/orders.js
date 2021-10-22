@@ -15,6 +15,31 @@ const createOrder = async ({status, userId, datePlaced}) => {
   }
 }
 
+const getOrderById = async (id) => {
+  try {
+    const {rows: [order]} = await client.query(`
+    SELECT * from orders
+    WHERE id = $1;
+    `)
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
+getAllOrders = async () => {
+  try {
+    const {rows: orders} = await client.query(`
+    SELECT * from orders;
+    `);
+    return orders;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
-  createOrder
+  createOrder,
+  getOrderById,
+  getAllOrders
 }
