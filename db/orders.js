@@ -91,9 +91,38 @@ const getOrdersByUser = async ({id}) => {
   }
 }
 
+
+
+
+
+
+const getOrdersByProduct = async ({id}) => {
+  try {
+    const {rows: ordersByProduct} = await client.query(`
+    SELECT "orderId" from order_products
+    WHERE "productId" = $1;
+    `, [id]);
+    const {rows: orders} = await client.query(`
+    SELECT * FROM orders
+    WHERE id = $1;
+    `, [ordersByProduct.orderId])
+
+    const attachProductsToOrder = await Promise.all(orders.map(async(order) => {
+      const attachedOrder = await _attachProducts(order.id);
+      return attachedOrder;
+    }));
+    return attachProductsToOrder;
+
+    
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createOrder,
   getOrderById,
   getAllOrders,
-  getOrdersByUser
+  getOrdersByUser,
+  getOrdersByProduct
 }
