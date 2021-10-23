@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 
 import {
   Products,
-  SingleProduct
+  Login,
+  Register,
+  Navigation
 } from './';
 
 import {
@@ -17,7 +19,6 @@ const App = () => {
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
-  const [userId, setUserId] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
 

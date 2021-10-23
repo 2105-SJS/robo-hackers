@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, password}) => {
+const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, password, setUser}) => {
     const[secondPassword, setSecondPassword] = useState('');
     const history = useHistory();
 
     const handleSubmit = async (ev) => {
         try {
             ev.preventDefault();
-            const user = ({username: 'robo', password: 'hacker', token: 'robotoken'})
+            const token = {token: 'robotoken'}
+            const user = ({username: 'robo', password: 'hacker'})
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);
