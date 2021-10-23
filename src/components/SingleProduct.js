@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SingleProduct = async ({product}) => {
+const SingleProduct = ({product}) => {
     return product ?
     <div>
         <div>{product.imageURL}</div>
