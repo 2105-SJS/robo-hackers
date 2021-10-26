@@ -5,7 +5,8 @@ const {
     getAllUsers,
     getUserById,
     getUserByUsername,
-    getUser
+    getUser,
+    createUser
 } = require('../db/index.js')
 
 const jwt = require('jsonwebtoken');
@@ -28,7 +29,7 @@ usersRouter.get('/', async (req, res, next) => {
 })
 
 usersRouter.post('/register', async (req, res, next) => {
-    const {username, password} = req.body;
+    const {username, password, firstName, lastName, email} = req.body;
 
     try {
 
