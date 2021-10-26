@@ -5,7 +5,8 @@ import {
   Products,
   Login,
   Register,
-  Navigation
+  Navigation,
+  MyAccount
 } from './';
 
 import {
@@ -76,6 +77,10 @@ const fetchProducts = (productsList) => {
             <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} productsList = {productsList}/>
           </Route>
           
+          <Route exact path = "/account">
+            <MyAccount user={user}/>
+          </Route>
+
         </Switch>
       </div>
     </div>
