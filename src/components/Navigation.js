@@ -6,7 +6,7 @@ const Navigation = ({username, token, setToken, setUsername}) => {
     const logOut = () => {
         setUsername('');
         setToken('');
-        localStorage.remove('token')
+        localStorage.removeItem('token')
         history.push('/account/:method');
     }
     return <>
