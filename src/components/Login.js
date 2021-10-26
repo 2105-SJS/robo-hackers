@@ -7,6 +7,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
         try {
             ev.preventDefault();
             const user = ({username: 'robo', password: 'hacker', token: 'robotoken'})
+            const token = user.token;
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);

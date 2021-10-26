@@ -9,6 +9,9 @@ apiRouter.get("/", (req, res, next) => {
 const productsRouter = require('./products');
 apiRouter.use('/products', productsRouter);
 
+const usersRouter = require('./users');
+apiRouter.use('/users', usersRouter);
+
 apiRouter.use((error, req, res, next) => {
   res.send(error);
 });
