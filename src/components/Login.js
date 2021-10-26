@@ -6,8 +6,10 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
     const handleSubmit = async (ev) => {
         try {
             ev.preventDefault();
+
             const token = {token: 'robotoken'}
             const user = ({username: 'robo', password: 'hacker'})
+
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);
