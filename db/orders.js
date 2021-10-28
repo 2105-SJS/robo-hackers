@@ -91,14 +91,16 @@ const getOrdersByUser = async ({id}) => {
   }
 }
 
-const getCartByUser = async ({id}) => {
+const getCartByUser = async (id) => {
   try {
-    const {rows: [userCart]} = await client.query(`
-    SELECT users.username, users.email, orders.status, orders."datePlaced", products.description, products.price, order_products.quantity, order_products.quantity
-    FROM users WHERE id = $1
-    INNER JOIN orders ON users.is = orders."userId"
-    INNER JOIN order_products ON orders.id = order_products."orderId";
+    const {rows: userCart} = await client.query(`
+    SELECT users.username, users.email, orders.status, orders."datePlaced", order_products.quantity, order_products.price
+    FROM users
+    JOIN orders ON users.id = orders."userId"
+    LEFT JOIN order_products ON orders.id = order_products."orderId"
+    WHERE users.id = $1;
     `,[id])
+    return userCart;
     
   } catch (error) {
     throw error
