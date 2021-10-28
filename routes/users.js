@@ -71,4 +71,57 @@ usersRouter.post('/register', async (req, res, next) => {
     }
 });
 
+usersRouter.post('/login', async (req, res, next) => {
+    const {username, password} = req.body;
+
+    if (!username || !password) {
+        next({
+            name: "MissingCredentialsError",
+            message: "Please supply both a username and password"
+        });
+    }
+
+    try {
+        const user = await getUserByUsername(username);
+        const token = jwt.sign(user, process.env.JWT_SECRET);
+
+        const checkPass = use.password === password;
+
+        if(user && checkPass) {
+            res.send({token});
+        } else {
+            next({
+                name: 'IncorrectCredentialsError',
+                message: 'Username or password is incorrect'
+            });
+        }
+    } catch({name, message}) {
+        next({name, message});
+    }
+})
+
+usersRouter.get('/me', async (req, res, next) => {
+    const bearerToken = req.headers.authorization;
+    
+    try {
+        if (!bearerToken) {
+            res.status(400);
+            next({
+                name: 'InvalidToken',
+                message: 'no token was provided in header'
+            })
+        }
+        //getting just the actual token without 'bearer' in front
+        const token = bearerToken.slice(7);
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        const userData = await getUserById(verifiedToken.id);
+        res.send(userData);
+
+    } catch({name, message}){
+        next({name, message})
+    }
+})
+
+
 module.exports = usersRouter
