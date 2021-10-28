@@ -1,5 +1,6 @@
 const express = require('express');
 const usersRouter = express.Router();
+const bcrypt = require('bcrypt');
 
 const {
     getAllUsers,
@@ -85,7 +86,7 @@ usersRouter.post('/login', async (req, res, next) => {
         const user = await getUserByUsername(username);
         const token = jwt.sign(user, process.env.JWT_SECRET);
 
-        const checkPass = use.password === password;
+        const checkPass = await bcrypt.compare(password, user.password)
 
         if(user && checkPass) {
             res.send({token});
@@ -102,6 +103,7 @@ usersRouter.post('/login', async (req, res, next) => {
 
 usersRouter.get('/me', async (req, res, next) => {
     const bearerToken = req.headers.authorization;
+    console.log(bearerToken);
     
     try {
         if (!bearerToken) {
