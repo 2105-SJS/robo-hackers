@@ -13,7 +13,8 @@ const {
 } = require('./users');
 
 const {
-  createOrder
+  createOrder,
+  getOrdersByProduct
 } = require('./orders');
 
 const {
@@ -32,5 +33,6 @@ module.exports = {
   createOrder,
   createOrderProducts,
   getAllProducts,
-  getProductById
+  getProductById,
+  getOrdersByProduct
 }

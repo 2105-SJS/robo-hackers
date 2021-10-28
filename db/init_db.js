@@ -14,7 +14,8 @@ const {
   createOrder,
   createOrderProducts,
   getAllProducts,
-  getProductById
+  getProductById,
+  getOrdersByProduct
 } = require('./index.js')
 
 async function buildTables() {
