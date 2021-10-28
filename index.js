@@ -6,6 +6,7 @@ const server = express();
 const morgan = require('morgan');
 server.use(morgan('dev'));
 
+require('dotenv').config();
 // handle application/json requests
 const bodyParser = require('body-parser');
 server.use(bodyParser.json());
