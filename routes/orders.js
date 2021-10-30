@@ -24,13 +24,24 @@ ordersRouter.get('/', async (req, res, next) => {
 });
 
 ordersRouter.post('/', async (req, res, next) => {
-    console.log('req.body', req.body);
     try {
-        const order = createOrder(req.body);
+        const { status, userId, datePlaced } = req.body;
+        const order = createOrder({ status, userId, datePlaced });
         res.send(order);
     } catch (error) {
         next (error);
     };
+});
+
+ordersRouter.get('/cart', requireUser, async (req, res, next) => {
+    const { id } = req.body;
+    try {
+        const userOrders = await getOrdersByUser (id);
+        const userCart = userOrders.filter(order => order.status = "created");
+        res.send (userCart)
+    } catch (error) {
+        throw (error);
+    }
 });
 
 

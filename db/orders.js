@@ -87,7 +87,7 @@ const getOrdersByUser = async ({id}) => {
 
     
   } catch (error) {
-    throw errow;
+    throw error;
   }
 }
 
