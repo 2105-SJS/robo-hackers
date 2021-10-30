@@ -36,9 +36,22 @@ const updateOrderProducts = async ({ id, price, quantity }) => {
 const getOrderProductsByOrder = async ({id}) => {
   try {
     const {rows: orderProducts} = await client.query(`
-    SELECT * from order_products
+    SELECT * FROM order_products
     WHERE "productId" = ${id};
     `)
+    return orderProducts;
+    
+  } catch (error) {
+    throw error
+  }
+}
+
+const getOrderProductById = async (id) => {
+  try {
+    const {rows: orderProducts} = await client.query(`
+    SELECT * FROM order_products
+    WHERE id = $1;
+    `, [id]);
     return orderProducts;
     
   } catch (error) {
@@ -49,5 +62,7 @@ const getOrderProductsByOrder = async ({id}) => {
 module.exports = {
   createOrderProducts,
   getOrderProductsByOrder,
+  getOrderProductById,
   updateOrderProducts
+
 }
