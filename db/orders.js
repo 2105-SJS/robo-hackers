@@ -77,11 +77,11 @@ const getOrdersByUser = async (id) => {
     JOIN products AS p ON op."productId" = p.id
     WHERE users.id = $1;
     `, [id]);
-    return userOrder
 
-    
+    return userOrder
+ 
   } catch (error) {
-    throw errow;
+    throw error;
   }
 }
 
