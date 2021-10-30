@@ -13,6 +13,21 @@ const createOrderProducts = async ({productId, orderId, price, quantity}) => {
   }
 }
 
+const updateOrderProducts = async ({ id, price, quantity }) => {
+  try {
+    const {rows: orderProductUpdate} = await client.query(`
+    UPDATE order_products
+    SET price = $2, quantity = $3
+    WHERE "orderId" = $1;
+    `, [id, price, quantity])
+    return orderProductUpdate;
+    
+  } catch (error) {
+    throw error
+    
+  }
+}
+
 const getOrderProductsByOrder = async ({id}) => {
   try {
     const {rows: orderProducts} = await client.query(`
@@ -28,5 +43,6 @@ const getOrderProductsByOrder = async ({id}) => {
 
 module.exports = {
   createOrderProducts,
-  getOrderProductsByOrder
+  getOrderProductsByOrder,
+  updateOrderProducts
 }
