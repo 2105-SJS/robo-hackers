@@ -12,6 +12,9 @@ const {
 
 const jwt = require('jsonwebtoken');
 
+
+const { getOrderById, getOrdersByUser } = require('../db/orders.js');
+
 usersRouter.use((req, res, next) => {
     next();
 })
@@ -69,6 +72,19 @@ usersRouter.post('/register', async (req, res, next) => {
 
     } catch ({name, message}){
         next({name, message});
+    }
+});
+
+usersRouter.get('/:userId/orders', async(req, res, next) => {
+    console.log(req.params.userId);
+    try {
+        const { userId } = req.params;
+        console.log('userId', userId);
+        const getOrders = await getOrdersByUser({userId}) 
+        res.send(getOrders)
+    } catch ({name, message}){
+        next({name, message}); 
+        
     }
 });
 

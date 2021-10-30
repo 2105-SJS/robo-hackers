@@ -73,6 +73,7 @@ const getOrdersByUser = async ({id}) => {
     SELECT * FROM users
     WHERE id = $1;
     `, [id]);
+    console.log('this is the user', id);
 
     const {rows: orders} = await client.query(`
     SELECT * from orders
@@ -87,7 +88,7 @@ const getOrdersByUser = async ({id}) => {
 
     
   } catch (error) {
-    throw errow;
+    throw error;
   }
 }
 
