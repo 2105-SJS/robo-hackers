@@ -197,15 +197,15 @@ async function populateInitialData() {
   } catch (error) {
     throw error;
   }
-}
 
-try {
-  const userIdOrders = await getOrdersByUser(1);
-  console.log('user>>>>>>', userIdOrders);
-} catch (error) {
+
+  try {
+    const userIdOrders = await getOrdersByUser(1);
+    console.log('user>>>>>>', userIdOrders);
+  } catch (error) {
   throw error;
+  }
 }
-
   
 
 

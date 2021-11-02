@@ -8,7 +8,6 @@ const {
     getUserByUsername,
     getUser,
     createUser,
-    createUser,
     getOrdersByUser,
     getOrderById
 } = require('../db/index.js')
