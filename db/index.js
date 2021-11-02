@@ -14,25 +14,39 @@ const {
 
 const {
   createOrder,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUser,
+  completeOrder,
   cancelOrder
 } = require('./orders');
 
 const {
-  createOrderProducts
+  createOrderProducts,
+  getOrderProductsByOrder,
+  getOrderProductById,
+  updateOrderProducts
 } = require('./order_products');
 
 // export
 module.exports = {
   // db methods
   createProduct,
+  getAllProducts,
+  getProductById,
   createUser,
   getUserByUsername,
   getUserById,
   getAllUsers,
   getUser,
   createOrder,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUser,
+  completeOrder,
   createOrderProducts,
-  getAllProducts,
-  getProductById,
-  cancelOrder
+  cancelOrder,
+  getOrderProductsByOrder,
+  getOrderProductById,
+  updateOrderProducts
 }

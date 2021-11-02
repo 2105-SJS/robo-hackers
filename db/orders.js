@@ -18,6 +18,19 @@ const createOrder = async ({status, userId, datePlaced}) => {
   }
 }
 
+const completeOrder = async (id) => {
+  try {
+    const {rows: finishedOrder} = await client.query(`
+    UPDATE orders
+    SET status = 'completed'
+    WHERE id = $1;
+    `, [id]);
+    return finishedOrder;
+  } catch (error) {
+    throw error
+  }
+}
+
 const _attachProducts = async (id) => {
   const order = await getOrderById(id);
   const allOrderProducts = await getOrderProductsByOrder({id: order.id});
@@ -102,5 +115,6 @@ module.exports = {
   getOrderById,
   getAllOrders,
   getOrdersByUser,
-  cancelOrder
+  cancelOrder,
+  completeOrder
 }
