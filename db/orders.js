@@ -46,22 +46,22 @@ const _attachProducts = async (id) => {
       return product;
   }));
 
-  const cancelOrder = async (id) => {
-    try {
-      const {rows: orderCancelled} = await client.query(`
-      UPDATE orders
-      SET status = 'cancelled'
-      WHERE id = $1;
-      `, [id]);
-    } catch (error) {
-      throw error
-    }
-  }
-
 //<<<<<<<<<<<
 //This should get all orders in general
 //Can make a helper function that should grab all orders with their products by specific user
 
+};
+
+const cancelOrder = async (id) => {
+  try {
+    const {rows: orderCancelled} = await client.query(`
+    UPDATE orders
+    SET status = 'cancelled'
+    WHERE id = $1;
+    `, [id]);
+  } catch (error) {
+    throw error
+  }
 };
 
 const getOrderById = async (id) => {
