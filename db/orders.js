@@ -33,6 +33,18 @@ const _attachProducts = async (id) => {
       return product;
   }));
 
+  const cancelOrder = async (id) => {
+    try {
+      const {rows: orderCancelled} = await client.query(`
+      UPDATE orders
+      SET status = 'cancelled'
+      WHERE id = $1;
+      `, [id]);
+    } catch (error) {
+      throw error
+    }
+  }
+
 //<<<<<<<<<<<
 //This should get all orders in general
 //Can make a helper function that should grab all orders with their products by specific user
@@ -44,7 +56,7 @@ const getOrderById = async (id) => {
     const {rows: [order]} = await client.query(`
     SELECT * from orders
     WHERE id = $1;
-    `)
+    `, [id])
     return order;
   } catch (error) {
     throw error;
@@ -89,5 +101,6 @@ module.exports = {
   createOrder,
   getOrderById,
   getAllOrders,
-  getOrdersByUser
+  getOrdersByUser,
+  cancelOrder
 }
