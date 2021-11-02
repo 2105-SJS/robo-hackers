@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { SingleProduct} from './'
+import { SingleProduct } from './'
 
-const Products = async ({products, fetchProducts}) => {
-
+const Products = ({products, fetchProducts, productsList}) => {
+    console.log('Products <><><><><', productsList)
     return <>
+    {/* <h3>{productsList[0].description}</h3> */}
     {
         products ? products.map(product => <SingleProduct key = {product.id} product = {product}>
             </SingleProduct>)

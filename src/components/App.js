@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 
 import {
   Products,
-  SingleProduct
+  Login,
+  Register,
+  Navigation,
+  MyAccount
 } from './';
 
 import {
@@ -17,14 +20,14 @@ const App = () => {
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
-  const [userId, setUserId] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
-
-  const fetchProducts = () => {
+const productsList = [{description: "Chia pet", price: 10.99, inStock: true, category: "plants"}];
+  
+const fetchProducts = (productsList) => {
     try {
-      const products = [{description: "Chia pet", price: 10.99, inStock: true, category: "plants"}];
-      setProducts(products);
+      
+      setProducts(productsList);
       
     } catch (error) {
       throw error;
@@ -44,7 +47,7 @@ const App = () => {
 
   useEffect(() => {
     try {
-        fetchProducts();
+        fetchProducts(productsList);
         
     } catch (error) {
         console.error(error);
@@ -52,7 +55,7 @@ const App = () => {
     }
 }, [token]);
 
-  return (
+  return <>
     <div className="App">
       <h1>Hello, World!</h1>
       <h2>{ message }</h2>
@@ -71,13 +74,17 @@ const App = () => {
           </Route>
 
           <Route exact path = "/products">
-            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts}/>
+            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} productsList = {productsList}/>
           </Route>
           
+          <Route exact path = "/account">
+            <MyAccount user={user}/>
+          </Route>
+
         </Switch>
       </div>
     </div>
-  );
+  </>;
 }
 
 export default App;
