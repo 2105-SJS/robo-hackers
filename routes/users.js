@@ -7,13 +7,14 @@ const {
     getUserById,
     getUserByUsername,
     getUser,
-    createUser
+    createUser,
+    createUser,
+    getOrdersByUser,
+    getOrderById
 } = require('../db/index.js')
 
 const jwt = require('jsonwebtoken');
 
-
-const { getOrderById, getOrdersByUser } = require('../db/orders.js');
 
 usersRouter.use((req, res, next) => {
     next();
