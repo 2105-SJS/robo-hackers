@@ -110,11 +110,28 @@ const getOrdersByUser = async (id) => {
   }
 }
 
+const getCartByUser = async (id) => {
+  try {
+    const {rows: userCart} = await client.query(`
+    SELECT users.username, users.email, orders.status, orders."datePlaced", order_products.quantity, order_products.price
+    FROM users
+    JOIN orders ON users.id = orders."userId"
+    LEFT JOIN order_products ON orders.id = order_products."orderId"
+    WHERE users.id = $1;
+    `,[id])
+    return userCart;
+    
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   createOrder,
   getOrderById,
   getAllOrders,
   getOrdersByUser,
+  getCartByUser,
   cancelOrder,
   completeOrder
 }
