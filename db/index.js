@@ -13,24 +13,38 @@ const {
 } = require('./users');
 
 const {
-  createOrder
+  createOrder,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUser,
+  completeOrder
 } = require('./orders');
 
 const {
-  createOrderProducts
+  createOrderProducts,
+  getOrderProductsByOrder,
+  getOrderProductById,
+  updateOrderProducts
 } = require('./order_products');
 
 // export
 module.exports = {
   // db methods
   createProduct,
+  getAllProducts,
+  getProductById,
   createUser,
   getUserByUsername,
   getUserById,
   getAllUsers,
   getUser,
   createOrder,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUser,
+  completeOrder,
   createOrderProducts,
-  getAllProducts,
-  getProductById
+  getOrderProductsByOrder,
+  getOrderProductById,
+  updateOrderProducts
 }
