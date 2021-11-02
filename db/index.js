@@ -15,6 +15,7 @@ const {
 const {
   createOrder,
   getOrdersByProduct,
+  getCartByUser,
   getOrderById,
   getAllOrders,
   getOrdersByUser,
@@ -47,6 +48,7 @@ module.exports = {
   completeOrder,
   createOrderProducts,
   getOrdersByProduct,
+  getCartByUser,
   cancelOrder,
   getOrderProductsByOrder,
   getOrderProductById,
