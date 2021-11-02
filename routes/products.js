@@ -1,6 +1,6 @@
 const express = require('express');
 const productsRouter = express.Router();
-const { getAllProducts, getProductById } = require('../db');
+const { getAllProducts, getProductById } = require('../db/index');
 
 productsRouter.get('/', async (req, res, next) => {
     try {
@@ -13,10 +13,12 @@ productsRouter.get('/', async (req, res, next) => {
 
 
 
+
 productsRouter.get('/:productid', async (req, res, next) => {
+
     try {
-        const {productId} = req.params;
-        const product = await getProductById(productId);
+        const {productid} = req.params;
+        const product = await getProductById(productid);
         res.send(product)
     } catch (error) {
         next (error)

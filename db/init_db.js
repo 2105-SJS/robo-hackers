@@ -14,8 +14,10 @@ const {
   createOrder,
   createOrderProducts,
   getAllProducts,
-  getProductById
-} = require('./index.js')
+  getProductById,
+  getOrdersByProduct,
+  getCartByUser
+} = require('./index.js');
 
 async function buildTables() {
   try {
@@ -136,6 +138,7 @@ async function populateInitialData() {
     const order_productsToCreate = [
       {productId: 1, orderId: 1, price: 120.88, quantity: 50},
       {productId: 3, orderId: 2, price: 120398.23, quantity: 7}
+
     ]
   } catch(error) {
     throw(error);
@@ -181,7 +184,15 @@ async function populateInitialData() {
   } catch(error) {
     throw(error);
   }
+  try {
+   const cart = await getCartByUser(1);
+    console.log('cart>>>>>>>>>>', cart)
+  } catch (error) {
+    throw error;
+  }
 }
+  
+
 
 buildTables()
   .then(populateInitialData)
