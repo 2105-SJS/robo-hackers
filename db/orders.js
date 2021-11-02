@@ -102,11 +102,26 @@ const getOrdersByUser = async (id) => {
     JOIN products AS p ON op."productId" = p.id
     WHERE users.id = $1;
     `, [id]);
-
-    return userOrder
- 
+    return userOrder;
+    
   } catch (error) {
     throw error;
+  }
+}
+
+const getOrdersByProduct = async (id) => {
+  try {
+    const {rows: ordersByProduct} = await client.query(`
+    SELECT orders.id AS OrderID, orders.status, orders."datePlaced", orders."userId", products.description, products.price
+    FROM orders
+    JOIN order_products ON orders.id = order_products."orderId"
+    JOIN products ON products.id = order_products."productId"
+    WHERE "productId" = $1;
+    `, [id]);
+
+    return ordersByProduct;
+  } catch (error) {
+    throw(error)
   }
 }
 
@@ -121,6 +136,7 @@ const getCartByUser = async (id) => {
     `,[id])
     return userCart;
     
+
   } catch (error) {
     throw error
   }
@@ -131,6 +147,7 @@ module.exports = {
   getOrderById,
   getAllOrders,
   getOrdersByUser,
+  getOrdersByProduct,
   getCartByUser,
   cancelOrder,
   completeOrder

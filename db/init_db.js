@@ -15,6 +15,7 @@ const {
   createOrderProducts,
   getAllProducts,
   getProductById,
+  getOrdersByProduct,
   getCartByUser
 } = require('./index.js');
 
