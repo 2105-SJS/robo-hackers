@@ -16,7 +16,8 @@ const {
   getAllProducts,
   getProductById,
   getOrdersByProduct,
-  getCartByUser
+  getCartByUser,
+  getOrdersByUser
 } = require('./index.js');
 
 async function buildTables() {
@@ -140,6 +141,12 @@ async function populateInitialData() {
       {productId: 3, orderId: 2, price: 120398.23, quantity: 7}
 
     ]
+
+    const order_products = await Promise.all(order_productsToCreate.map(createOrderProducts))
+
+    console.log('OrderProducts created:')
+    console.log(order_products);
+    console.log('Finished creating orderProducts');
   } catch(error) {
     throw(error);
   }
@@ -189,6 +196,14 @@ async function populateInitialData() {
     console.log('cart>>>>>>>>>>', cart)
   } catch (error) {
     throw error;
+  }
+
+
+  try {
+    const userIdOrders = await getOrdersByUser(1);
+    console.log('user>>>>>>', userIdOrders);
+  } catch (error) {
+  throw error;
   }
 }
   

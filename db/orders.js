@@ -94,7 +94,7 @@ const getAllOrders = async () => {
 
 const getOrdersByUser = async (id) => {
   try {
-    const {rows: [userOrder]} = await client.query(`
+    const {rows: userOrder} = await client.query(`
     SELECT users.username, users.email, orders.status, orders."datePlaced", op.price, op.quantity, p.description, p.price 
     FROM users
     JOIN orders ON users.id = orders."userId"
