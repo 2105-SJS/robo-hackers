@@ -75,19 +75,6 @@ usersRouter.post('/register', async (req, res, next) => {
     }
 });
 
-usersRouter.get('/:userId/orders', async(req, res, next) => {
-    console.log(req.params.userId);
-    try {
-        const { userId } = req.params;
-        console.log('userId', userId);
-        const getOrders = await getOrdersByUser({userId}) 
-        res.send(getOrders)
-    } catch ({name, message}){
-        next({name, message}); 
-        
-    }
-});
-
 usersRouter.post('/login', async (req, res, next) => {
     const {username, password} = req.body;
 
@@ -140,6 +127,19 @@ usersRouter.get('/me', async (req, res, next) => {
         next({name, message})
     }
 })
+
+usersRouter.get('/:userId/orders', async(req, res, next) => {
+    console.log(req.params.userId);
+    try {
+        const { userId } = req.params;
+        console.log('userId', userId);
+        const getOrders = await getOrdersByUser({userId}) 
+        res.send(getOrders)
+    } catch ({name, message}){
+        next({name, message}); 
+        
+    }
+});
 
 
 module.exports = usersRouter
