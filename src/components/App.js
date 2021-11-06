@@ -6,7 +6,8 @@ import {
   Login,
   Register,
   Navigation,
-  MyAccount
+  MyAccount,
+  ProductById
 } from './';
 
 import {
@@ -22,7 +23,7 @@ const App = () => {
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
-const productsList = [{description: "Chia pet", price: 10.99, inStock: true, category: "plants"}];
+const productsList = [{id: 1, description: "Chia pet", price: 10.99, inStock: true, category: "plants"}];
   
 const fetchProducts = (productsList) => {
     try {
@@ -75,6 +76,10 @@ const fetchProducts = (productsList) => {
 
           <Route exact path = "/products">
             <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} productsList = {productsList}/>
+          </Route>
+
+          <Route exact path = "/products/:productId">
+            <ProductById products = {products} />
           </Route>
           
           <Route exact path = "/account">

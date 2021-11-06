@@ -4,6 +4,7 @@ const SingleProduct = ({product}) => {
     return product ?
     <div>
         <div>{product.imageURL}</div>
+        <div>ID: {product.id}</div>
         <div>Name: {product.description}</div>
         <hr></hr>
         <div>Price: {product.price}</div>
