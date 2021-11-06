@@ -4,6 +4,10 @@ const {} = require('../db');
 const { getOrderById, getAllOrders, createOrder } = require('../db/orders');
 const { requireUser } = require('./utils');
 
+ordersRouter.use((req, res, next) => {
+    next();
+});
+
 ordersRouter.get('/', async (req, res, next) => {
     try {
         const { isAdmin } = req.body;
@@ -11,7 +15,7 @@ ordersRouter.get('/', async (req, res, next) => {
             res.status(400)
             throw ({
                 name: "Authentication failure error",
-                message: "user is not administerator"
+                message: "user is not administrator"
             })
         }
         const orders = await getAllOrders();
