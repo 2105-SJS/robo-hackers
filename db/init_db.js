@@ -19,6 +19,7 @@ const {
   getCartByUser,
   getOrdersByUser
 } = require('./index.js');
+const { updateOrder } = require('./orders');
 
 async function buildTables() {
   try {
@@ -204,6 +205,15 @@ async function populateInitialData() {
     console.log('user>>>>>>', userIdOrders);
   } catch (error) {
   throw error;
+  }
+
+  try {
+    const id = 1
+    const status = 'created'
+    const userId = 2
+    await updateOrder({ id, status, userId });
+  } catch (error) {
+    throw error;
   }
 }
   
