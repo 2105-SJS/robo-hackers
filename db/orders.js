@@ -142,6 +142,21 @@ const getCartByUser = async (id) => {
   }
 }
 
+const updateOrder = async ({ id, status, userId }) => {
+  try {
+    const { rows: [order] } = await client.query (`
+      UPDATE orders
+      SET status = $1, 
+      "userId" = $2
+      WHERE id = $3
+      RETURNING *;
+    `,[status, userId, id]);
+    return order;
+  } catch (error) {
+    throw error;
+  };
+};
+
 module.exports = {
   createOrder,
   getOrderById,
@@ -150,5 +165,6 @@ module.exports = {
   getOrdersByProduct,
   getCartByUser,
   cancelOrder,
-  completeOrder
+  completeOrder,
+  updateOrder
 }
