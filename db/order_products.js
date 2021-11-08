@@ -59,10 +59,52 @@ const getOrderProductById = async (id) => {
   }
 }
 
+const addProductToOrder = async ({ orderId, productId, price, quantity }) => {
+  try {
+    const { rows: orderProducts } = await client.query(`
+      SELECT * FROM order_products
+      WHERE "orderId" = $1;
+    `, [orderId]);
+    const inOrder = false;
+    const exstngOrderProduct = orderProducts[0];
+    orderProducts.forEach(orderProduct => {
+      if (orderProduct.productId === productId) {
+        exstngOrderProduct = orderProduct;
+        inOrder = true;
+      }
+    })
+    if (!inOrder) {
+      const newOrderProduct = await createOrderProducts ({ orderId, productId, price, quantity });
+      return newOrderProduct;
+    }
+    let updtProduct = {}
+    if (exstngOrderProduct.price != price) {
+      updtProduct = await client.query(`
+        UPDATE order_products
+        SET (price = $1)
+        WHERE id = $2
+        RETURNING *;
+      `, [price, exstngOrderProduct.id]);
+    }
+    if (exstngOrderProduct.quantity != quantity) {
+      updtProduct = await client.query(`
+        UPDATE order_products
+        SET (quantity = $1)
+        WHERE id = $2
+        RETURNING *;
+      `, [quantity, exstngOrderProduct.id]);
+    }
+    return updtProduct;
+  } catch (error) {
+    throw error;
+  };
+};
+
 module.exports = {
   createOrderProducts,
   getOrderProductsByOrder,
   getOrderProductById,
-  updateOrderProducts
+  updateOrderProducts,
+  addProductToOrder
 
 }
