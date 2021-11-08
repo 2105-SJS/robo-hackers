@@ -219,13 +219,15 @@ async function populateInitialData() {
   }
 
   try {
-    const id = 3
-    const orderId = 3
-    const productId = 3
-    const price = 200
-    const quantity = 2021
+    console.log('testing addProductToOrder function')
+    
+    const orderId = 2
+    const productId = 1
+    const price = 2034
+    const quantity = 1223
     await addProductToOrder ({ productId, orderId, price, quantity })
     console.log('addProductToOrder>>>>', productId, orderId, price, quantity);
+    
   } catch (error) {
     throw error;
   }
