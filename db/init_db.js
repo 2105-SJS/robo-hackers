@@ -17,9 +17,11 @@ const {
   getProductById,
   getOrdersByProduct,
   getCartByUser,
-  getOrdersByUser
+  getOrdersByUser,
+  updateOrder,
+  addProductToOrder
 } = require('./index.js');
-const { updateOrder } = require('./orders');
+
 
 async function buildTables() {
   try {
@@ -212,6 +214,18 @@ async function populateInitialData() {
     const status = 'created'
     const userId = 2
     await updateOrder({ id, status, userId });
+  } catch (error) {
+    throw error;
+  }
+
+  try {
+    const id = 3
+    const orderId = 3
+    const productId = 3
+    const price = 200
+    const quantity = 2021
+    await addProductToOrder ({ productId, orderId, price, quantity })
+    console.log('addProductToOrder>>>>', productId, orderId, price, quantity);
   } catch (error) {
     throw error;
   }
