@@ -12,4 +12,8 @@ export {default as Register} from './Register';
 
 export {default as MyAccount} from './MyAccount';
 
+export {default as CheckoutForm} from './CheckoutForm';
+
+export {default as Checkout} from './Checkout';
+
 export {default as ProductById} from './ProductById';

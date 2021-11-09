@@ -7,6 +7,7 @@ import {
   Register,
   Navigation,
   MyAccount,
+  Checkout,
   ProductById
 } from './';
 
@@ -35,7 +36,6 @@ const App = () => {
       throw error;
     }
   }
-
 
   useEffect(() => {
     try {
@@ -75,6 +75,10 @@ const App = () => {
           
           <Route exact path = "/account">
             <MyAccount user={user}/>
+          </Route>
+
+          <Route exact path = "/checkout">
+            <Checkout />
           </Route>
 
         </Switch>
