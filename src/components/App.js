@@ -23,7 +23,10 @@ const App = () => {
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
-const productsList = [{id: 1, description: "Chia pet", price: 10.99, inStock: true, category: "plants"}];
+const productsList = [
+  {id: 1, description: "Chia pet", price: 10.99, inStock: true, category: "plants"},
+  {id: 2, description: "Doge", price: 1.99, inStock: true, category: "currency"}
+];
   
 const fetchProducts = (productsList) => {
     try {
