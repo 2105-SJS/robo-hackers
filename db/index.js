@@ -29,7 +29,8 @@ const {
   getOrderProductsByOrder,
   getOrderProductById,
   updateOrderProducts,
-  addProductToOrder
+  addProductToOrder,
+  destroyOrderProduct
 } = require('./order_products');
 
 // export
@@ -56,5 +57,6 @@ module.exports = {
   getOrderProductById,
   updateOrderProducts,
   updateOrder,
-  addProductToOrder
+  addProductToOrder,
+  destroyOrderProduct
 }
