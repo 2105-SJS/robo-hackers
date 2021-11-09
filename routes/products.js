@@ -15,9 +15,6 @@ productsRouter.get('/', async (req, res, next) => {
     };
 });
 
-
-
-
 productsRouter.get('/:productid', async (req, res, next) => {
 
     try {
