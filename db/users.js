@@ -85,6 +85,19 @@ const getAllUsers = async() => {
   }
 }
 
+const updateUser = async ({id, firstName, lastName, email, imageURL, username, password, isAdmin}) => {
+  try {
+    const {rows: updatedUser} = await client.query(`
+    UPDATE users
+    SET "firstName" = $2, "lastName" = $3, email = $4, "imageURL" = $5, username = $6, password = $7, "isAdmin" = $8
+    WHERE id = $1;
+    `, [id, firstName, lastName, email, imageURL, username, password, isAdmin]);
+
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 module.exports = {
@@ -92,5 +105,6 @@ module.exports = {
   getUserByUsername,
   getUserById,
   getAllUsers,
-  getUser
+  getUser,
+  updateUser
 }
