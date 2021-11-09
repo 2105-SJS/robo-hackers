@@ -18,7 +18,7 @@ const ProductById = ({products}) => {
             <div>In Stock: {product.inStock}</div>
           </div>
         )
-      : 'No item by that item!'
+      : 'No item by that item number!'
     }
   </>
 }
