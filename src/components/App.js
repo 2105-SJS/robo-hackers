@@ -6,7 +6,8 @@ import {
   Login,
   Register,
   Navigation,
-  MyAccount
+  MyAccount,
+  Checkout
 } from './';
 
 import {
@@ -33,7 +34,6 @@ const fetchProducts = (productsList) => {
       throw error;
     }
   }
-
 
   useEffect(() => {
     getSomething()
@@ -79,6 +79,10 @@ const fetchProducts = (productsList) => {
           
           <Route exact path = "/account">
             <MyAccount user={user}/>
+          </Route>
+
+          <Route exact path = "/checkout">
+            <Checkout />
           </Route>
 
         </Switch>

@@ -3,6 +3,30 @@ const ordersRouter = express.Router();
 const {} = require('../db');
 const { getOrderById, getAllOrders, createOrder } = require('../db/orders');
 const { requireUser } = require('./utils');
+const {STRIPE_SECRET_KEY} = process.env;
+const stripe = require("stripe")(STRIPE_SECRET_KEY);
+
+const calculateOrderAmount = (items) => {
+    //TO-DO return order total for checkout>>>>>>>>(Dummy being used)
+    //calculate orer total on server to prevent tampering
+    return 1400;
+};
+
+//POST /api/orders/create-payment-intent
+ordersRouter.post("/create-payment-intent", async (req, res) => {
+    const {items} = req.body;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: calculateOrderAmount(items),
+        currency: "usd",
+        payment_method_types: [
+           "card",
+        ],
+    });
+    res.send ({
+        clientSecret: paymentIntent.client_secret,
+    });
+});
 
 ordersRouter.get('/', async (req, res, next) => {
     try {
