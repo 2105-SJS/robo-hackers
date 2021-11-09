@@ -44,8 +44,29 @@ const getProductById = async (productId) => {
   }
 }
 
+const destroyProduct = async (id) => {
+  try {
+    await client.query(`
+    DELETE FROM products
+    WHERE id = $1;
+    `, [id]);
+    await client.query(`
+    DELETE from order_products
+    WHERE "productId" = $1;
+    `, [id])
+    await client.query(`
+    UPDATE orders
+    SET status = 'created';
+    `)
+
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  destroyProduct
 }
