@@ -1,6 +1,6 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const {} = require('../db');
+const { getProductById } = require('../db');
 const { getOrderById, getAllOrders, createOrder } = require('../db/orders');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
@@ -71,6 +71,18 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
         throw (error);
     }
 });
+
+ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
+    const { orderId } = req.params;
+    const { productId, quantity } = req.body;
+    try {
+        const order = await getOrderById(orderId);
+        const product = await getProductById(productId);
+        
+    } catch (error) {
+        
+    }
+})
 
 
 module.exports = ordersRouter;
