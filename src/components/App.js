@@ -11,7 +11,7 @@ import {
 } from './';
 
 import {
-  getSomething
+  callAPI
 } from '../api';
 
 const App = () => {
@@ -22,17 +22,15 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-
-const productsList = [
-  {id: 1, description: "Chia pet", price: 10.99, inStock: true, category: "plants"},
-  {id: 2, description: "Doge", price: 1.99, inStock: true, category: "currency"}
-];
   
-const fetchProducts = (productsList) => {
+  const fetchProducts = async () => {
     try {
-      
-      setProducts(productsList);
-      
+      const productsObj = await callAPI({
+        method: 'GET',
+        url: 'products',
+      });
+      if(productsObj) setProducts(productsObj);
+
     } catch (error) {
       throw error;
     }
@@ -40,24 +38,14 @@ const fetchProducts = (productsList) => {
 
 
   useEffect(() => {
-    getSomething()
-      .then(response => {
-        setMessage(response.message);
-      })
-      .catch(error => {
-        setMessage(error.message);
-      });
-  });
-
-  useEffect(() => {
     try {
-        fetchProducts(productsList);
-        
+      fetchProducts();
+          
     } catch (error) {
         console.error(error);
-        
+          
     }
-}, [token]);
+  }, [token]);
 
   return <>
     <div className="App">
@@ -78,7 +66,7 @@ const fetchProducts = (productsList) => {
           </Route>
 
           <Route exact path = "/products">
-            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} productsList = {productsList}/>
+            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} />
           </Route>
 
           <Route exact path = "/products/:productId">
