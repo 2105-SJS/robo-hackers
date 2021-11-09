@@ -28,6 +28,10 @@ ordersRouter.post("/create-payment-intent", async (req, res) => {
     });
 });
 
+ordersRouter.use((req, res, next) => {
+    next();
+});
+
 ordersRouter.get('/', async (req, res, next) => {
     try {
         const { isAdmin } = req.body;
@@ -35,7 +39,7 @@ ordersRouter.get('/', async (req, res, next) => {
             res.status(400)
             throw ({
                 name: "Authentication failure error",
-                message: "user is not administerator"
+                message: "user is not administrator"
             })
         }
         const orders = await getAllOrders();

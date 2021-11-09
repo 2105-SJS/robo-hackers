@@ -20,14 +20,17 @@ const {
   getAllOrders,
   getOrdersByUser,
   completeOrder,
-  cancelOrder
+  cancelOrder,
+  updateOrder
 } = require('./orders');
 
 const {
   createOrderProducts,
   getOrderProductsByOrder,
   getOrderProductById,
-  updateOrderProducts
+  updateOrderProducts,
+  addProductToOrder,
+  destroyOrderProduct
 } = require('./order_products');
 
 // export
@@ -52,5 +55,8 @@ module.exports = {
   cancelOrder,
   getOrderProductsByOrder,
   getOrderProductById,
-  updateOrderProducts
+  updateOrderProducts,
+  updateOrder,
+  addProductToOrder,
+  destroyOrderProduct
 }

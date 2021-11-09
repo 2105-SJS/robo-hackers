@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom";
 
 const Navigation = ({username, token, setToken, setUsername}) => {
     const history= useHistory();

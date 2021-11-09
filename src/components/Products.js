@@ -1,15 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 
 import { SingleProduct } from './'
 
 const Products = ({products, fetchProducts, productsList}) => {
-    console.log('Products <><><><><', productsList)
-    return <>
-    {/* <h3>{productsList[0].description}</h3> */}
+
+  return <>
     {
-        products ? products.map(product => <SingleProduct key = {product.id} product = {product}>
-            </SingleProduct>)
-            : 'Rendering...'
+      products ? 
+        products.map(product => <SingleProduct key = {product.id} product = {product}> 
+        <Link to={`/products/${product.id}`}>Details</Link>
+        </SingleProduct>)
+      : 'Rendering...'
     }
     </>;
 }

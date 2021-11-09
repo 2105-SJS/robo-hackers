@@ -13,7 +13,8 @@ const createOrderProducts = async ({productId, orderId, price, quantity}) => {
   }
 }
 
-const updateOrderProducts = async ({ id, price, quantity }) => {
+const updateOrderProducts = async (orderProductObject) => {
+  const { price, id, quantity } = orderProductObject;
   try {
     const {rows: orderProductUpdate} = await client.query(`
     SELECT * from order_products JOIN orders ON order_products."orderId" = orders.id
@@ -23,8 +24,8 @@ const updateOrderProducts = async ({ id, price, quantity }) => {
     await client.query(`
     UPDATE order_products
     SET price = $2, quantity = $3
-    WHERE "productId" = $1;
-    `, [product.id, price, quantity])
+    WHERE id = $1;
+    `, [id, price, quantity])
     
     return orderProductUpdate;
   } catch (error) {
@@ -59,10 +60,51 @@ const getOrderProductById = async (id) => {
   }
 }
 
+const destroyOrderProduct = async(id) => {
+  try {
+    await client.query(`
+    DELETE FROM order_products
+    WHERE id=$1;
+    `, [id]);
+  } catch(error) {
+    throw error
+  }
+}
+
+const addProductToOrder = async ({ orderId, productId, price, quantity }) => {
+  try {
+    const { rows: orderProducts } = await client.query(`
+      SELECT * FROM order_products
+      WHERE "orderId" = $1;
+    `, [orderId]);
+    
+    let productFound = false;
+    for (let i = 0; i < orderProducts.length; i++ ) {
+      if (productId === orderProducts[i].productId) {
+        
+
+        const newQuantity = orderProducts[i].quantity+quantity;
+        const newPrice = parseFloat(orderProducts[i].price)+price;
+        
+        const updatedOrderProduct = { quantity: newQuantity, price: newPrice, id: orderProducts[i].id }
+        await updateOrderProducts (updatedOrderProduct);
+        productFound = true;
+      }; 
+    }; 
+    if (productFound === false){
+      await createOrderProducts ({productId, orderId, price, quantity});
+
+    }
+  } catch (error) {
+    throw error;
+  };
+};
+
 module.exports = {
   createOrderProducts,
   getOrderProductsByOrder,
   getOrderProductById,
-  updateOrderProducts
-
+  updateOrderProducts,
+  addProductToOrder,
+  destroyOrderProduct
 }

@@ -17,8 +17,13 @@ const {
   getProductById,
   getOrdersByProduct,
   getCartByUser,
-  getOrdersByUser
+  getOrdersByUser,
+  updateOrder,
+  addProductToOrder,
+  destroyOrderProduct
 } = require('./index.js');
+const { getOrderProductById } = require('./order_products');
+
 
 async function buildTables() {
   try {
@@ -204,6 +209,38 @@ async function populateInitialData() {
     console.log('user>>>>>>', userIdOrders);
   } catch (error) {
   throw error;
+  }
+
+  try {
+    const id = 1
+    const status = 'created'
+    const userId = 2
+    await updateOrder({ id, status, userId });
+  } catch (error) {
+    throw error;
+  }
+
+  try {
+    console.log('testing addProductToOrder function')
+    
+    const orderId = 2
+    const productId = 1
+    const price = 2034
+    const quantity = 1223
+    await addProductToOrder ({ productId, orderId, price, quantity })
+    console.log('addProductToOrder>>>>', productId, orderId, price, quantity);
+  } catch (error) {
+    throw error;
+  }
+
+  console.log('Testing destroyProductOrder --------------------------------');
+  try {
+    await destroyOrderProduct(3);
+    const product_order_test = await getOrderProductById(3);
+    console.log("Expecting Empty List");
+    console.log(product_order_test);
+  } catch(error) {
+    throw error;
   }
 }
   
