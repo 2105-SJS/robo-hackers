@@ -1,7 +1,8 @@
 const { 
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  destroyProduct
 } = require('./products');
 
 const {
