@@ -60,6 +60,17 @@ const getOrderProductById = async (id) => {
   }
 }
 
+const destroyOrderProduct = async(id) => {
+  try {
+    await client.query(`
+    DELETE FROM order_products
+    WHERE id=$1;
+    `, [id]);
+  } catch(error) {
+    throw error
+  }
+}
+
 const addProductToOrder = async ({ orderId, productId, price, quantity }) => {
   try {
     const { rows: orderProducts } = await client.query(`
@@ -94,6 +105,6 @@ module.exports = {
   getOrderProductsByOrder,
   getOrderProductById,
   updateOrderProducts,
-  addProductToOrder
-
+  addProductToOrder,
+  destroyOrderProduct
 }
