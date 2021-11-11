@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Route, Switch } from 'react-router-dom';
 
+import './bootstrap.min.css';
+
 import {
   Products,
   Login,
@@ -49,7 +51,6 @@ const App = () => {
 
   return <>
     <div className="App">
-      <h1>Hello, World!</h1>
       <h2>{ message }</h2>
 
       <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword}/>

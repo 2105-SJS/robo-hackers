@@ -43,9 +43,25 @@ const getProductById = async (productId) => {
     throw error;
   }
 }
+const reviewProduct = async ({title, content, stars, userId, productId}) => {
+  try {
+    const {rows: productReview} = await client.query(`
+    INSERT INTO reviews (title, content, stars, "userId", "productId")
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `, [ title, content, stars, userId, productId])
+
+    return productReview
+  } catch (error) {
+    throw error
+  }
+}
+
+
 
 module.exports = {
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  reviewProduct
 }

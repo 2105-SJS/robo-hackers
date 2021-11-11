@@ -1,7 +1,8 @@
 const { 
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  reviewProduct
 } = require('./products');
 
 const {
@@ -58,5 +59,6 @@ module.exports = {
   updateOrderProducts,
   updateOrder,
   addProductToOrder,
-  destroyOrderProduct
+  destroyOrderProduct,
+  reviewProduct
 }
