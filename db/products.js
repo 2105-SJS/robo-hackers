@@ -44,7 +44,7 @@ const getProductById = async (productId) => {
   }
 }
 
-const updateProduct = async ({ description, price, imageURL, inStock, category }) => {
+const updateProduct = async ({ id, description, price, imageURL, inStock, category }) => {
   try {
     const { rows: [product] } = await client.query(`
       UPDATE products 
