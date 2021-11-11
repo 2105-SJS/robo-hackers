@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
 const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, password, setUser}) => {
@@ -8,8 +8,18 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
     const handleSubmit = async (ev) => {
         try {
             ev.preventDefault();
-            const token = {token: 'robotoken'}
-            const user = ({username: 'robo', password: 'hacker'})
+            const registerObj = await callAPI({
+              method: 'POST',
+              url: 'users/register',
+              body: {
+                username: username,
+                password: password, 
+                firstName: firstName, 
+                lastName: lastName, 
+                email: email, 
+                isAdmin: 'false'
+              }
+            })
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);
