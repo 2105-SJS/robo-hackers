@@ -9,6 +9,7 @@ function requireUser(req, res, next) {
         }
     
         next();
+        
     } catch ({name, message}) {
         next({name, message});
     }
