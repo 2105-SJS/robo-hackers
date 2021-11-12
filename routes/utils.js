@@ -9,8 +9,9 @@ function requireUser(req, res, next) {
         }
     
         next();
-    } catch (error) {
-        next(error);
+        
+    } catch ({name, message}) {
+        next({name, message});
     }
 }
 
@@ -25,8 +26,8 @@ function requireAdmin(req, res, next) {
         }
     
         next();
-    } catch (error) {
-        next(error);
+    } catch ({name, message}) {
+        next({name, message});
     }
 }
 

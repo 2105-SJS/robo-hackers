@@ -12,6 +12,8 @@ const {
     getOrderById
 } = require('../db/index.js')
 
+const {requireAdmin} = require('./utils');
+
 const jwt = require('jsonwebtoken');
 
 
@@ -19,7 +21,7 @@ usersRouter.use((req, res, next) => {
     next();
 })
 
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireAdmin, async (req, res, next) => {
     try {
         const users = await getAllUsers();
 

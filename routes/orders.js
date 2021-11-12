@@ -1,7 +1,6 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const {} = require('../db');
-const { getOrderById, getAllOrders, createOrder } = require('../db/orders');
+const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder } = require('../db/orders');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
@@ -72,5 +71,58 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
     }
 });
 
+ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
+    const {orderId} = req.params;
+    const {status, userId} = req.body;
+
+    try {
+        //checking to make sure body is filled out
+        if (!status && !userId) {
+            throw ({
+            name: "EmptyBodyError",
+            message: "You must provide either status or userId in the body"
+            })
+        }
+
+        const orderToPatch = await getOrderById(orderId);
+
+        //checking to see if the order was made by the currently logged in user
+        if (orderToPatch.userId === req.user.id) {
+            //setting id to pass into updateOrder
+            const id = orderId
+            await updateOrder({id, status, userId})
+            const newOrder = await getOrderById(orderId);
+            res.send(newOrder);
+        } else {
+            throw ({
+                name: "InvalidUserError",
+                message: "You must be the owner of the order to make changes to it"
+            })
+        }
+
+    } catch ({name, message}) {
+        next ({name, message})
+    }
+})
+
+ordersRouter.delete('/:orderId', requireUser, async (req, res, next) => {
+    const {orderId} = req.params;
+
+    try {
+        const orderToDelete = await getOrderById(orderId);
+        if (orderToDelete.userId === req.user.id) {
+            const cancelledOrder = await cancelOrder(orderId);
+            res.send(cancelledOrder);
+        } else {
+            throw ({
+                name: "InvalidUserError",
+                message: "You must be the owner of the order to make changes to it"
+            })
+        }
+
+    } catch ({name, message}) {
+        next ({name, message});
+    }
+})
 
 module.exports = ordersRouter;

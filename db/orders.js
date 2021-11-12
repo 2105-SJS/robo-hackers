@@ -54,11 +54,14 @@ const _attachProducts = async (id) => {
 
 const cancelOrder = async (id) => {
   try {
-    const {rows: orderCancelled} = await client.query(`
+    const {rows: [orderCancelled]} = await client.query(`
     UPDATE orders
     SET status = 'cancelled'
-    WHERE id = $1;
+    WHERE id = $1
+    RETURNING *;
     `, [id]);
+
+    return orderCancelled;
   } catch (error) {
     throw error
   }
@@ -142,20 +145,33 @@ const getCartByUser = async (id) => {
   }
 }
 
-const updateOrder = async ({ id, status, userId }) => {
+const updateOrder = async ({id, status, userId}) => {
   try {
-    const { rows: [order] } = await client.query (`
+
+    if (status) {
+      await client.query(`
       UPDATE orders
-      SET status = $1, 
-      "userId" = $2
-      WHERE id = $3
-      RETURNING *;
-    `,[status, userId, id]);
+      SET status = $1
+      WHERE id = $2;
+      `,[status, id])
+    }
+
+    if (userId) {
+      await client.query(`
+      UPDATE orders
+      SET "userId" = $1
+      WHERE id = $2;
+      `,[userId, id])
+    }
+
+    const order = await getOrderById(id);
     return order;
+
   } catch (error) {
     throw error;
   };
 };
+
 
 module.exports = {
   createOrder,

@@ -20,9 +20,11 @@ const {
   getOrdersByUser,
   updateOrder,
   addProductToOrder,
-  destroyOrderProduct
+  destroyOrderProduct,
+  reviewProduct
 } = require('./index.js');
 const { getOrderProductById } = require('./order_products');
+const { updateProduct } = require('./products');
 
 
 async function buildTables() {
@@ -77,6 +79,15 @@ async function buildTables() {
          "orderId" INTEGER REFERENCES orders(id),
          price NUMERIC(10, 2) NOT NULL,
          quantity INTEGER NOT NULL
+      );
+
+      CREATE TABLE reviews (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        content VARCHAR(60) NOT NULL,
+        stars INTEGER CHECK (stars BETWEEN 0 AND 5),
+        "userId" INTEGER REFERENCES users(id),
+        "productId" Integer REFERENCES products(id)
       );
     `);
 
@@ -155,6 +166,22 @@ async function populateInitialData() {
   } catch(error) {
     throw(error);
   }
+
+  console.log('Creating reviews...');
+  try {
+    const createReviews = [
+      { title: 'Verygood!', content: 'really helpful product', stars: 4, userId: 1, productId: 1},
+      { title: 'Its Okay.', content: 'it does what its supposed to at least', stars: 3, userId: 1, productId: 3},
+      { title: 'Not the best', content: 'wouldnt recommend', stars: 1, userId: 2, productId: 1}
+    ]
+    const demoReviews = await Promise.all( createReviews.map(reviewProduct))
+    console.log("reviews created: ");
+    console.log(demoReviews);
+    console.log('finished creating reviews');
+  } catch (error) {
+    throw(error);
+  }
+  
 
   console.log('Testing User Methods');
   try {
@@ -240,6 +267,13 @@ async function populateInitialData() {
     console.log("Expecting Empty List");
     console.log(product_order_test);
   } catch(error) {
+    throw error;
+  }
+
+  try {
+    const updatedProduct = await updateProduct({ id: 2, description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
+    console.log('-------------', updatedProduct);
+  } catch (error) {
     throw error;
   }
 }

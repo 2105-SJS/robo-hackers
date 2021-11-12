@@ -43,9 +43,44 @@ const getProductById = async (productId) => {
     throw error;
   }
 }
+const reviewProduct = async ({title, content, stars, userId, productId}) => {
+  try {
+    const {rows: productReview} = await client.query(`
+    INSERT INTO reviews (title, content, stars, "userId", "productId")
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `, [ title, content, stars, userId, productId])
+
+    return productReview
+  } catch (error) {
+    throw error
+  }
+}
+
+
+
+const updateProduct = async ({ id, description, price, imageURL, inStock, category }) => {
+  try {
+    const { rows: [product] } = await client.query(`
+      UPDATE products 
+      SET description = $1,
+      price = $2,
+      "imageURL" = $3,
+      "inStock" = $4,
+      category = $5
+      WHERE id = $6
+      RETURNING *;
+    `, [description, price, imageURL, inStock, category, id]);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = {
   createProduct,
   getAllProducts,
-  getProductById
+  getProductById,
+  reviewProduct,
+  updateProduct
 }

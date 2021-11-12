@@ -43,6 +43,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
     }
   }
     
+<<<<<<< HEAD
   return <>
     <h1>| Register User |</h1>
     <form onSubmit = {handleSubmit} >
@@ -70,6 +71,31 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
       </div>
     </form>
   </>
+=======
+    return <>
+        <h2>Register</h2>
+        <form onSubmit = {handleSubmit} >
+            <div >
+              
+                <input type="text" placeholder="username" value={username} onChange={(event) => setUsername(event.target.value)}></input>
+                <hr></hr>
+                <input type="password" placeholder="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+                <hr></hr>
+                <input type="password" placeholder="password" value={secondPassword} onChange={(event) => setSecondPassword(event.target.value)}></input>
+                <hr></hr>
+                <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword}>Submit</button>
+                <hr></hr>
+                {
+                    password !== secondPassword && <span>Passwords do not match!</span>
+                }
+                {
+                    password.length < 8 && <div>Password must be at least 8 characters!</div>
+                }
+            </div>
+        </form>
+    
+    </>
+>>>>>>> dev
 }
 
 export default Register;
