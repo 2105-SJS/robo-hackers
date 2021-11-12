@@ -49,6 +49,7 @@ async function buildTables() {
 
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
         price NUMERIC(10, 2) NOT NULL,
         "imageURL" VARCHAR(255) NOT NULL,
@@ -120,9 +121,9 @@ async function populateInitialData() {
   console.log('Starting to create products...');
   try {
     const productsToCreate = [
-      {description: "tasty vanilla ice cream", price: 5.99, imageURL:"ice cream", inStock: true, category:'food'},
-      {description: "a single ripe banana", price: 124.45, inStock: false, category:'food'},
-      {description: "lightly worn running shoes", price:75.00, imageURL:'running shoes', inStock: true, category:'shoes'}
+      {name:"Vanille Ice Cream", description: "tasty vanilla ice cream", price: 5.99, imageURL:"ice cream", inStock: true, category:'food'},
+      {name:"Banana", description: "a single ripe banana", price: 124.45, inStock: false, category:'food'},
+      {name:"Shoes Running", description: "lightly worn running shoes", price:75.00, imageURL:'running shoes', inStock: true, category:'shoes'}
     ]
 
     const products = await Promise.all(productsToCreate.map(createProduct))

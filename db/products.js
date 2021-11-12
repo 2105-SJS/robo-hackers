@@ -1,6 +1,6 @@
 const { client } = require('./client');
 
-const createProduct = async ({description, price, imageURL, inStock, category}) => {
+const createProduct = async ({name, description, price, imageURL, inStock, category}) => {
 
   if (!imageURL) {
     imageURL = "placeholder picture";
@@ -8,10 +8,10 @@ const createProduct = async ({description, price, imageURL, inStock, category}) 
   
   try {
     const {rows: [product] } = await client.query(`
-    INSERT INTO products(description, price, "imageURL", "inStock", "category")
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO products(name, description, price, "imageURL", "inStock", "category")
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
-    `, [description, price, imageURL, inStock, category]);
+    `, [name, description, price, imageURL, inStock, category]);
     return product;
   } catch (error) {
     throw error
@@ -63,14 +63,15 @@ const updateProduct = async ({ id, description, price, imageURL, inStock, catego
   try {
     const { rows: [product] } = await client.query(`
       UPDATE products 
-      SET description = $1,
-      price = $2,
-      "imageURL" = $3,
-      "inStock" = $4,
-      category = $5
-      WHERE id = $6
+      SET name = $1
+      description = $2,
+      price = $3,
+      "imageURL" = $4,
+      "inStock" = $5,
+      category = $6
+      WHERE id = $7
       RETURNING *;
-    `, [description, price, imageURL, inStock, category, id]);
+    `, [name, description, price, imageURL, inStock, category, id]);
     return product;
   } catch (error) {
     throw error;
