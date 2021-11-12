@@ -24,6 +24,7 @@ const {
   reviewProduct
 } = require('./index.js');
 const { getOrderProductById } = require('./order_products');
+const { updateProduct } = require('./products');
 
 
 async function buildTables() {
@@ -266,6 +267,13 @@ async function populateInitialData() {
     console.log("Expecting Empty List");
     console.log(product_order_test);
   } catch(error) {
+    throw error;
+  }
+
+  try {
+    const updatedProduct = await updateProduct({ id: 2, description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
+    console.log('-------------', updatedProduct);
+  } catch (error) {
     throw error;
   }
 }

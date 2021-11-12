@@ -59,9 +59,28 @@ const reviewProduct = async ({title, content, stars, userId, productId}) => {
 
 
 
+const updateProduct = async ({ id, description, price, imageURL, inStock, category }) => {
+  try {
+    const { rows: [product] } = await client.query(`
+      UPDATE products 
+      SET description = $1,
+      price = $2,
+      "imageURL" = $3,
+      "inStock" = $4,
+      category = $5
+      WHERE id = $6
+      RETURNING *;
+    `, [description, price, imageURL, inStock, category, id]);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
-  reviewProduct
+  reviewProduct,
+  updateProduct
 }
