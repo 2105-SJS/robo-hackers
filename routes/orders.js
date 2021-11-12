@@ -1,6 +1,5 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const {} = require('../db');
 const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder } = require('../db/orders');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
