@@ -55,8 +55,8 @@ ordersRouter.post('/', async (req, res, next) => {
         const { status, userId, datePlaced } = req.body;
         const order = createOrder({ status, userId, datePlaced });
         res.send(order);
-    } catch (error) {
-        next (error);
+    } catch ({name, message}) {
+        next ({name, message});
     };
 });
 
@@ -66,10 +66,19 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
         const userOrders = await getOrdersByUser (id);
         const userCart = userOrders.filter(order => order.status = "created");
         res.send (userCart)
-    } catch (error) {
-        throw (error);
+    } catch ({name, message}) {
+        next({name, message});
     }
 });
+
+ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
+    const {orderId} = req.params;
+    try {
+
+    } catch ({name, message}) {
+
+    }
+})
 
 ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
     const {orderId} = req.params;
