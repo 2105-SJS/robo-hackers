@@ -36,6 +36,7 @@ async function buildTables() {
     await client.query(`
       DROP TABLE IF EXISTS order_products;
       DROP TABLE IF EXISTS orders;
+      DROP TABLE IF EXISTS reviews;
       DROP TABLE IF EXISTS users;
       DROP TABLE IF EXISTS products;
     `);
@@ -102,7 +103,9 @@ async function populateInitialData() {
   try {
     const usersToCreate = [
       {firstName: 'chicken', lastName: 'sandwich', email: 'chickenSandwich@gmail.com', imageURL:'chicken', username:'chicken555', password:'sandwich555', isAdmin: false},
-      {firstName: 'dinosaur', lastName: 'sandwich', email: 'dinosaurSandwich@gmail.com', imageURL:'dinosaur', username:'dinosaur555', password:'sandwich555', isAdmin: false}
+      {firstName: 'dinosaur', lastName: 'sandwich', email: 'dinosaurSandwich@gmail.com', imageURL:'dinosaur', username:'dinosaur555', password:'sandwich555', isAdmin: false},
+      {firstName: 'bruce', lastName: 'wayne', email: 'darkKnight@gmail.com', imageURL:'batman', username:'batman555', password:'sandwich555', isAdmin: true}
+      
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
 
