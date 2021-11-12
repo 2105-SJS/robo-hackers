@@ -25,7 +25,6 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  
   const fetchProducts = async () => {
     try {
       const productsObj = await callAPI({

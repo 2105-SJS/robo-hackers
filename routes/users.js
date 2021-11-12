@@ -91,10 +91,10 @@ usersRouter.post('/login', async (req, res, next) => {
         const user = await getUserByUsername(username);
         const token = jwt.sign(user, process.env.JWT_SECRET);
 
-        const checkPass = await bcrypt.compare(password, user.password)
-
+        const checkPass = await bcrypt.compare(password, user.password);
+        delete user.password;
         if(user && checkPass) {
-            res.send({token});
+            res.send({token, user});
         } else {
             next({
                 name: 'IncorrectCredentialsError',

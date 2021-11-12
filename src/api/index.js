@@ -4,14 +4,15 @@ export const callAPI = async ({ url, method, token, body }) => {
   try {
     const options = {
       method: method ? method.toUpperCase() : 'GET',
+      url: `api/${url}`,
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      data: JSON.stringify(body)
     }
     if (token) options.headers['Authorization'] = `Bearer ${token}`;
 
-    const response = await axios.get(`/api/${url}`, options);
+    const response = await axios(options);
     const data = await response.data;
     return data;
   } catch (error) {

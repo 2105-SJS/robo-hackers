@@ -20,16 +20,19 @@ const Navigation = ({username, token, setToken, setUsername}) => {
                 <li class = "nav-item">
                     <a class = "nav-link" href = "#" ><Link to = '/products'>Products</Link></a>
                 </li>
-                <li class = "nav-item">
-                    <a class = "nav-link" href = "#" ><Link to = '/account'>My Account</Link></a>
-                </li>
+                {
+                  token ?
+                  <li class = "nav-item">
+                      <a class = "nav-link" href = "#" ><Link to = '/account'>My Account</Link></a>
+                  </li>
+                  : null
+                }
                 {
                     token ? 
                     null :
                     <li class = "nav-item">
                         <a class = "nav-link" href = "#"><Link to="/login">Login</Link></a>
                     </li>
-                         
                 }
                 {
                     token ?
