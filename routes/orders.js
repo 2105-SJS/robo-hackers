@@ -1,6 +1,6 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder } = require('../db/orders');
+const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder, getProductById, addProductToOrder, getOrderProductsByOrder, getAllOrderProducts, updateOrderProducts } = require('../db/index');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
@@ -73,10 +73,77 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
 
 ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
     const {orderId} = req.params;
+    const {id, quantity, price} = req.body;
+    const user = req.user
+
     try {
+        //check to see if product id was provided 
+        if (!id) {
+            throw ({
+                name: "MissingBodyRequirementError",
+                message: "Fetch call body must include a product id"
+            })
+        }
+
+        const productToAdd = await getProductById(id);
+        //check to see if a product with that id exists
+        if (!productToAdd) {
+            throw({
+                name:"ProductNotFoundError",
+                message:"No product with that id exists"
+            })
+        }
+
+        const orderToAddTo = await getOrderById(orderId);
+        
+        if (req.user.id === orderToAddTo.userId) {
+            const {price} = productToAdd
+            let quantity = 1
+            const productId = id;
+            let productInOrder = false;
+            let updatedOrder_product = {}
+
+            //get all of the order products
+            const order_products = await getAllOrderProducts();
+            //iterate through them
+            for (let i = 0; i < order_products.length; i++) {
+                //if orderId and productId match the order and product id in the given order_product,
+                //it means we have a duplicate, so we call updateOrderProducts instead of addProductToOrder
+                if (parseInt(orderId) === order_products[i].orderId && parseInt(productId) === order_products[i].productId) {
+                    productInOrder = true;
+                    //calculate new quantity and price for the updated order_product object
+                    const newQuantity = 1 + order_products[i].quantity;
+                    const newPrice = productToAdd.price * newQuantity
+                    const newOrder_product = {
+                        id:order_products[i].id,
+                        price: newPrice,
+                        quantity: newQuantity
+                    }
+                    await updateOrderProducts(newOrder_product)
+                    updatedOrder_product = await getOrderProductsByOrder(orderId); 
+                }
+            }
+
+            //if a duplicate was found, send the updated order product for confirmation
+            if (productInOrder === true) {
+                res.send(updatedOrder_product)
+            //if there isn't a duplicate, then add the product to the order
+            } else {
+                await addProductToOrder({orderId, productId, price, quantity});
+                updatedOrder_product = await getOrderProductsByOrder(orderId);
+                res.send(updatedOrder_product);
+            }
+        } else {
+            throw ({
+                name: "UserError",
+                message: "Only the user who created the order can add products to it"
+            })
+        }
+
+        res.send("chicken");
 
     } catch ({name, message}) {
-
+        next({name, message});
     }
 })
 

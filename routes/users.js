@@ -12,7 +12,7 @@ const {
     getOrderById
 } = require('../db/index.js')
 
-const {requireAdmin} = require('./utils');
+const {requireAdmin, requireUser} = require('./utils');
 
 const jwt = require('jsonwebtoken');
 
@@ -21,7 +21,7 @@ usersRouter.use((req, res, next) => {
     next();
 })
 
-usersRouter.get('/', requireAdmin, async (req, res, next) => {
+usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
     try {
         const users = await getAllUsers();
 
@@ -108,7 +108,6 @@ usersRouter.post('/login', async (req, res, next) => {
 
 usersRouter.get('/me', async (req, res, next) => {
     const bearerToken = req.headers.authorization;
-    console.log(bearerToken);
     
     try {
         if (!bearerToken) {
@@ -131,10 +130,8 @@ usersRouter.get('/me', async (req, res, next) => {
 })
 
 usersRouter.get('/:userId/orders', async(req, res, next) => {
-    console.log(req.params.userId);
     try {
         const { userId } = req.params;
-        console.log('userId', userId);
         const getOrders = await getOrdersByUser({userId}) 
         res.send(getOrders)
     } catch ({name, message}){

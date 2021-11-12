@@ -1,7 +1,6 @@
 const { client } = require('./client');
 
 const createProduct = async ({name, description, price, imageURL, inStock, category}) => {
-
   if (!imageURL) {
     imageURL = "placeholder picture";
   }
@@ -43,6 +42,7 @@ const getProductById = async (productId) => {
     throw error;
   }
 }
+
 const reviewProduct = async ({title, content, stars, userId, productId}) => {
   try {
     const {rows: productReview} = await client.query(`
@@ -57,13 +57,11 @@ const reviewProduct = async ({title, content, stars, userId, productId}) => {
   }
 }
 
-
-
-const updateProduct = async ({ id, description, price, imageURL, inStock, category }) => {
+const updateProduct = async ({ id, name, description, price, imageURL, inStock, category }) => {
   try {
     const { rows: [product] } = await client.query(`
       UPDATE products 
-      SET name = $1
+      SET name = $1,
       description = $2,
       price = $3,
       "imageURL" = $4,

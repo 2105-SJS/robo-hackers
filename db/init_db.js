@@ -81,6 +81,7 @@ async function buildTables() {
          "orderId" INTEGER REFERENCES orders(id),
          price NUMERIC(10, 2) NOT NULL,
          quantity INTEGER NOT NULL
+         UNIQUE ("productId", "orderId")
       );
 
       CREATE TABLE reviews (
@@ -275,7 +276,7 @@ async function populateInitialData() {
   }
 
   try {
-    const updatedProduct = await updateProduct({ id: 2, description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
+    const updatedProduct = await updateProduct({ id: 2, name:"banana", description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
     console.log('-------------', updatedProduct);
   } catch (error) {
     throw error;

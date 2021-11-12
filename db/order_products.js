@@ -34,12 +34,24 @@ const updateOrderProducts = async (orderProductObject) => {
   }
 }
 
-const getOrderProductsByOrder = async ({id}) => {
+const getAllOrderProducts = async () => {
+  try {
+    const {rows: orderProducts} = await client.query(`
+    SELECT * FROM order_products;
+    `)
+
+    return orderProducts;
+  } catch (error) {
+    throw(error)
+  }
+}
+
+const getOrderProductsByOrder = async (id) => {
   try {
     const {rows: orderProducts} = await client.query(`
     SELECT * FROM order_products
-    WHERE "productId" = ${id};
-    `)
+    WHERE "orderId" = $1;
+    `,[id])
     return orderProducts;
     
   } catch (error) {
@@ -106,5 +118,6 @@ module.exports = {
   getOrderProductById,
   updateOrderProducts,
   addProductToOrder,
-  destroyOrderProduct
+  destroyOrderProduct,
+  getAllOrderProducts
 }
