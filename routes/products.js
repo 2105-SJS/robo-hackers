@@ -1,6 +1,7 @@
 const express = require('express');
 const productsRouter = express.Router();
-const { getAllProducts, getProductById } = require('../db/index');
+const { getAllProducts, getProductById, createProduct} = require('../db/index');
+const { requireAdmin } = require('./utils');
 
 productsRouter.use((req, res, next) => {
     next();
@@ -24,6 +25,16 @@ productsRouter.get('/:productid', async (req, res, next) => {
     } catch (error) {
         next (error)
     };
+});
+
+productsRouter.post('/', requireAdmin, async (req, res, next) => {
+    try {
+        const { description, price, inStock, imageURL, category } = req.body;
+        const createdProduct = await createProduct({ description, price, inStock, imageURL, category});
+        res.send(createdProduct);
+    } catch (error) {
+        next (error);
+    }
 });
 
 module.exports = productsRouter;
