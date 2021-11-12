@@ -10,22 +10,44 @@ const Navigation = ({username, token, setToken, setUsername}) => {
         history.push('/account/:method');
     }
     return <>
-    <nav>
-        <div>
-            <h1>Robo Hackers: The Shop</h1>
-            <ul>
-                <Link to = '/home'>Home</Link>
-                <Link to = '/products'>Products</Link>
-                <Link to = '/account'>My Account</Link>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h1 className='nav_title'>Robo Hackers: The Shop</h1>
+            <ul id = 'links' class="nav nav-pills">
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "#" ><Link to = '/home'>Home</Link></a>
+                </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "#" ><Link to = '/products'>Products</Link></a>
+                </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "#" ><Link to = '/account'>My Account</Link></a>
+                </li>
                 {
-                    token ? null : <Link to="/login">Login</Link> 
+                    token ? 
+                    null :
+                    <li class = "nav-item">
+                        <a class = "nav-link" href = "#"><Link to="/login">Login</Link></a>
+                    </li>
+                         
                 }
                 {
-                    token ? null : <Link to ="/register">Register</Link> 
+                    token ?
+                    null :
+                    <li class = "nav-item">
+                        <a class = "nav-link" href = "#"><Link to ="/register">Register</Link></a>
+                    </li> 
                 }
                 {
                     token ? <button type='logout' onClick={logOut}>Logout</button>  : null
                 }
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "#" >
+                        <Link to = '/checkout'>
+                            <i class="bi bi-cart">Cart</i>
+                        </Link>
+                    </a>
+                </li>
 
 
             </ul>

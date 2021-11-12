@@ -27,7 +27,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
     }
 
     return <>
-        <h1>| Login |</h1>
+        <h2>Login</h2>
         <form onSubmit = {handleSubmit}>
             <div>
             <input type="text" placeholder="username" value={username} onChange={(event) => setUsername(event.target.value)}></input>

@@ -2,6 +2,7 @@ const {
   createProduct,
   getAllProducts,
   getProductById,
+  reviewProduct,
   updateProduct
 } = require('./products');
 
@@ -60,5 +61,6 @@ module.exports = {
   updateOrder,
   addProductToOrder,
   destroyOrderProduct,
+  reviewProduct,
   updateProduct
 }

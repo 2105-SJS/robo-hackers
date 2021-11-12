@@ -27,9 +27,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
     }
     
     return <>
-        <h1>
-        | Register User |
-        </h1>
+        <h2>Register</h2>
         <form onSubmit = {handleSubmit} >
             <div >
               
