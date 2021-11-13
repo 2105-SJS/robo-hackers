@@ -1,6 +1,6 @@
 const express = require('express');
 const productsRouter = express.Router();
-const { getAllProducts, getProductById, createProduct, destroyProduct } = require('../db/index');
+const { getAllProducts, getProductById, createProduct, destroyProduct, getOrdersByProduct } = require('../db/index');
 const { requireAdmin } = require('./utils');
 
 productsRouter.use((req, res, next) => {
@@ -42,6 +42,16 @@ productsRouter.delete('/:productId', requireAdmin, async (req, res, next) => {
         const { productId } = req.params;
         const destroyedProducts = await destroyProduct(productId);
         res.send(destroyedProducts);
+    } catch (error) {
+        next(error);
+    }
+});
+
+productsRouter.get('/:productId/orders', requireAdmin, async (req, res, next) => {
+    try {
+        const { productId } = req.params;
+        const allOrdersByProduct = await getOrdersByProduct(productId);
+        res.send(allOrdersByProduct);
     } catch (error) {
         next(error);
     }
