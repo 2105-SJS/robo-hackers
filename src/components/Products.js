@@ -35,6 +35,7 @@ const handleAddToCart = async (product) => {
     if(addToOrder) {
       history.push('/cart')
     }
+    
     console.log('clicked', addToOrder)
   } catch (error) {
     console.error(error)
