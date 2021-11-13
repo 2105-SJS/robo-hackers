@@ -9,17 +9,6 @@ const Cart = () => {
     {description: "a single ripe banana", price: 124.45, imageURL: <img class = 'image' src = "https://pngimg.com/uploads/banana/banana_PNG104253.png"/>, inStock: false, category:'food'},
     {description: "lightly worn running shoes", price:75.00, imageURL: <img class = 'image' src = "https://www.freepnglogos.com/uploads/shoes-png/shoes-wasatch-running-3.png" />, inStock: true, category:'shoes'}
     ]
-    const removeButton = document.getElementsByClassName('btn-danger');
-    for (let i = 0; i < removeButton.length; i++) {
-        const button = removeButton[i];
-        button.addEventListener('click', function(event) {
-            const buttonClicked = event.target
-            buttonClicked.parentElement.parentElement.remove();
-            console.log('clicked');
-            updateTotal();
-        })
-    }
-
     const updateTotal = () => {
         const cartItemContatiner = document.getElementsByClassName('cart-items')[0];
         const cartRows = cartItemContatiner.getElementsByClassName('cart-row');

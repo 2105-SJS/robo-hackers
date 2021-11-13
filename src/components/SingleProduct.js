@@ -1,6 +1,16 @@
 import React from 'react';
 import './style.css';
-const SingleProduct = ({product, children,testProducts, testProduct}) => {
+import {callAPI} from '../api';
+
+const SingleProduct = ({token, product, children,testProducts, testProduct}) => {
+  const handleAddToCart = async (testProduct) => {
+    try {
+      const addtoOrder = await callAPI({ url: 'orders', method: 'POST', token, body: product})
+      console.log('added>>>>', addtoOrder)
+    } catch (error) {
+      console.error(error)
+    }
+  }
     return testProducts ?
     <div class = 'shop-items'>
       
@@ -9,7 +19,8 @@ const SingleProduct = ({product, children,testProducts, testProduct}) => {
         <div class = 'item-image'>{testProduct.imageURL}</div>
         <div class = 'item-details'>
           <span class = 'item-price'>{testProduct.price}</span>
-          <button class = 'btn btn-primary shop-item-button' type = "button">Add to Cart</button>
+          <button onClick = {() => {
+            handleAddToCart(product)}}>Add to cart</button>
         </div>
         {
           children

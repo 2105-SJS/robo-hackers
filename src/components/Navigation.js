@@ -26,6 +26,7 @@ const Navigation = ({username, token, setToken, setUsername}) => {
                 {
                     token ? <button type='logout' onClick={logOut}>Logout</button>  : null
                 }
+                <Link to = '/cart'>Cart</Link>
 
 
             </ul>
