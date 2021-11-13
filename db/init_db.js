@@ -55,7 +55,8 @@ async function buildTables() {
         price NUMERIC(10, 2) NOT NULL,
         "imageURL" VARCHAR(255) NOT NULL,
         "inStock" BOOLEAN DEFAULT false,
-        "category" VARCHAR(255) NOT NULL
+        "category" VARCHAR(255) NOT NULL,
+        active BOOLEAN DEFAULT true
       );
       
       CREATE TABLE users (
@@ -123,9 +124,15 @@ async function populateInitialData() {
   console.log('Starting to create products...');
   try {
     const productsToCreate = [
+      {name:"Potato", description: "yukon potato at its finest", price: 5.99, imageURL:"potato", inStock: true, category:'food'},
+      {name:"Cheesecake", description: "German Raspberry Cheesecake", price: 6, imageURL:'cheesecake', inStock: false, category:'food'},
+      {name:"laser gun", description: "from the future!", price:75.00, imageURL:'laser', inStock: true, category:'weaponry'},
+      {name:"Gundam", description: "big cool robot", price: 120, imageURL:"gundam", inStock: true, category:'toy'},
+      {name:"Pokemon Emerald", description: "old school pokemon at it's finest", price: 50, imageURL:"emerald cartridge", inStock: true, category:'video game'},
       {name:"Vanille Ice Cream", description: "tasty vanilla ice cream", price: 5.99, imageURL:"https://media.istockphoto.com/photos/front-view-of-real-edible-ice-cream-cone-with-3-different-scoops-of-picture-id1148364081?k=20&m=1148364081&s=612x612&w=0&h=Ukaod6oXxX7Jn1KPk8r4UkkK7lNz-SBvS2YkRL-C6Q0=", inStock: true, category:'food'},
       {name:"Banana", description: "a single ripe banana", price: 124.45, imageURL: "https://media.istockphoto.com/photos/big-banana-picture-id182817811?b=1&k=20&m=182817811&s=170667a&w=0&h=1VbC6BgMmIbftOxBBIgkgrwG4i0SLWa3MTX7RRFCwPk=", inStock: false, category:'food'},
       {name:"Shoes Running", description: "lightly worn running shoes", price:75.00, imageURL:'https://media.istockphoto.com/photos/sport-shoes-on-isolated-white-background-picture-id956501428?k=20&m=956501428&s=612x612&w=0&h=UC4qdZa2iA0PJvv0RIBlJDyF80wxFyLPq4YWvZa30Sc=', inStock: true, category:'shoes'}
+
     ]
 
     const products = await Promise.all(productsToCreate.map(createProduct))
@@ -141,9 +148,10 @@ async function populateInitialData() {
   console.log('Starting to create orders....');
   try {
     const ordersToCreate = [
-      {userId: 2, datePlaced:'10/24/2021'},
-      {status: 'processing', userId: 1, datePlaced:'5/2/1996'},
-      {status: 'processed', userId: 1, datePlaced:'2/2/2022'}
+      {userId: 2, status:'created', datePlaced:'10/24/2021'},
+      {status: 'created', userId: 1, datePlaced:'5/2/1996'},
+      {status: 'completed', userId: 1, datePlaced:'2/2/2022'},
+      {userId: 3, datePlaced:'12/24/1995', status:'created'}
     ]
 
     const orders = await Promise.all(ordersToCreate.map(createOrder))
@@ -160,7 +168,10 @@ async function populateInitialData() {
   try {
     const order_productsToCreate = [
       {productId: 1, orderId: 1, price: 120.88, quantity: 50},
-      {productId: 3, orderId: 2, price: 120398.23, quantity: 7}
+      {productId: 3, orderId: 2, price: 120398.23, quantity: 7},
+      {productId: 4, orderId: 3, price: 200, quantity: 2},
+      {productId: 5, orderId: 3, price: 50, quantity: 1},
+      {productId: 2, orderId: 3, price: 35, quantity: 3}
 
     ]
 
@@ -246,7 +257,7 @@ async function populateInitialData() {
 
   try {
     const id = 1
-    const status = 'created'
+    const status = 'completed'
     const userId = 2
     await updateOrder({ id, status, userId });
   } catch (error) {

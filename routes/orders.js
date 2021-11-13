@@ -1,6 +1,18 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder, getProductById, addProductToOrder, getOrderProductsByOrder, getAllOrderProducts, updateOrderProducts } = require('../db/index');
+const { getOrderById,
+        getAllOrders,
+        createOrder,
+        cancelOrder,
+        updateOrder,
+        getProductById,
+        addProductToOrder,
+        getOrderProductsByOrder,
+        getAllOrderProducts,
+        updateOrderProducts,
+        getOrdersByUser,
+        getCartByUser
+        } = require('../db/index');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
@@ -61,11 +73,15 @@ ordersRouter.post('/', async (req, res, next) => {
 });
 
 ordersRouter.get('/cart', requireUser, async (req, res, next) => {
-    const { id } = req.body;
+    const {id} = req.body;
     try {
-        const userOrders = await getOrdersByUser (id);
-        const userCart = userOrders.filter(order => order.status = "created");
-        res.send (userCart)
+        // console.log(id);
+        // const userOrders = await getOrdersByUser(id);
+        // const userCart = userOrders.filter(order => order.status = "created");
+        // const cartTest = getCartByUser(id);
+        // console.log(userOrders);
+        // //console.log(userCart);
+        // res.send(userOrders);
     } catch ({name, message}) {
         next({name, message});
     }
