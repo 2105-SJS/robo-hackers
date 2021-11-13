@@ -12,7 +12,8 @@ const {
   getUserByUsername,
   getUserById,
   getAllUsers,
-  getUser
+  getUser,
+  updateUser
 } = require('./users');
 
 const {
@@ -66,5 +67,6 @@ module.exports = {
   reviewProduct,
   updateProduct,
   getAllOrderProducts,
+  updateUser,
   destroyProduct
 }
