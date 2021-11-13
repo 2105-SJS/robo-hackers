@@ -59,17 +59,55 @@ const reviewProduct = async ({title, content, stars, userId, productId}) => {
 
 const updateProduct = async ({ id, name, description, price, imageURL, inStock, category }) => {
   try {
-    const { rows: [product] } = await client.query(`
-      UPDATE products 
-      SET name = $1,
-      description = $2,
-      price = $3,
-      "imageURL" = $4,
-      "inStock" = $5,
-      category = $6
-      WHERE id = $7
-      RETURNING *;
-    `, [name, description, price, imageURL, inStock, category, id]);
+    if (name) {
+      await client.query(`
+      UPDATE products
+      SET name = $1
+      WHERE id = $2;
+      `,[name, id])
+    }
+
+    if (description) {
+      await client.query(`
+      UPDATE products
+      SET description = $1
+      WHERE id = $2;
+      `,[description, id])
+    }
+
+    if (price) {
+      await client.query(`
+      UPDATE products
+      SET price = $1
+      WHERE id = $2;
+      `,[price, id])
+    }
+
+    if (imageURL) {
+      await client.query(`
+      UPDATE products
+      SET "imageURL" = $1
+      WHERE id = $2;
+      `,[imageURL, id])
+    }
+
+    if (inStock) {
+      await client.query(`
+      UPDATE products
+      SET "inStock" = $1
+      WHERE id = $2;
+      `,[inStock, id])
+    }
+
+    if (category) {
+      await client.query(`
+      UPDATE products
+      SET category = $1
+      WHERE id = $2;
+      `,[category, id])
+    }
+
+    const product = await getProductById(id);
     return product;
   } catch (error) {
     throw error;

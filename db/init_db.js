@@ -289,6 +289,10 @@ async function populateInitialData() {
   } catch (error) {
     throw error;
   }
+
+  console.log("Testing Update Product --------------------------------------")
+  const updatedProductTest = await updateProduct({id:3, name:"chicken"});
+  console.log(updatedProductTest);
 }
   
 

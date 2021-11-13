@@ -9,7 +9,8 @@ const {
     getUser,
     createUser,
     getOrdersByUser,
-    getOrderById
+    getOrderById,
+    updateUser
 } = require('../db/index.js')
 
 const {requireAdmin, requireUser} = require('./utils');
@@ -22,6 +23,7 @@ usersRouter.use((req, res, next) => {
 })
 
 usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
+
     try {
         const users = await getAllUsers();
 
@@ -129,6 +131,7 @@ usersRouter.get('/me', async (req, res, next) => {
     }
 })
 
+
 usersRouter.get('/:userId/orders', async(req, res, next) => {
     try {
         const { userId } = req.params;
@@ -140,5 +143,21 @@ usersRouter.get('/:userId/orders', async(req, res, next) => {
     }
 });
 
+usersRouter.patch('/:userId', requireAdmin, async(req, res, next) => {
+    const {userId} = req.params;
+    const {username, password, firstName, lastName, imageURL, email, isAdmin} = req.body;
+
+    try {
+        const id = userId;
+        const updatedUser = await updateUser({id, username, password, firstName, lastName, imageURL, email, isAdmin})
+        res.send({
+            name:"success!",
+            message:"you've updated the user"
+        });
+
+    } catch({name, message}) {
+        next({name, message})
+    }
+});
 
 module.exports = usersRouter

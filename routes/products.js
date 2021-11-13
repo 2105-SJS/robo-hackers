@@ -1,6 +1,6 @@
 const express = require('express');
 const productsRouter = express.Router();
-const { getAllProducts, getProductById, createProduct} = require('../db/index');
+const { getAllProducts, getProductById, createProduct, updateProduct} = require('../db/index');
 const { requireAdmin } = require('./utils');
 
 productsRouter.use((req, res, next) => {
@@ -36,5 +36,19 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
         next (error);
     }
 });
+
+
+productsRouter.patch('/:productId', requireAdmin, async(req, res, next) => {
+    const {productId} = req.params;
+    const {name, description, price, imageURL, inStock, category} = req.body;
+
+    try {
+        const updatedProduct = await updateProduct({id:productId, name, description, price, imageURL, inStock, category});
+        console.log(updatedProduct);
+        res.send(updatedProduct);
+    } catch ({name, message}) {
+        next ({name, message})
+    }
+})
 
 module.exports = productsRouter;
