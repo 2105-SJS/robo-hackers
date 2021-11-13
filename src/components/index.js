@@ -17,3 +17,5 @@ export {default as CheckoutForm} from './CheckoutForm';
 export {default as Checkout} from './Checkout';
 
 export {default as ProductById} from './ProductById';
+
+export {default as Orders} from './Orders';
