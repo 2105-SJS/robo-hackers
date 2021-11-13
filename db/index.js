@@ -3,7 +3,8 @@ const {
   getAllProducts,
   getProductById,
   reviewProduct,
-  updateProduct
+  updateProduct,
+  destroyProduct
 } = require('./products');
 
 const {
@@ -64,5 +65,6 @@ module.exports = {
   destroyOrderProduct,
   reviewProduct,
   updateProduct,
-  getAllOrderProducts
+  getAllOrderProducts,
+  destroyProduct
 }
