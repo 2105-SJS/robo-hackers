@@ -80,7 +80,7 @@ async function buildTables() {
          "productId" INTEGER REFERENCES products(id),
          "orderId" INTEGER REFERENCES orders(id),
          price NUMERIC(10, 2) NOT NULL,
-         quantity INTEGER NOT NULL
+         quantity INTEGER NOT NULL,
          UNIQUE ("productId", "orderId")
       );
 

@@ -76,6 +76,15 @@ const updateProduct = async ({ id, name, description, price, imageURL, inStock, 
   }
 }
 
+const destroyProduct = async (id) => {
+  
+  try {
+
+  } catch (error) {
+    throw (error);
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
