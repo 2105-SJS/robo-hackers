@@ -15,7 +15,6 @@ const createProduct = async ({name, description, price, imageURL, inStock, categ
   } catch (error) {
     throw error
   }
-  
 }
 
 const getAllProducts = async () => {
@@ -59,6 +58,7 @@ const reviewProduct = async ({title, content, stars, userId, productId}) => {
 
 const updateProduct = async ({ id, name, description, price, imageURL, inStock, category }) => {
   try {
+
     if (name) {
       await client.query(`
       UPDATE products
@@ -117,26 +117,32 @@ const updateProduct = async ({ id, name, description, price, imageURL, inStock, 
 const destroyProduct = async (id) => {
   try {
     const { rows: order_products } = await client.query(`
-    DELETE FROM order_products
-    WHERE "productId" = $1
-    AND "orderId" NOT IN
-    (SELECT orders.id FROM orders
+      DELETE FROM order_products
+      WHERE "productId" = $1
+      AND "orderId" NOT IN
+      (SELECT orders.id FROM orders
       JOIN order_products ON orders.id = order_products."orderId"
       WHERE orders.status = 'completed'
       AND order_products."productId" = $1)
       RETURNING *;
       `, [id]);
+    
+    console.log("destroyProduct Method Call",order_products)
+    const { rows: review} = await client.query(`
+      DELETE FROM reviews
+      WHERE "productId" =$1;
+     `,[id]);
 
-      const { rows: review} = await client.query(`
-       DELETE FROM reviews
-       WHERE "productId" =$1;
-      `,[id]);
+    console.log("destroy product method call, returning review", review)
       
-      const { rows: product } = await client.query(`
-        DELETE FROM products
-        WHERE id = $1
-        RETURNING *;
+    const { rows: product } = await client.query(`
+      UPDATE products
+      SET active=false
+      WHERE id=$1
+      RETURNING *;
       `, [id]);
+
+    console.log("DestroyProduct method call returning product deleted", product);
     return product;
   } catch (error) {
     throw error;
