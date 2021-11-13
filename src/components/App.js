@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
 import {Route, Switch } from 'react-router-dom';
-
 import './bootstrap.min.css';
 
 import {
@@ -10,7 +10,8 @@ import {
   Navigation,
   MyAccount,
   Checkout,
-  ProductById
+  ProductById,
+  Orders
 } from './';
 
 import {
@@ -25,6 +26,10 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [orders, setOrders] = useState([]);
+  
+  console.log(products);
+  
   const fetchProducts = async () => {
     try {
       const productsObj = await callAPI({
@@ -48,9 +53,9 @@ const App = () => {
     }
   }, [token]);
 
+
   return <>
     <div className="App">
-      <h2>{ message }</h2>
 
       <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword}/>
 
@@ -66,11 +71,11 @@ const App = () => {
           </Route>
 
           <Route exact path = "/products">
-            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} />
+            <Products products = {products} setProducts = {setProducts} orders = {orders} token={token}/>
           </Route>
 
-          <Route exact path = "/products/:productId">
-            <ProductById products = {products} />
+          <Route exact path = "/products/:testProductId">
+            <ProductById products = {products}/>
           </Route>
           
           <Route exact path = "/account">
@@ -79,6 +84,11 @@ const App = () => {
 
           <Route exact path = "/checkout">
             <Checkout />
+          </Route>
+
+
+          <Route exact path = "/cart">
+            <Orders token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
           </Route>
 
         </Switch>
