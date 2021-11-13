@@ -123,6 +123,7 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
                     updatedOrder_product = await getOrderProductsByOrder(orderId); 
                 }
             }
+            
 
             //if a duplicate was found, send the updated order product for confirmation
             if (productInOrder === true) {
@@ -139,9 +140,6 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
                 message: "Only the user who created the order can add products to it"
             })
         }
-
-        res.send("chicken");
-
     } catch ({name, message}) {
         next({name, message});
     }
