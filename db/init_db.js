@@ -21,7 +21,8 @@ const {
   updateOrder,
   addProductToOrder,
   destroyOrderProduct,
-  reviewProduct
+  reviewProduct,
+  destroyProduct
 } = require('./index.js');
 const { getOrderProductById } = require('./order_products');
 const { updateProduct } = require('./products');
@@ -278,6 +279,13 @@ async function populateInitialData() {
   try {
     const updatedProduct = await updateProduct({ id: 2, name:"banana", description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
     console.log('-------------', updatedProduct);
+  } catch (error) {
+    throw error;
+  }
+
+  try {
+    const destroyedProduct = await destroyProduct(1);
+    console.log('xXxXxXxXxXx', destroyedProduct);
   } catch (error) {
     throw error;
   }
