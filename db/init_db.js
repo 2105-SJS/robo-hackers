@@ -124,11 +124,15 @@ async function populateInitialData() {
   console.log('Starting to create products...');
   try {
     const productsToCreate = [
-      {name:"Vanille Ice Cream", description: "tasty vanilla ice cream", price: 5.99, imageURL:"ice cream", inStock: true, category:'food'},
-      {name:"Banana", description: "a single ripe banana", price: 124.45, inStock: false, category:'food'},
-      {name:"Shoes Running", description: "lightly worn running shoes", price:75.00, imageURL:'running shoes', inStock: true, category:'shoes'},
+      {name:"Potato", description: "yukon potato at its finest", price: 5.99, imageURL:"potato", inStock: true, category:'food'},
+      {name:"Cheesecake", description: "German Raspberry Cheesecake", price: 6, imageURL:'cheesecake', inStock: false, category:'food'},
+      {name:"laser gun", description: "from the future!", price:75.00, imageURL:'laser', inStock: true, category:'weaponry'},
       {name:"Gundam", description: "big cool robot", price: 120, imageURL:"gundam", inStock: true, category:'toy'},
       {name:"Pokemon Emerald", description: "old school pokemon at it's finest", price: 50, imageURL:"emerald cartridge", inStock: true, category:'video game'},
+      {name:"Vanille Ice Cream", description: "tasty vanilla ice cream", price: 5.99, imageURL:"https://media.istockphoto.com/photos/front-view-of-real-edible-ice-cream-cone-with-3-different-scoops-of-picture-id1148364081?k=20&m=1148364081&s=612x612&w=0&h=Ukaod6oXxX7Jn1KPk8r4UkkK7lNz-SBvS2YkRL-C6Q0=", inStock: true, category:'food'},
+      {name:"Banana", description: "a single ripe banana", price: 124.45, imageURL: "https://media.istockphoto.com/photos/big-banana-picture-id182817811?b=1&k=20&m=182817811&s=170667a&w=0&h=1VbC6BgMmIbftOxBBIgkgrwG4i0SLWa3MTX7RRFCwPk=", inStock: false, category:'food'},
+      {name:"Shoes Running", description: "lightly worn running shoes", price:75.00, imageURL:'https://media.istockphoto.com/photos/sport-shoes-on-isolated-white-background-picture-id956501428?k=20&m=956501428&s=612x612&w=0&h=UC4qdZa2iA0PJvv0RIBlJDyF80wxFyLPq4YWvZa30Sc=', inStock: true, category:'shoes'}
+
     ]
 
     const products = await Promise.all(productsToCreate.map(createProduct))
@@ -284,7 +288,7 @@ async function populateInitialData() {
   }
 
   try {
-    const updatedProduct = await updateProduct({ id: 2, name:"banana", description:'ripe banana', price: 20, imageURL: 'none', inStock: 'true', category:'food' });
+    const updatedProduct = await updateProduct({ id: 2, name:"banana", description:'ripe banana', price: 20, imageURL: 'https://media.istockphoto.com/photos/big-banana-picture-id182817811?b=1&k=20&m=182817811&s=170667a&w=0&h=1VbC6BgMmIbftOxBBIgkgrwG4i0SLWa3MTX7RRFCwPk=', inStock: 'true', category:'food' });
     console.log('-------------', updatedProduct);
   } catch (error) {
     throw error;

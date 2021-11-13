@@ -46,9 +46,7 @@ const Navigation = ({username, token, setToken, setUsername}) => {
                 }
                 <li class = "nav-item">
                     <a class = "nav-link" href = "#" >
-                        <Link to = '/checkout'>
-                            <i class="bi bi-cart">Cart</i>
-                        </Link>
+                        <Link to = '/cart'>Cart</Link>
                     </a>
                 </li>
 
