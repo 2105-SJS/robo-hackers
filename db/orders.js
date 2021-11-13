@@ -54,11 +54,14 @@ const _attachProducts = async (id) => {
 
 const cancelOrder = async (id) => {
   try {
-    const {rows: orderCancelled} = await client.query(`
+    const {rows: [orderCancelled]} = await client.query(`
     UPDATE orders
     SET status = 'cancelled'
-    WHERE id = $1;
+    WHERE id = $1
+    RETURNING *;
     `, [id]);
+
+    return orderCancelled;
   } catch (error) {
     throw error
   }
@@ -94,7 +97,7 @@ const getAllOrders = async () => {
 
 const getOrdersByUser = async (id) => {
   try {
-    const {rows: [userOrder]} = await client.query(`
+    const {rows: userOrder} = await client.query(`
     SELECT users.username, users.email, orders.status, orders."datePlaced", op.price, op.quantity, p.description, p.price 
     FROM users
     JOIN orders ON users.id = orders."userId"
@@ -142,6 +145,34 @@ const getCartByUser = async (id) => {
   }
 }
 
+const updateOrder = async ({id, status, userId}) => {
+  try {
+
+    if (status) {
+      await client.query(`
+      UPDATE orders
+      SET status = $1
+      WHERE id = $2;
+      `,[status, id])
+    }
+
+    if (userId) {
+      await client.query(`
+      UPDATE orders
+      SET "userId" = $1
+      WHERE id = $2;
+      `,[userId, id])
+    }
+
+    const order = await getOrderById(id);
+    return order;
+
+  } catch (error) {
+    throw error;
+  };
+};
+
+
 module.exports = {
   createOrder,
   getOrderById,
@@ -150,5 +181,6 @@ module.exports = {
   getOrdersByProduct,
   getCartByUser,
   cancelOrder,
-  completeOrder
+  completeOrder,
+  updateOrder
 }

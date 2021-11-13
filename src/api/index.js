@@ -1,8 +1,19 @@
 import axios from 'axios';
 
-export async function getSomething() {
+export const callAPI = async ({ url, method, token, body }) => {
   try {
-    const { data } = await axios.get('/api');
+    const options = {
+      method: method ? method.toUpperCase() : 'GET',
+      url: `api/${url}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(body)
+    }
+    if (token) options.headers['Authorization'] = `Bearer ${token}`;
+
+    const response = await axios(options);
+    const data = await response.data;
     return data;
   } catch (error) {
     throw error;

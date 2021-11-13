@@ -7,19 +7,23 @@ const {
     getUserById,
     getUserByUsername,
     getUser,
-    createUser
+    createUser,
+    getOrdersByUser,
+    getOrderById,
+    updateUser
 } = require('../db/index.js')
+
+const {requireAdmin, requireUser} = require('./utils');
 
 const jwt = require('jsonwebtoken');
 
-
-const { getOrderById, getOrdersByUser } = require('../db/orders.js');
 
 usersRouter.use((req, res, next) => {
     next();
 })
 
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
+
     try {
         const users = await getAllUsers();
 
@@ -75,19 +79,6 @@ usersRouter.post('/register', async (req, res, next) => {
     }
 });
 
-usersRouter.get('/:userId/orders', async(req, res, next) => {
-    console.log(req.params.userId);
-    try {
-        const { userId } = req.params;
-        console.log('userId', userId);
-        const getOrders = await getOrdersByUser({userId}) 
-        res.send(getOrders)
-    } catch ({name, message}){
-        next({name, message}); 
-        
-    }
-});
-
 usersRouter.post('/login', async (req, res, next) => {
     const {username, password} = req.body;
 
@@ -102,10 +93,10 @@ usersRouter.post('/login', async (req, res, next) => {
         const user = await getUserByUsername(username);
         const token = jwt.sign(user, process.env.JWT_SECRET);
 
-        const checkPass = await bcrypt.compare(password, user.password)
-
+        const checkPass = await bcrypt.compare(password, user.password);
+        delete user.password;
         if(user && checkPass) {
-            res.send({token});
+            res.send({token, user});
         } else {
             next({
                 name: 'IncorrectCredentialsError',
@@ -119,7 +110,6 @@ usersRouter.post('/login', async (req, res, next) => {
 
 usersRouter.get('/me', async (req, res, next) => {
     const bearerToken = req.headers.authorization;
-    console.log(bearerToken);
     
     try {
         if (!bearerToken) {
@@ -141,5 +131,33 @@ usersRouter.get('/me', async (req, res, next) => {
     }
 })
 
+
+usersRouter.get('/:userId/orders', async(req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const getOrders = await getOrdersByUser({userId}) 
+        res.send(getOrders)
+    } catch ({name, message}){
+        next({name, message}); 
+        
+    }
+});
+
+usersRouter.patch('/:userId', requireAdmin, async(req, res, next) => {
+    const {userId} = req.params;
+    const {username, password, firstName, lastName, imageURL, email, isAdmin} = req.body;
+
+    try {
+        const id = userId;
+        const updatedUser = await updateUser({id, username, password, firstName, lastName, imageURL, email, isAdmin})
+        res.send({
+            name:"success!",
+            message:"you've updated the user"
+        });
+
+    } catch({name, message}) {
+        next({name, message})
+    }
+});
 
 module.exports = usersRouter

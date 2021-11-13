@@ -85,6 +85,69 @@ const getAllUsers = async() => {
   }
 }
 
+const updateUser = async ({id, username, password, firstName, lastName, imageURL, isAdmin, email}) => {
+  try {
+
+    if (username) {
+      await client.query(`
+      UPDATE users
+      SET username=$1
+      WHERE id=$2;
+      `,[username, id])
+    }
+
+    if (password) {
+      await client.query(`
+      UPDATE users
+      SET password=$1
+      WHERE id=$2;
+      `,[password, id])
+    }
+
+    if (firstName) {
+      await client.query(`
+      UPDATE users
+      SET "firstName"=$1
+      WHERE id=$2;
+      `,[firstName, id])
+    }
+
+    if (lastName) {
+      await client.query(`
+      UPDATE users
+      SET "lastName"=$1
+      WHERE id=$2;
+      `,[lastName, id])
+    }
+
+    if (imageURL) {
+      await client.query(`
+      UPDATE users
+      SET "imageURL"=$1
+      WHERE id=$2;
+      `,[imageURL, id])
+    }
+
+    if (isAdmin) {
+      await client.query(`
+      UPDATE users
+      SET "isAdmin"=$1
+      WHERE id=$2;
+      `,[isAdmin, id])
+    }
+
+    if (email) {
+      await client.query(`
+      UPDATE users
+      SET email=$1
+      WHERE id=$2;
+      `,[email, id])
+    }
+
+  } catch (error) {
+    throw(error)
+  }
+}
 
 
 module.exports = {
@@ -92,5 +155,6 @@ module.exports = {
   getUserByUsername,
   getUserById,
   getAllUsers,
-  getUser
+  getUser,
+  updateUser
 }
