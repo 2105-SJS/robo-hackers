@@ -3,7 +3,7 @@ import React from 'react';
 const SingleProduct = ({product, children}) => {
     return product ?
       <div>
-        <div>{product.imageURL}</div>
+        <img src={product.imageURL}/>
         <div>ID: {product.id}</div>
         <div>Name: {product.description}</div>
         <hr></hr>

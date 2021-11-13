@@ -10,7 +10,7 @@ const ProductById = ({products}) => {
       productById ?
         productById.map(product =>
           <div key={product.id}>
-            <div>{product.imageURL}</div>
+            <img src={product.imageURL}/>
             <div>ID: {product.id}</div>
             <div>Name: {product.description}</div>
             <hr></hr>
