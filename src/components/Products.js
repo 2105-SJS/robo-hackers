@@ -1,18 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
-import { SingleProduct } from './'
+import { SingleProduct, Cart } from './'
 
-const Products = ({products, fetchProducts, productsList}) => {
-
+const Products = ({products, fetchProducts, productsList, testProducts}) => {
+  console.log("testproducts>>>>>", testProducts)
   return <>
+    <section class = 'container content-section'>
     {
-      products ? 
-        products.map(product => <SingleProduct key = {product.id} product = {product}> 
-        <Link to={`/products/${product.id}`}>Details</Link>
+      testProducts ? 
+        testProducts.map(testProduct => <SingleProduct key = {testProduct.id} testProducts={testProducts} testProduct={testProduct}> 
+        
+        <Link to={`/products/${testProduct.id}`} className='detail_butn'>Details</Link>
+        
         </SingleProduct>)
+        
       : 'Rendering...'
     }
+    </section>
+    <section>
+      <Cart testProducts={testProducts}/>
+    </section>
     </>;
 }
 

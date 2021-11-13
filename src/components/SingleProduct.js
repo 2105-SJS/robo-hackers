@@ -1,18 +1,22 @@
 import React from 'react';
-
-const SingleProduct = ({product, children}) => {
-    return product ?
-      <div>
-        <div>{product.imageURL}</div>
-        <div>ID: {product.id}</div>
-        <div>Name: {product.description}</div>
-        <hr></hr>
-        <div>Price: {product.price}</div>
-        <div>In Stock: {product.inStock}</div>
+import './style.css';
+const SingleProduct = ({product, children,testProducts, testProduct}) => {
+    return testProducts ?
+    <div class = 'shop-items'>
+      
+      <div class = 'shop-item'>
+        <span class = 'item-title'>{testProduct.description}</span>
+        <div class = 'item-image'>{testProduct.imageURL}</div>
+        <div class = 'item-details'>
+          <span class = 'item-price'>{testProduct.price}</span>
+          <button class = 'btn btn-primary shop-item-button' type = "button">Add to Cart</button>
+        </div>
         {
           children
         }
       </div>
+
+    </div>
     : 'Rendering...'
 }
 
