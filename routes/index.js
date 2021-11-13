@@ -15,7 +15,7 @@ apiRouter.use(async (req, res, next) => {
     } else {
       const [_, token] = authorization.split(' ');
       const userObject = jwt.verify(token, JWT_SECRET);
-      let user = null
+      let user = {}
       
       if (!userObject.id) {
         next();
