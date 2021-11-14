@@ -72,7 +72,7 @@ async function buildTables() {
 
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
-        status VARCHAR(255) DEFAULT 'created',
+        status VARCHAR(255) NOT NULL,
         "userId" INTEGER REFERENCES users(id),
         "datePlaced" VARCHAR(255) NOT NULL
       );
@@ -169,9 +169,9 @@ async function populateInitialData() {
     const order_productsToCreate = [
       {productId: 1, orderId: 1, price: 120.88, quantity: 50},
       {productId: 3, orderId: 2, price: 120398.23, quantity: 7},
-      {productId: 4, orderId: 3, price: 200, quantity: 2},
-      {productId: 5, orderId: 3, price: 50, quantity: 1},
-      {productId: 2, orderId: 3, price: 35, quantity: 3}
+      {productId: 4, orderId: 4, price: 200, quantity: 2},
+      {productId: 5, orderId: 4, price: 50, quantity: 1},
+      {productId: 2, orderId: 4, price: 35, quantity: 3}
 
     ]
 
@@ -274,16 +274,6 @@ async function populateInitialData() {
     await addProductToOrder ({ productId, orderId, price, quantity })
     console.log('addProductToOrder>>>>', productId, orderId, price, quantity);
   } catch (error) {
-    throw error;
-  }
-
-  console.log('Testing destroyProductOrder --------------------------------');
-  try {
-    await destroyOrderProduct(3);
-    const product_order_test = await getOrderProductById(3);
-    console.log("Expecting Empty List");
-    console.log(product_order_test);
-  } catch(error) {
     throw error;
   }
 

@@ -111,14 +111,24 @@ const getOrdersByUser = async (id) => {
     SELECT * FROM orders
     WHERE "userId"=$1;
     `,[id])
-
-
-
-
-
     return userOrders;
     
   } catch (error) {
+    throw error;
+  }
+}
+
+const getActiveOrdersByUser = async (id) => {
+  try {
+    const {rows: [activeUserOrder]} = await client.query(`
+    SELECT * FROM orders
+    WHERE "userId"=$1
+    AND status = 'created';
+    `,[id])
+
+    return activeUserOrder
+
+  } catch(error){
     throw error;
   }
 }
@@ -148,6 +158,7 @@ const getCartByUser = async (id) => {
     LEFT JOIN order_products ON orders.id = order_products."orderId"
     WHERE users.id = $1;
     `,[id])
+
     return userCart;
     
 
@@ -193,5 +204,6 @@ module.exports = {
   getCartByUser,
   cancelOrder,
   completeOrder,
-  updateOrder
+  updateOrder,
+  getActiveOrdersByUser
 }
