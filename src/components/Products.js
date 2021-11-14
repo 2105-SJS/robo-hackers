@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {useHistory} from 'react-router'
+import { Link, useHistory } from 'react-router-dom';
+import SingleProduct from './SingleProduct'
 
 import {
   callAPI
@@ -9,30 +9,25 @@ import {
 const Products = ({products, setProducts, token}) => {
   const history = useHistory();
 
-const handleAddToCart = async (product) => {
-  try {
-    const addToOrder = await callAPI({ url: `/${products.id}`, method: 'POST', token, body: product})
-    if(addToOrder) {
-      history.push('/cart')
+  const handleAddToCart = async (product) => {
+    try {
+      const addToOrder = await callAPI({ url: `/${products.id}`, method: 'POST', token, body: product})
+      if(addToOrder) {
+        history.push('/cart')
+      }
+
+    } catch (error) {
+      throw error;
     }
-    
-    console.log('clicked', addToOrder)
-  } catch (error) {
-    console.error(error)
   }
-}
   return <>
   {
     products ?
       products.map (product => <>
-      <div key = {product.id}>
-        <div>{product.description}</div>
-        <div>
-          <img src = {product.imgURL} />
-          <h4>{product.price}</h4>
-            <button onClick={() => {handleAddToCart(product)}}>Add to cart</button>
-        </div>
-      </div>
+        <SingleProduct key={product.id} product={product} >
+          <Link to={`/products/${product.id}`}>Details</Link>
+          <button onClick={() => {handleAddToCart(product)}}>Add to cart</button>
+        </SingleProduct>
       </>) : null
   }
   </>

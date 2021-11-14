@@ -26,7 +26,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
         history.push('./home');
       }
     } catch (error) {
-      console.error(error)
+      throw error;
     }
   }
 

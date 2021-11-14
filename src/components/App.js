@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import {Route, Switch } from 'react-router-dom';
+
 import './bootstrap.min.css';
 
 import {
@@ -19,16 +19,13 @@ import {
 } from '../api';
 
 const App = () => {
-  const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [orders, setOrders] = useState([]);
-  
-  console.log(products);
+  const [orders, setOrders] = useState([]);  
   
   const fetchProducts = async () => {
     try {
@@ -48,11 +45,10 @@ const App = () => {
       fetchProducts();
           
     } catch (error) {
-        console.error(error);
+        throw error;
           
     }
   }, [token]);
-
 
   return <>
     <div className="App">
@@ -71,11 +67,11 @@ const App = () => {
           </Route>
 
           <Route exact path = "/products">
-            <Products products = {products} setProducts = {setProducts} orders = {orders} token={token}/>
+            <Products products={products} fetchProducts={fetchProducts} setProducts={setProducts} orders={orders} token={token} />
           </Route>
 
-          <Route exact path = "/products/:testProductId">
-            <ProductById products = {products}/>
+          <Route exact path = "/products/:productId">
+            <ProductById products={products} token={token} setProducts={setProducts}/>
           </Route>
           
           <Route exact path = "/account">
@@ -85,8 +81,7 @@ const App = () => {
           <Route exact path = "/checkout">
             <Checkout />
           </Route>
-
-
+          
           <Route exact path = "/cart">
             <Orders token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
           </Route>
