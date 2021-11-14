@@ -11,7 +11,8 @@ const { getOrderById,
         getAllOrderProducts,
         updateOrderProducts,
         getOrdersByUser,
-        getCartByUser
+        getCartByUser,
+        getActiveOrdersByUser
         } = require('../db/index');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
@@ -75,13 +76,25 @@ ordersRouter.post('/', async (req, res, next) => {
 ordersRouter.get('/cart', requireUser, async (req, res, next) => {
     const {id} = req.body;
     try {
-        // console.log(id);
-        // const userOrders = await getOrdersByUser(id);
-        // const userCart = userOrders.filter(order => order.status = "created");
-        // const cartTest = getCartByUser(id);
-        // console.log(userOrders);
-        // //console.log(userCart);
-        // res.send(userOrders);
+        const userOrders = await getActiveOrdersByUser(id);
+        const productList = []
+        //if the user doesn't have a cart (they've completed their previous order)
+        //make them a new order aka a new cart
+        if (!userOrders) {
+            let today = new Date().toISOString().slice(0, 10)
+            const newOrder =  await createOrder({userId:id, status:'created', datePlaced:today})
+            res.send({newOrder, productList});
+        }
+        //get a list of order_products associated with the user
+        const relevantOrder_products = await getOrderProductsByOrder(userOrders.id);
+        //iterate through the order_products list and use productId to get the product from the database
+        //and push it into a list to send back to the front end
+        for(let i = 0; i < relevantOrder_products.length; i++) {
+            const productToAdd = await getProductById(relevantOrder_products[i].productId);
+            productList.push(productToAdd);
+        }
+
+        res.send({CartInfo:userOrders, products:productList});
     } catch ({name, message}) {
         next({name, message});
     }
