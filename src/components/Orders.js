@@ -11,7 +11,6 @@ const Orders = ({token, setOrders, orders, products}) => {
                 const respObj = await callAPI({ url: 'orders/cart', token});
                 if (respObj) {
                     setOrders(respObj)
-                    console.log(respObj)
                     return respObj;
                 }
             } catch (error) {
@@ -23,7 +22,6 @@ const Orders = ({token, setOrders, orders, products}) => {
     for(let i = 0; i < orders.length; i++) {
         total += Number(orders[i].products[0].price)
     }
-    console.log('my orders>>>', orders);
     return <>
     <h2>Cart</h2>
     <div>
@@ -32,7 +30,7 @@ const Orders = ({token, setOrders, orders, products}) => {
             <div key = {order.id}>
                 {
                     order.products.map(orderProduct => <>
-                    <div><img src = {orderProduct.imgUrl}/>{orderProduct.title} {orderProduct.price}</div>
+                    <div><img src = {orderProduct.imgUrl} alt=''/>{orderProduct.title} {orderProduct.price}</div>
                     </>
                     )
                     }

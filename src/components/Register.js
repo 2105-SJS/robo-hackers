@@ -39,7 +39,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
       }
             
     } catch (error) {
-      console.error(error)
+      throw error;
     }
   }
     
