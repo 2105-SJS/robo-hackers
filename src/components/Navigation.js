@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from "react-router-dom";
 
-const Navigation = ({username, token, setToken, setUsername}) => {
+const Navigation = ({username, token, setToken, setUsername, isAdmin}) => {
   const history= useHistory();
   
   const logOut = () => {
@@ -42,6 +42,9 @@ const Navigation = ({username, token, setToken, setUsername}) => {
             <li class = "nav-item">
               <Link to="/register" class="nav-link" href="#">Register</Link>
             </li> 
+          }
+          {
+           isAdmin ? <Link to = "/admin" >Admin</Link>  : null
           }
           {
             token ? <button type='logout' onClick={logOut}>Logout</button>  : null
