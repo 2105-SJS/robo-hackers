@@ -5,7 +5,7 @@ const SingleProduct = ({product, children}) => {
     <div class = 'store-items' key = {product.id}>
     <div class = 'store-item'>
       <span class = 'item-title'>{product.name}</span>
-      <img class = 'item-image' src = {product.imgURL} />
+      <img class = 'item-image' src = {product.imageURL} class='img-thumbnail' class='w-25' />
       <div class = 'item-details'>
       <span>{product.description}</span>
       <span class = 'item-price'>${product.price}</span>

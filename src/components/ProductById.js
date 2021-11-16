@@ -25,7 +25,7 @@ const ProductById = ({ products, token, setProducts }) => {
       productById ?
         productById.map(product =>
           <div key={product.id}>
-            <img src={product.imageURL} alt=''/>
+            <img src={product.imageURL} alt='' class='img-thumbnail' class='w-25'/>
             <div>ID: {product.id}</div>
             <div>Name: {product.name}</div>
             <div>Description: {product.description}</div>
