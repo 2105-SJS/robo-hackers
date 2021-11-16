@@ -124,14 +124,14 @@ async function populateInitialData() {
   console.log('Starting to create products...');
   try {
     const productsToCreate = [
-      {name:"Potato", description: "yukon potato at its finest", price: 5.99, imageURL:"potato", inStock: true, category:'food'},
-      {name:"Cheesecake", description: "German Raspberry Cheesecake", price: 6, imageURL:'cheesecake', inStock: false, category:'food'},
-      {name:"laser gun", description: "from the future!", price:75.00, imageURL:'laser', inStock: true, category:'weaponry'},
-      {name:"Gundam", description: "big cool robot", price: 120, imageURL:"gundam", inStock: true, category:'toy'},
-      {name:"Pokemon Emerald", description: "old school pokemon at it's finest", price: 50, imageURL:"emerald cartridge", inStock: true, category:'video game'},
-      {name:"Vanille Ice Cream", description: "tasty vanilla ice cream", price: 5.99, imageURL:"https://media.istockphoto.com/photos/front-view-of-real-edible-ice-cream-cone-with-3-different-scoops-of-picture-id1148364081?k=20&m=1148364081&s=612x612&w=0&h=Ukaod6oXxX7Jn1KPk8r4UkkK7lNz-SBvS2YkRL-C6Q0=", inStock: true, category:'food'},
-      {name:"Banana", description: "a single ripe banana", price: 124.45, imageURL: "https://media.istockphoto.com/photos/big-banana-picture-id182817811?b=1&k=20&m=182817811&s=170667a&w=0&h=1VbC6BgMmIbftOxBBIgkgrwG4i0SLWa3MTX7RRFCwPk=", inStock: false, category:'food'},
-      {name:"Shoes Running", description: "lightly worn running shoes", price:75.00, imageURL:'https://media.istockphoto.com/photos/sport-shoes-on-isolated-white-background-picture-id956501428?k=20&m=956501428&s=612x612&w=0&h=UC4qdZa2iA0PJvv0RIBlJDyF80wxFyLPq4YWvZa30Sc=', inStock: true, category:'shoes'}
+      {name:"ASUS ROG Strix NVIDIA GeForce RTX 3080 Ti OC Edition Gaming Graphics Card", description: "(PCIe 4.0, 12GB GDDR6X, HDMI 2.1, Axial-tech Fan Design, 2.9-Slot, Super Alloy Power II, ASUS Auto-Extreme Technology)", price: 2678.93, imageURL:"https://c1.neweggimages.com/ProductImageCompressAll1280/14-126-508-V19.jpg", inStock: true, category: "graphics card"},
+      {name:"GIGABYTE AORUS GeForce RTX 3070 MASTER", description: "8GB GDDR6 PCI Express 4.0 ATX Video Card GV-N3070AORUS M-8GD (rev. 2.0) (LHR)", price: 1205.39, imageURL:'https://c1.neweggimages.com/ProductImageCompressAll1280/14-932-466-V01.jpg', inStock: false, category: "graphics card"},
+      {name:"MSI Suprim GeForce RTX 3070", description: "8GB GDDR6 PCI Express 4.0 x16 Video Card RTX 3070 Suprim X 8G LHR", price: 1137.85, imageURL: "https://c1.neweggimages.com/ProductImageCompressAll1280/14-137-668-V03.jpg", inStock: true, category: "graphics card"},
+      {name:"ASUS ROG Strix NVIDIA GeForce RTX 3070 V2 White OC Edition Gaming Graphics Card", description: "(PCIe 4.0, 8GB GDDR6, LHR, HDMI 2.1, DisplayPort 1.4a, White Color Scheme, Axial-tech Fan Design, 2.9-slot)", price: 1329.49, imageURL: "https://c1.neweggimages.com/ProductImageCompressAll1280/14-126-535-V01.jpg", inStock: true, category: "graphics card"},
+      {name:"Mobile Suit Gundam 00 GN-0000-GNR-010 00 Raiser Real Grade Model Kit", description: "Utilizing real world technology to interpret the futuristic elements of the Gundam universe, the Real Grade series presents its version of the 00 Raiser from the Gundam 00 animated series.", price: 29.74, imageURL: "https://media.gamestop.com/i/gamestop/11122494/Mobile-Suit-Gundam-00-GN-0000-GNR-010-00-Raiser-Real-Grade-Model-Kit?$pdp$$&fmt=webp", inStock: true, category: "collectible"},
+      {name:"Mobile Suit Gundam Calamity Full Mechanics Grade Model Kit", description: "The Calamity Gundam from MS Gundam Seed, a series popular among fans will be available and joins the new format series Full Mechanics.", price: 51.84, imageURL: "https://media.gamestop.com/i/gamestop/11118817/Mobile-Suit-Gundam-Calamity-Full-Mechanics-Grade-Model-Kit?$pdp$$&fmt=webp", inStock: true, category: "collectibles"},
+      {name:"Bandai Mobile Suit Gundam Wing XXXG-01H Gundam Heavyarms Gundam Universe 6.69-in Action Figure", description: "The figure perfectly captures its heavy look and signature massive Gatling cannons.", price: 24.99, imageURL: "https://media.gamestop.com/i/gamestop/11146483/Bandai-Mobile-Suit-Gundam-Wing-XXXG-01H-Gundam-Heavyarms-Gundam-Universe-6.69-in-Action-Figure?$pdp$$&fmt=webp", inStock: false, category: "collectibles"},
+      {name:"Bandai Gundam Wing Infinity 4.5-in Action Figure", description: "The iconic world of Gundam comes to life in this exciting 4.5 inch build a figure. With exceptional detail- these figures are the perfect addition to any Gundam Collection.", price: 11.04, imageURL: "https://media.gamestop.com/i/gamestop/11148531/Bandai-Gundam-Wing-Infinity-4.5-in-Action-Figure?$pdp$$&fmt=webp", inStock: true, category: "collectibles"}
 
     ]
 
@@ -276,24 +276,6 @@ async function populateInitialData() {
   } catch (error) {
     throw error;
   }
-
-  try {
-    const updatedProduct = await updateProduct({ id: 2, name:"banana", description:'ripe banana', price: 20, imageURL: 'https://media.istockphoto.com/photos/big-banana-picture-id182817811?b=1&k=20&m=182817811&s=170667a&w=0&h=1VbC6BgMmIbftOxBBIgkgrwG4i0SLWa3MTX7RRFCwPk=', inStock: 'true', category:'food' });
-    console.log('-------------', updatedProduct);
-  } catch (error) {
-    throw error;
-  }
-
-  try {
-    const destroyedProduct = await destroyProduct(1);
-    console.log('xXxXxXxXxXx', destroyedProduct);
-  } catch (error) {
-    throw error;
-  }
-
-  console.log("Testing Update Product --------------------------------------")
-  const updatedProductTest = await updateProduct({id:3, name:"chicken"});
-  console.log(updatedProductTest);
 }
   
 
