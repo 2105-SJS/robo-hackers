@@ -101,7 +101,7 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
 });
 
 ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
-    const {orderId} = req.params;
+    //const {orderId} = req.params;
     const {id, quantity, price} = req.body;
     const user = req.user
 
@@ -123,7 +123,10 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
             })
         }
 
-        const orderToAddTo = await getOrderById(orderId);
+        const orderToAddTo = await getActiveOrdersByUser(req.user.id);
+        const orderId = orderToAddTo.id;
+        console.log(orderToAddTo.userId);
+        console.log(req.user.id);
         
         if (req.user.id === orderToAddTo.userId) {
             const {price} = productToAdd
@@ -152,7 +155,6 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
                     updatedOrder_product = await getOrderProductsByOrder(orderId); 
                 }
             }
-            
 
             //if a duplicate was found, send the updated order product for confirmation
             if (productInOrder === true) {
