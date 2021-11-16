@@ -11,7 +11,8 @@ import {
   MyAccount,
   Checkout,
   ProductById,
-  Orders
+  Orders,
+  AddProduct
 } from './';
 
 import {
