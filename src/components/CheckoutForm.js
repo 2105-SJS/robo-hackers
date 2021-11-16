@@ -5,6 +5,8 @@ import {
     useElements
 } from "@stripe/react-stripe-js";
 
+const {REACT_APP_CHECKOUT_RETURN_URL} = process.env;
+
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
@@ -53,7 +55,7 @@ const CheckoutForm = () => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "http://localhost:3000",
+                return_url: `${REACT_APP_CHECKOUT_RETURN_URL}`,
             },
         });
         if (error.type === "card_error" || error.type === "validation_error") {

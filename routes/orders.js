@@ -1,6 +1,19 @@
 const express = require('express');
 const ordersRouter = express.Router();
-const { getOrderById, getAllOrders, createOrder, cancelOrder, updateOrder, getProductById, addProductToOrder, getOrderProductsByOrder, getAllOrderProducts, updateOrderProducts } = require('../db/index');
+const { getOrderById,
+        getAllOrders,
+        createOrder,
+        cancelOrder,
+        updateOrder,
+        getProductById,
+        addProductToOrder,
+        getOrderProductsByOrder,
+        getAllOrderProducts,
+        updateOrderProducts,
+        getOrdersByUser,
+        getCartByUser,
+        getActiveOrdersByUser
+        } = require('../db/index');
 const { requireUser } = require('./utils');
 const {STRIPE_SECRET_KEY} = process.env;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
@@ -61,18 +74,34 @@ ordersRouter.post('/', async (req, res, next) => {
 });
 
 ordersRouter.get('/cart', requireUser, async (req, res, next) => {
-    const { id } = req.body;
+    const userId = req.user.id;
     try {
-        const userOrders = await getOrdersByUser (id);
-        const userCart = userOrders.filter(order => order.status = "created");
-        res.send (userCart)
+        const userOrders = await getActiveOrdersByUser(userId);
+        const productList = []
+        //if the user doesn't have a cart (they've completed their previous order)
+        //make them a new order aka a new cart
+        if (!userOrders) {
+            let today = new Date().toISOString().slice(0, 10)
+            const newOrder =  await createOrder({userId, status:'created', datePlaced:today})
+            res.send({CartInfo:newOrder, products:productList});
+        }
+        //get a list of order_products associated with the user
+        const relevantOrder_products = await getOrderProductsByOrder(userOrders.id);
+        //iterate through the order_products list and use productId to get the product from the database
+        //and push it into a list to send back to the front end
+        for(let i = 0; i < relevantOrder_products.length; i++) {
+            const productToAdd = await getProductById(relevantOrder_products[i].productId);
+            productList.push(productToAdd);
+        }
+
+        res.send({CartInfo:userOrders, products:productList});
     } catch ({name, message}) {
         next({name, message});
     }
 });
 
 ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
-    const {orderId} = req.params;
+    //const {orderId} = req.params;
     const {id, quantity, price} = req.body;
     const user = req.user
 
@@ -94,7 +123,10 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
             })
         }
 
-        const orderToAddTo = await getOrderById(orderId);
+        const orderToAddTo = await getActiveOrdersByUser(req.user.id);
+        const orderId = orderToAddTo.id;
+        console.log(orderToAddTo.userId);
+        console.log(req.user.id);
         
         if (req.user.id === orderToAddTo.userId) {
             const {price} = productToAdd
@@ -123,7 +155,6 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
                     updatedOrder_product = await getOrderProductsByOrder(orderId); 
                 }
             }
-            
 
             //if a duplicate was found, send the updated order product for confirmation
             if (productInOrder === true) {

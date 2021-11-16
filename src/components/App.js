@@ -10,7 +10,8 @@ import {
   Navigation,
   MyAccount,
   Checkout,
-  ProductById
+  ProductById,
+  Orders
 } from './';
 
 import {
@@ -18,13 +19,14 @@ import {
 } from '../api';
 
 const App = () => {
-  const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [orders, setOrders] = useState([]);  
+  
   const fetchProducts = async () => {
     try {
       const productsObj = await callAPI({
@@ -43,14 +45,18 @@ const App = () => {
       fetchProducts();
           
     } catch (error) {
-        console.error(error);
+        throw error;
           
     }
   }, [token]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) setToken(token);
+  }, []);
+
   return <>
     <div className="App">
-      <h2>{ message }</h2>
 
       <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword}/>
 
@@ -66,11 +72,11 @@ const App = () => {
           </Route>
 
           <Route exact path = "/products">
-            <Products products = {products} fetchProducts = {fetchProducts} setProducts = {setProducts} />
+            <Products products={products} fetchProducts={fetchProducts} setProducts={setProducts} orders={orders} token={token} />
           </Route>
 
           <Route exact path = "/products/:productId">
-            <ProductById products = {products} />
+            <ProductById products={products} token={token} setProducts={setProducts}/>
           </Route>
           
           <Route exact path = "/account">
@@ -79,6 +85,10 @@ const App = () => {
 
           <Route exact path = "/checkout">
             <Checkout />
+          </Route>
+          
+          <Route exact path = "/cart">
+            <Orders token = {token} setOrders = {setOrders} orders = {orders} products = {products} user = {user}/>
           </Route>
 
         </Switch>

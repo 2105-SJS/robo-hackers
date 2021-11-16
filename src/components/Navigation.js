@@ -2,65 +2,57 @@ import React from 'react';
 import { Link, useHistory } from "react-router-dom";
 
 const Navigation = ({username, token, setToken, setUsername}) => {
-    const history= useHistory();
-    const logOut = () => {
-        setUsername('');
-        setToken('');
-        localStorage.removeItem('token')
-        history.push('/account/:method');
-    }
-    return <>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <h1 className='nav_title'>Robo Hackers: The Shop</h1>
-            <ul id = 'links' class="nav nav-pills">
-                <li class = "nav-item">
-                    <a class = "nav-link" href = "#" ><Link to = '/home'>Home</Link></a>
-                </li>
-                <li class = "nav-item">
-                    <a class = "nav-link" href = "#" ><Link to = '/products'>Products</Link></a>
-                </li>
-                {
-                  token ?
-                  <li class = "nav-item">
-                      <a class = "nav-link" href = "#" ><Link to = '/account'>My Account</Link></a>
-                  </li>
-                  : null
-                }
-                {
-                    token ? 
-                    null :
-                    <li class = "nav-item">
-                        <a class = "nav-link" href = "#"><Link to="/login">Login</Link></a>
-                    </li>
-                }
-                {
-                    token ?
-                    null :
-                    <li class = "nav-item">
-                        <a class = "nav-link" href = "#"><Link to ="/register">Register</Link></a>
-                    </li> 
-                }
-                {
-                    token ? <button type='logout' onClick={logOut}>Logout</button>  : null
-                }
-                <li class = "nav-item">
-                    <a class = "nav-link" href = "#" >
-                        <Link to = '/checkout'>
-                            <i class="bi bi-cart">Cart</i>
-                        </Link>
-                    </a>
-                </li>
+  const history= useHistory();
+  
+  const logOut = () => {
+    setUsername('');
+    setToken('');
+    localStorage.removeItem('token')
+    history.push('/account/:method');
+  }
 
-
-            </ul>
-        </div>
-
+  return <>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <h1 className='nav_title'>Robo Hackers: The Shop</h1>
+        <ul id = 'links' className="nav nav-pills">
+          <li className = "nav-item">
+            <Link to='/home' className="nav-link" href="#">Home</Link>
+          </li>
+          <li className = "nav-item">
+            <Link to='/products' className="nav-link" href="#">Products</Link>
+          </li>
+          {
+            token ?
+            <li className = "nav-item">
+              <Link to='/account' className="nav-link" href="#">My Account</Link>
+            </li>
+            : null
+          }
+          {
+            token ? 
+            null :
+            <li className = "nav-item">
+              <Link to="/login" className="nav-link" href="#">Login</Link>
+            </li>
+          }
+          {
+            token ?
+            null :
+            <li className = "nav-item">
+              <Link to="/register" className="nav-link" href="#">Register</Link>
+            </li> 
+          }
+          {
+            token ? <button type='logout' onClick={logOut}>Logout</button>  : null
+          }
+          <li className = "nav-item">
+            <Link to='/cart' className="nav-link" href="#">Cart</Link>
+          </li>
+        </ul>
+      </div>
     </nav>
-    
-    
-    </>
-
-
+  </>
 }
+
 export default Navigation;

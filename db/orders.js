@@ -1,7 +1,7 @@
 const { client } = require('./client');
-
 const { getProductById } = require("./products");
 const { getOrderProductsByOrder} = require("./order_products");
+
 
 const createOrder = async ({status, userId, datePlaced}) => {
   try {
@@ -97,17 +97,28 @@ const getAllOrders = async () => {
 
 const getOrdersByUser = async (id) => {
   try {
-    const {rows: userOrder} = await client.query(`
-    SELECT users.username, users.email, orders.status, orders."datePlaced", op.price, op.quantity, p.description, p.price 
-    FROM users
-    JOIN orders ON users.id = orders."userId"
-    JOIN order_products AS op ON orders.id = op."orderId"
-    JOIN products AS p ON op."productId" = p.id
-    WHERE users.id = $1;
-    `, [id]);
-    return userOrder;
+    const {rows: userOrders} = await client.query(`
+    SELECT * FROM orders
+    WHERE "userId"=$1;
+    `,[id])
+    return userOrders;
     
   } catch (error) {
+    throw error;
+  }
+}
+
+const getActiveOrdersByUser = async (id) => {
+  try {
+    const {rows: [activeUserOrder]} = await client.query(`
+    SELECT * FROM orders
+    WHERE "userId"=$1
+    AND status = 'created';
+    `,[id])
+
+    return activeUserOrder
+
+  } catch(error){
     throw error;
   }
 }
@@ -137,6 +148,7 @@ const getCartByUser = async (id) => {
     LEFT JOIN order_products ON orders.id = order_products."orderId"
     WHERE users.id = $1;
     `,[id])
+
     return userCart;
     
 
@@ -182,5 +194,6 @@ module.exports = {
   getCartByUser,
   cancelOrder,
   completeOrder,
-  updateOrder
+  updateOrder,
+  getActiveOrdersByUser
 }
