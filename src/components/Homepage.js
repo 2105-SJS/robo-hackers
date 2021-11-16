@@ -4,7 +4,7 @@ const Homepage = ({ user }) => {
   return <>
     <div class='d-flex flex-row justify-content-center'>
       <h3>
-        Welcome to the Robo Hackers Shop where we sell collectible robots and computer parts.
+        Welcome to the Robo Hackers Shop where we sell robot themed collectibles and computer parts.
       </h3>
     </div>
     <div class=''>
