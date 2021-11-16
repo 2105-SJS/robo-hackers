@@ -19,3 +19,5 @@ export {default as Checkout} from './Checkout';
 export {default as ProductById} from './ProductById';
 
 export {default as Orders} from './Orders';
+
+export {default as Homepage} from './Homepage';

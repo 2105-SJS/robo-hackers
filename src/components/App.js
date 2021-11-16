@@ -11,7 +11,8 @@ import {
   MyAccount,
   Checkout,
   ProductById,
-  Orders
+  Orders,
+  Homepage
 } from './';
 
 import {
@@ -57,6 +58,10 @@ const App = () => {
 
       <div>
         <Switch>
+
+          <Route exact path = "/home">
+            <Homepage token={token} user = {user} />
+          </Route>
 
           <Route exact path = "/login">
             <Login setToken= {setToken} token={token} setUsername = {setUsername} setPassword = {setPassword} username = {username} password = {password} setLoggedIn = {setLoggedIn} setUser = {setUser} user = {user} />
