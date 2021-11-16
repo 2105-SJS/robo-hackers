@@ -10,7 +10,6 @@ const Orders = ({token, setOrders, orders, products, user}) => {
             try {
                 if (user && user.id) {
                     const respObj = await callAPI({ url: 'orders/cart', token});
-                    console.log("RESPONSE TO GETTING CART", respObj);
                     if (respObj) {
                         setOrders(respObj.products)
                         return respObj;
@@ -27,7 +26,6 @@ const Orders = ({token, setOrders, orders, products, user}) => {
         total += Number(product.price);
     })
 
-    console.log("ORDERS AFTER BEING SET IN ORDERS>JS", orders)
     return <>
     <h2>Cart</h2>
     <div>
