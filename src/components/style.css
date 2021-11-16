@@ -1,6 +1,12 @@
 .store-item {
     margin: 30px;
 }
+
+.item-image {
+    width: 65px;
+    height: 65px;
+}
+
 .item-title {
     display: block;
     width: 100%;
@@ -15,6 +21,7 @@
     display: flex;
     align-items: center;
     padding: 5px;
+    padding-left: 15px;
 }
 
 .store-items {
