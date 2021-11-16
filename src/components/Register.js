@@ -35,7 +35,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
         setPassword('');
         setSecondPassword('');
         setUser(registerObj.user);
-        history.push('./home');
+        history.push('/products');
       }
             
     } catch (error) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const usersRouter = express.Router();
 const bcrypt = require('bcrypt');
+const {JWT_SECRET = 'neverTell'} = process.env;
 
 const {
     getAllUsers,
@@ -64,7 +65,7 @@ usersRouter.post('/register', async (req, res, next) => {
         const token = jwt.sign({
             id: user.id,
             username
-            }, process.env.JWT_SECRET, {
+            }, JWT_SECRET, {
             expiresIn: '1w'
         });
 
@@ -91,7 +92,7 @@ usersRouter.post('/login', async (req, res, next) => {
 
     try {
         const user = await getUserByUsername(username);
-        const token = jwt.sign(user, process.env.JWT_SECRET);
+        const token = jwt.sign(user, JWT_SECRET);
 
         const checkPass = await bcrypt.compare(password, user.password);
         delete user.password;
@@ -121,7 +122,7 @@ usersRouter.get('/me', async (req, res, next) => {
         }
         //getting just the actual token without 'bearer' in front
         const token = bearerToken.slice(7);
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const verifiedToken = jwt.verify(token, JWT_SECRET);
 
         const userData = await getUserById(verifiedToken.id);
         res.send(userData);
