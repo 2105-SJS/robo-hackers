@@ -47,7 +47,9 @@ const Navigation = ({username, token, setToken, setUsername}) => {
             token ? <button type='logout' onClick={logOut}>Logout</button>  : null
           }
           <li className = "nav-item">
-            <Link to='/cart' className="nav-link" href="#">Cart</Link>
+            {
+              token ? <Link to='/cart' className="nav-link" href="#">Cart</Link> : null
+            }
           </li>
         </ul>
       </div>

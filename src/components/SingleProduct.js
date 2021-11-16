@@ -2,16 +2,19 @@ import React from 'react';
 
 const SingleProduct = ({product, children}) => {
     return product ?
-      <div key={product.id}>
-        <img src={product.imageURL} alt=''/>
-        <div>ID: {product.id}</div>
-        <div>Name: {product.description}</div>
-        <div>Price: {product.price}</div>
-        <div>In Stock: {product.inStock}</div>
-        {
-          children
-        }
-        <hr></hr>
+    <div class = 'store-items' key = {product.id}>
+    <div class = 'store-item'>
+      <span class = 'item-title'>{product.name}</span>
+      <img class = 'item-image' src = {product.imgURL} />
+      <div class = 'item-details'>
+      <span>{product.description}</span>
+      <span class = 'item-price'>${product.price}</span>
+      </div>
+          {
+            children
+          }
+          <hr></hr>
+        </div>
       </div>
     : 'Rendering...'
 }

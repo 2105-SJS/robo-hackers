@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Route, Switch } from 'react-router-dom';
 
 import './bootstrap.min.css';
+import './style.css';
 
 import {
   Products,
@@ -26,7 +27,7 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [orders, setOrders] = useState([]);  
+  const [orders, setOrders] = useState([]); 
   
   const fetchProducts = async () => {
     try {
@@ -93,8 +94,12 @@ const App = () => {
           </Route>
           
           <Route exact path = "/cart">
-            <Orders token = {token} setOrders = {setOrders} orders = {orders} products = {products} user = {user}/>
+            <Orders user = {user} token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
           </Route>
+
+          {/* <Route exact path = "/cart">
+            <Admin token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
+          </Route> */}
 
         </Switch>
       </div>
