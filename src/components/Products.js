@@ -23,12 +23,12 @@ const Products = ({products, setProducts, token}) => {
   return <>
   {
     products ?
-      products.map (product => <>
+      products.map (product => (
         <SingleProduct key={product.id} product={product} >
           <Link to={`/products/${product.id}`}>Details</Link>
           <button onClick={() => {handleAddToCart(product)}}>Add to cart</button>
         </SingleProduct>
-      </>) : null
+      )) : null
   }
   </>
 }

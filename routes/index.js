@@ -1,6 +1,6 @@
 const apiRouter = require('express').Router();
 const jwt = require('jsonwebtoken');
-const {JWT_SECRET} = process.env;
+const {JWT_SECRET = 'neverTell'} = process.env;
 const {getUserById} = require('../db/index');
 
 //authorization middleware
