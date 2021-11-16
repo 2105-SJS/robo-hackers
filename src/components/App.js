@@ -49,11 +49,11 @@ const App = () => {
           
     }
   }, [token]);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(token) setToken(token);
-  })
-
+  }, []);
 
   return <>
     <div className="App">
