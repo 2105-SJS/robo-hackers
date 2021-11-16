@@ -74,16 +74,16 @@ ordersRouter.post('/', async (req, res, next) => {
 });
 
 ordersRouter.get('/cart', requireUser, async (req, res, next) => {
-    const {id} = req.body;
+    const userId = req.user.id;
     try {
-        const userOrders = await getActiveOrdersByUser(id);
+        const userOrders = await getActiveOrdersByUser(userId);
         const productList = []
         //if the user doesn't have a cart (they've completed their previous order)
         //make them a new order aka a new cart
         if (!userOrders) {
             let today = new Date().toISOString().slice(0, 10)
-            const newOrder =  await createOrder({userId:id, status:'created', datePlaced:today})
-            res.send({newOrder, productList});
+            const newOrder =  await createOrder({userId, status:'created', datePlaced:today})
+            res.send({CartInfo:newOrder, products:productList});
         }
         //get a list of order_products associated with the user
         const relevantOrder_products = await getOrderProductsByOrder(userOrders.id);
