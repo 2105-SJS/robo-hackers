@@ -51,6 +51,11 @@ const App = () => {
     }
   }, [token]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) setToken(token);
+  }, []);
+
   return <>
     <div className="App">
 
@@ -84,7 +89,7 @@ const App = () => {
           </Route>
           
           <Route exact path = "/cart">
-            <Orders token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
+            <Orders user = {user} token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
           </Route>
 
           {/* <Route exact path = "/cart">
