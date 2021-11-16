@@ -2,16 +2,19 @@ import React, {useEffect, useState} from "react";
 import {callAPI} from '../api';
 import Checkout from './Checkout';
 
-const Orders = ({token, setOrders, orders, products}) => {
+const Orders = ({token, setOrders, orders, products, user}) => {
     let total = 0
     
     useEffect(() => {
         const getOrders = async () => {
             try {
-                const respObj = await callAPI({ url: 'orders/cart', token});
-                if (respObj) {
-                    setOrders(respObj)
-                    return respObj;
+                if (user && user.id) {
+                    const respObj = await callAPI({ url: 'orders/cart', token});
+                    console.log("RESPONSE TO GETTING CART", respObj);
+                    if (respObj) {
+                        setOrders(respObj.products)
+                        return respObj;
+                    }
                 }
             } catch (error) {
                 throw error;
@@ -19,23 +22,22 @@ const Orders = ({token, setOrders, orders, products}) => {
         }
         getOrders()
     }, []);
-    for(let i = 0; i < orders.length; i++) {
-        total += Number(orders[i].products[0].price)
-    }
+
+    orders.forEach(product => {
+        total += Number(product.price);
+    })
+
+    console.log("ORDERS AFTER BEING SET IN ORDERS>JS", orders)
     return <>
     <h2>Cart</h2>
     <div>
         {
-            orders.map(order => <>
+            orders && orders.map(order => 
+        <>
             <div key = {order.id}>
-                {
-                    order.products.map(orderProduct => <>
-                    <div><img src = {orderProduct.imgUrl} alt=''/>{orderProduct.title} {orderProduct.price}</div>
-                    </>
-                    )
-                    }
-                    </div>
-                </>)
+                  <img src={order.imageURL} alt=''/>{order.name} {order.price}
+            </div>
+         </>)
         }
     </div>
     <h2>${total}</h2>

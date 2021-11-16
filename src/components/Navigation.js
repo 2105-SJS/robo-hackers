@@ -12,42 +12,42 @@ const Navigation = ({username, token, setToken, setUsername}) => {
   }
 
   return <>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
         <h1 className='nav_title'>Robo Hackers: The Shop</h1>
-        <ul id = 'links' class="nav nav-pills">
-          <li class = "nav-item">
-            <Link to='/home' class="nav-link" href="#">Home</Link>
+        <ul id = 'links' className="nav nav-pills">
+          <li className = "nav-item">
+            <Link to='/home' className="nav-link" href="#">Home</Link>
           </li>
-          <li class = "nav-item">
-            <Link to='/products' class="nav-link" href="#">Products</Link>
+          <li className = "nav-item">
+            <Link to='/products' className="nav-link" href="#">Products</Link>
           </li>
           {
             token ?
-            <li class = "nav-item">
-              <Link to='/account' class="nav-link" href="#">My Account</Link>
+            <li className = "nav-item">
+              <Link to='/account' className="nav-link" href="#">My Account</Link>
             </li>
             : null
           }
           {
             token ? 
             null :
-            <li class = "nav-item">
-              <Link to="/login" class="nav-link" href="#">Login</Link>
+            <li className = "nav-item">
+              <Link to="/login" className="nav-link" href="#">Login</Link>
             </li>
           }
           {
             token ?
             null :
-            <li class = "nav-item">
-              <Link to="/register" class="nav-link" href="#">Register</Link>
+            <li className = "nav-item">
+              <Link to="/register" className="nav-link" href="#">Register</Link>
             </li> 
           }
           {
             token ? <button type='logout' onClick={logOut}>Logout</button>  : null
           }
-          <li class = "nav-item">
-            <Link to='/cart' class="nav-link" href="#">Cart</Link>
+          <li className = "nav-item">
+            <Link to='/cart' className="nav-link" href="#">Cart</Link>
           </li>
         </ul>
       </div>
