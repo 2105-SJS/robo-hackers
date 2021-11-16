@@ -23,6 +23,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
         setUsername('');
         setPassword('');
         setUser(loginObj.user);
+        console.log("USER OBJECT AFTER LOGGING IN", loginObj.user);
         history.push('./home');
       }
     } catch (error) {
