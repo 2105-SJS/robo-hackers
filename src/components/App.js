@@ -13,8 +13,7 @@ import {
   Checkout,
   ProductById,
   Orders,
-  Homepage,
-  AddProduct
+  Homepage
 } from './';
 
 import {

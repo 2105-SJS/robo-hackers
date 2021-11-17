@@ -1,8 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { callAPI } from '../api';
 
-const ProductById = ({ products, token, setProducts }) => {
+const ProductById = ({ products }) => {
   const { productId } = useParams();
   const history = useHistory();
 
