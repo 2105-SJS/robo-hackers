@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import {callAPI} from '../api';
 import Checkout from './Checkout';
 import SingleProduct from './SingleProduct.js';

@@ -1,19 +1,16 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { callAPI } from '../api';
 
-const ProductById = ({ products, token, setProducts }) => {
+const ProductById = ({ products }) => {
   const { productId } = useParams();
   const history = useHistory();
 
   const productById = products.filter(product => product.id === Number(productId))
   
-  const handleAddToCart = async (product) => {
+  const handleButton = () => {
     try {
-      const addToOrder = await callAPI({ url: `/${products.id}`, method: 'POST', token, body: product})
-      if(addToOrder) {
-        history.push('/cart')
-      }
+      history.push('/products')
+
     } catch (error) {
       throw error;
     }
@@ -30,7 +27,7 @@ const ProductById = ({ products, token, setProducts }) => {
             <div>Description: {product.description}</div>
             <div>Price: {product.price}</div>
             <div>In Stock: {product.inStock}</div>
-            <button onClick={() => {handleAddToCart(product)}} class="btn btn-info">Add to cart</button>
+            <button type="button" onClick={() => {handleButton()}} class="btn btn-info">Back</button>
             <hr></hr>
           </div>
         )
