@@ -127,13 +127,13 @@ const destroyProduct = async (id) => {
       RETURNING *;
       `, [id]);
     
-    console.log("destroyProduct Method Call",order_products)
+    
     const { rows: review} = await client.query(`
       DELETE FROM reviews
       WHERE "productId" =$1;
      `,[id]);
 
-    console.log("destroy product method call, returning review", review)
+    
       
     const { rows: product } = await client.query(`
       UPDATE products
@@ -142,7 +142,7 @@ const destroyProduct = async (id) => {
       RETURNING *;
       `, [id]);
 
-    console.log("DestroyProduct method call returning product deleted", product);
+    
     return product;
   } catch (error) {
     throw error;

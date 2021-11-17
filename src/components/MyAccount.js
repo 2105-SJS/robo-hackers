@@ -1,8 +1,9 @@
 import React from 'react';
+import { AddProduct } from './';
 
-const MyAccount = ({ user }) => {
+const MyAccount = ({ user, fetchProducts, setToken }) => {
   return <>
-    <div>Welcome, {user.username}!</div>
+    {user.isAdmin ? <AddProduct user={user} fetchProducts={fetchProducts} setToken={setToken}/> : null}
   </>
 }
 export default MyAccount;

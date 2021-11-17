@@ -23,7 +23,7 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
         setUsername('');
         setPassword('');
         setUser(loginObj.user);
-        console.log("USER OBJECT AFTER LOGGING IN", loginObj.user);
+        
         history.push('/products');
       }
     } catch (error) {
@@ -38,13 +38,13 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
     <div class="form-group">
       <label className = 'user-input' for="inputUsername6">Username:</label>
       <input className = 'form-input' type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
-      {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
+      
       <br></br>
       <label className = 'user-input' for="inputPassword6">Password:</label>
       <input className = 'form-input' type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
       
-      {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
-      <button type="submit" disabled={!password || !username}>Submit</button>
+      
+      <button type="submit" disabled={!password || !username} class="btn btn-info">Submit</button>
     </div>
       <br></br>
       <div id = 'link-to-register'>New? Click here to <Link to = '/register'>register</Link> </div>
@@ -53,11 +53,3 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
 }
 
 export default Login;
-{/* <div>
-        <input type="text" placeholder="username" value={username} onChange={(event) => setUsername(event.target.value)}></input>
-        <hr></hr>
-        <input type="password" placeholder="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-        <hr></hr>
-        <button type="submit" disabled={!password || !username}>Submit</button>
-        <hr></hr>
-      </div> */}

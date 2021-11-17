@@ -31,7 +31,7 @@ const ProductById = ({ products, token, setProducts }) => {
             <div>Description: {product.description}</div>
             <div>Price: {product.price}</div>
             <div>In Stock: {product.inStock}</div>
-            <button onClick={() => {handleAddToCart(product)}}>Add to cart</button>
+            <button onClick={() => {handleAddToCart(product)}} class="btn btn-info">Add to cart</button>
             <hr></hr>
           </div>
         )

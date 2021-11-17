@@ -47,7 +47,6 @@ productsRouter.patch('/:productId', requireAdmin, async(req, res, next) => {
 
     try {
         const updatedProduct = await updateProduct({id:productId, name, description, price, imageURL, inStock, category});
-        console.log(updatedProduct);
         res.send(updatedProduct);
     } catch ({name, message}) {
         next ({name, message})

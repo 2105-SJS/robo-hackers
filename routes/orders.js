@@ -19,7 +19,6 @@ const {STRIPE_SECRET_KEY} = process.env;
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 const calculateOrderAmount = (items) => {
-    //TO-DO return order total for checkout>>>>>>>>(Dummy being used)
     //calculate orer total on server to prevent tampering
     return 1400;
 };
@@ -101,7 +100,6 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
 });
 
 ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
-    //const {orderId} = req.params;
     const {id, quantity, price} = req.body;
     const user = req.user
 
@@ -125,8 +123,7 @@ ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
 
         const orderToAddTo = await getActiveOrdersByUser(req.user.id);
         const orderId = orderToAddTo.id;
-        console.log(orderToAddTo.userId);
-        console.log(req.user.id);
+        
         
         if (req.user.id === orderToAddTo.userId) {
             const {price} = productToAdd

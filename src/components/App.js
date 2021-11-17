@@ -88,8 +88,7 @@ const App = () => {
           </Route>
           
           <Route exact path = "/account">
-            <MyAccount user={user}/>
-            {user.isAdmin ? <AddProduct user={user} fetchProducts={fetchProducts} setToken={setToken}/> : null}
+            <MyAccount user={user} fetchProducts={fetchProducts} setToken={setToken}/>
           </Route>
 
           <Route exact path = "/checkout">
