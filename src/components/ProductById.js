@@ -14,7 +14,6 @@ const ProductById = ({ products, token, setProducts }) => {
       if(addToOrder) {
         history.push('/cart')
       }
-
     } catch (error) {
       throw error;
     }
