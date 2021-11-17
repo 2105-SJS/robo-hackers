@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {callAPI} from '../api';
 import Checkout from './Checkout';
+import SingleProduct from './SingleProduct.js';
 
 const Orders = ({token, setOrders, orders, products, user}) => {
     let total = 0
@@ -26,6 +27,8 @@ const Orders = ({token, setOrders, orders, products, user}) => {
         total += Number(product.price);
     })
 
+    
+
     return <>
     <h2>Cart</h2>
     <div>
@@ -33,7 +36,7 @@ const Orders = ({token, setOrders, orders, products, user}) => {
             orders && orders.map(order => 
         <>
             <div key = {order.id}>
-                  <img src={order.imageURL} alt=''/>{order.name} {order.price}
+            <SingleProduct key={order.id} product={order} />          
             </div>
          </>)
         }
