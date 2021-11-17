@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from "react-router-dom";
 
-const Navigation = ({username, token, setToken, setUsername}) => {
+const Navigation = ({username, token, setToken, setUsername, user}) => {
   const history= useHistory();
   
   const logOut = () => {
@@ -30,6 +30,11 @@ const Navigation = ({username, token, setToken, setUsername}) => {
             </li>
             : null
           }
+          <li className = "nav-item">
+              {
+                user.isAdmin ? <Link to='/users' className="nav-link" href="#">Registered Users</Link> : null
+              }
+          </li>
           {
             token ? 
             null :
@@ -52,6 +57,7 @@ const Navigation = ({username, token, setToken, setUsername}) => {
               token ? <Link to='/cart' className="nav-link" href="#">Cart</Link> : null
             }
           </li>
+          
         </ul>
       </div>
     </nav>
