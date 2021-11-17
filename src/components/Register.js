@@ -47,7 +47,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
     <h1 className = 'login-header'>Register</h1>
     <h4>Complete form below to create a new account.</h4>
       <br></br>
-    <form onSubmit = {handleSubmit}>
+    <form className = 'form-input' onSubmit = {handleSubmit}>
       <div class="form-group">
         <label className = 'user-input' for="inputFirstName6">First Name:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={firstName} onChange={(event) => setFirstName(event.target.value)}></input>
