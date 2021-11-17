@@ -33,7 +33,7 @@ const RegisteredUsers = ({token, user}) => {
             <h1>ALL USERS :----</h1>
             {
                 allUsers.length > 0 ? allUsers.map((user) => <>
-                <div>
+                <div className = 'users-admin'>
                     <span>{user.firstName} {user.lastName}</span>
                     <span>{user.email}</span>
                     <img src = {user.imageURL} width = '75' height = '75'></img>

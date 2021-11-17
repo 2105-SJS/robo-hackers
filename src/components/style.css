@@ -86,3 +86,9 @@ body {
 .headertext{
     color: white;
 }
+
+.users-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
