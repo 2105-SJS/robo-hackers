@@ -32,19 +32,30 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
   }
 
   return <>
-    <h1>| Login |</h1>
+    <h1 className = 'login-header'>Login</h1>
+    <br></br>
     <form onSubmit = {handleSubmit}>
-      <div>
+    <div class="form-group">
+      <label className = 'username-input' for="inputUsername6">Username:</label>
+      <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
+      {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
+      <br></br>
+      <label className = 'password-input' for="inputPassword6">Password:</label>
+      <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+      {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
+    </div>
+      <br></br>
+      <div id = 'link-to-register'>New? Click here to <Link to = '/register'>register</Link> </div>
+    </form>
+  </>
+}
+
+export default Login;
+{/* <div>
         <input type="text" placeholder="username" value={username} onChange={(event) => setUsername(event.target.value)}></input>
         <hr></hr>
         <input type="password" placeholder="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
         <hr></hr>
         <button type="submit" disabled={!password || !username}>Submit</button>
         <hr></hr>
-      </div>
-      <div>New? Click here to <Link to = '/register'>register</Link> </div>
-    </form>
-  </>
-}
-
-export default Login;
+      </div> */}
