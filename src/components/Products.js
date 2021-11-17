@@ -29,7 +29,7 @@ const Products = ({products, setProducts, token}) => {
       products.map (product => (
         <SingleProduct key={product.id} product={product} >
           <Link to={`/products/${product.id}`} className = 'details-link'>Details</Link>
-          <button button type="button" class="btn btn-info" onClick={() => {handleAddToCart(product)}}>Add to cart</button>
+          <button type="button" class="btn btn-info" onClick={() => {handleAddToCart(product)}}>Add to cart</button>
         </SingleProduct>
       )) : null
   }
