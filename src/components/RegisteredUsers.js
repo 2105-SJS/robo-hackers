@@ -38,7 +38,7 @@ const RegisteredUsers = ({token, user}) => {
                     <span>{user.email}</span>
                     <img src = {user.imageURL} width = '75' height = '75'></img>
                 </div>
-                <AdminEditUser user={user}/>
+                <AdminEditUser user={user} token={token}/>
                 </>) : null
             }
             </>

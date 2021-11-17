@@ -27,7 +27,6 @@ usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
 
     try {
         const users = await getAllUsers();
-        console.log("USERS from usersRouter.get in users.js", users);
         res.send({
             users: users
         });
@@ -144,10 +143,9 @@ usersRouter.get('/:userId/orders', async(req, res, next) => {
     }
 });
 
-usersRouter.patch('/:userId', async(req, res, next) => {
+usersRouter.patch('/:userId', requireAdmin, async(req, res, next) => {
     const {userId} = req.params;
     const {username, password, firstName, lastName, imageURL, email, isAdmin} = req.body;
-
     try {
         const id = userId;
         const updatedUser = await updateUser({id, username, password, firstName, lastName, imageURL, email, isAdmin})
