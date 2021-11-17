@@ -34,14 +34,14 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
   return <>
     <h1 className = 'login-header'>Login</h1>
     <br></br>
-    <form onSubmit = {handleSubmit}>
+    <form className = 'form-input' onSubmit = {handleSubmit}>
     <div class="form-group">
       <label className = 'user-input' for="inputUsername6">Username:</label>
-      <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
+      <input className = 'form-input' type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
       {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
       <br></br>
       <label className = 'user-input' for="inputPassword6">Password:</label>
-      <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+      <input className = 'form-input' type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
       
       {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
       <button type="submit" disabled={!password || !username}>Submit</button>

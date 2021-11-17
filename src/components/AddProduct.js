@@ -37,20 +37,20 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
 
     return <>
         <div>Add a product</div>
-        <form onSubmit = {handleAdd}>
+        <form classname = 'form-input' onSubmit = {handleAdd}>
 
         <div class="form-group">
         <label className = 'user-input' for="inputProductName6">Product name:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={name} onChange={(event) => setName(event.target.value)}></input>
+        <input  type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={name} onChange={(event) => setName(event.target.value)}></input>
         <br></br>
         <label className = 'user-input' for="inputDescription6">Description:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={description} onChange={(event) => setDescription(event.target.value)}></input>
+        <input  type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={description} onChange={(event) => setDescription(event.target.value)}></input>
         <br></br>
         <label className = 'user-input' for="inputPrice6">Price:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={price} onChange={(event) => setPrice(event.target.value)}></input>
+        <input  type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={price} onChange={(event) => setPrice(event.target.value)}></input>
         <br></br>
         <label className = 'user-input' for="inputImage6">Image?:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={imgURL} onChange={(event) => setImgURL(event.target.value)}></input>
+        <input  type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={imgURL} onChange={(event) => setImgURL(event.target.value)}></input>
         <br></br>
         <label className='user-input'>In Stock?: </label>
             <select onChange= {(event) => setInStock(event.target.value)}>
@@ -59,7 +59,7 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
             </select>
         <br></br>
         <label className = 'user-input' for="inputCategory6">Category:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={category} onChange={(event) => setCategory(event.target.value)}></input>
+        <input  type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={category} onChange={(event) => setCategory(event.target.value)}></input>
         <br></br>
         <label className='user-input'>Active?: </label>
             <select onChange= {(event) => setActive(event.target.value)}>
