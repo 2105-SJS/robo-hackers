@@ -20,13 +20,13 @@ const ProductById = ({ products }) => {
     {
       productById ?
         productById.map(product =>
-          <div key={product.id}>
+          <div className = 'single-product-display' key={product.id}>
             <img src={product.imageURL} alt='' class='img-thumbnail' class='w-25'/>
             <div>ID: {product.id}</div>
             <div>Name: {product.name}</div>
             <div>Description: {product.description}</div>
             <div>Price: {product.price}</div>
-            <div>In Stock: {product.inStock}</div>
+            <div>In Stock: {product.inStock.toString()}</div>
             <button type="button" onClick={() => {handleButton()}} class="btn btn-info">Back</button>
             <hr></hr>
           </div>

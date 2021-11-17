@@ -6,8 +6,10 @@ const AdminEditUser = ({user, token}) => {
     const [isAdmin, setIsAdmin] = useState(true);
 
     return  <>
-        <label className='user-input'>Administrator: </label>
-        <select onChange= {(event) => {
+    <span className='admin-change-option-form'>
+
+        <label className='admin-user-input'>Administrator: </label>
+        <select className='admin-selection' onChange= {(event) => {
             console.log(event.target.value);
             if (event.target.value === 'true'){
                 setIsAdmin(true);
@@ -19,7 +21,7 @@ const AdminEditUser = ({user, token}) => {
         <option value='true'>Yes</option>
         <option value='false'>No</option>
         </select>
-        <button type='button' onClick={async (event) => {
+        <button className="admin-submit-button" type='button' onClick={async (event) => {
             const respObj = await callAPI({
                 url:`/users/${user.id}`,
                 method: "PATCH",
@@ -34,6 +36,7 @@ const AdminEditUser = ({user, token}) => {
             }
             console.log("user object after becoming admin", user);
         }}>Submit Change</button>
+    </span>
     </>
 }
 
