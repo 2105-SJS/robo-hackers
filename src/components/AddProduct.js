@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router';
 import { callAPI } from '../api';
 
-const AddProduct = ({user, setToken}) => {
+const AddProduct = ({user, setToken, fetchProducts}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -32,8 +32,8 @@ const AddProduct = ({user, setToken}) => {
             setToken(localStorage.getItem('token'));
             history.push('/products');
         }
-
-    }
+        fetchProducts();
+    } 
 
     return <>
         <div>Add a product</div>

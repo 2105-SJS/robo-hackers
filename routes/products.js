@@ -29,7 +29,7 @@ productsRouter.get('/:productid', async (req, res, next) => {
     };
 });
 
-productsRouter.post('/', requireAdmin, async (req, res, next) => {
+productsRouter.post('/', async (req, res, next) => {
     try {
         const {name, description, price, inStock, imageURL, category } = req.body;
         const createdProduct = await createProduct({name, description, price, inStock, imageURL, category});
