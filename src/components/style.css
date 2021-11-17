@@ -35,3 +35,21 @@
     color: #333;
     padding-left: 10px;
 } 
+
+.login-header {
+    padding-left: 35px;
+    background-color: rgb(114, 218, 221);
+    max-width: 5em;
+}
+
+.user-input {
+    padding-left: 15px;
+}
+
+.homepage-image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
