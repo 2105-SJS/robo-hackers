@@ -13,7 +13,8 @@ import {
   Checkout,
   ProductById,
   Orders,
-  Homepage
+  Homepage,
+  AddProduct
 } from './';
 
 import {
@@ -25,7 +26,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword ] = useState('');
   const [token, setToken] = useState('');
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [orders, setOrders] = useState([]); 
   
@@ -41,6 +42,7 @@ const App = () => {
       throw error;
     }
   }
+
 
   useEffect(() => {
     try {
@@ -87,6 +89,7 @@ const App = () => {
           
           <Route exact path = "/account">
             <MyAccount user={user}/>
+            {user.isAdmin ? <AddProduct user={user} fetchProducts={fetchProducts} setToken={setToken}/> : null}
           </Route>
 
           <Route exact path = "/checkout">
@@ -96,10 +99,6 @@ const App = () => {
           <Route exact path = "/cart">
             <Orders user = {user} token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
           </Route>
-
-          {/* <Route exact path = "/cart">
-            <Admin token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
-          </Route> */}
 
         </Switch>
       </div>
