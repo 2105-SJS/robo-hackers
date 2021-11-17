@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import {callAPI} from '../api/index'
 
 
-const AdminEditUser = ({user}) => {
+const AdminEditUser = ({user, token}) => {
     const [isAdmin, setIsAdmin] = useState(true);
 
     return  <>
         <label className='user-input'>Administrator: </label>
         <select onChange= {(event) => {
+            console.log(event.target.value);
             if (event.target.value === 'true'){
                 setIsAdmin(true);
             }
@@ -19,11 +20,10 @@ const AdminEditUser = ({user}) => {
         <option value='false'>No</option>
         </select>
         <button type='button' onClick={async (event) => {
-            console.log(isAdmin);
-            console.log(user.id);
             const respObj = await callAPI({
                 url:`/users/${user.id}`,
                 method: "PATCH",
+                token,
                 body: {
                     isAdmin: isAdmin,
                 }

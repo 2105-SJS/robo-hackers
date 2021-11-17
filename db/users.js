@@ -128,7 +128,7 @@ const updateUser = async ({id, username, password, firstName, lastName, imageURL
       `,[imageURL, id])
     }
 
-    if (isAdmin) {
+    if (isAdmin || !isAdmin) {
       await client.query(`
       UPDATE users
       SET "isAdmin"=$1
@@ -143,6 +143,9 @@ const updateUser = async ({id, username, password, firstName, lastName, imageURL
       WHERE id=$2;
       `,[email, id])
     }
+
+    const updatedUser = await getUserById(id);
+    return updatedUser
 
   } catch (error) {
     throw(error)

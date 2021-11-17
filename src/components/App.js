@@ -47,16 +47,16 @@ const App = () => {
   useEffect(() => {
     try {
       fetchProducts();
-          
     } catch (error) {
         throw error;
-          
     }
   }, [token]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(token) setToken(token);
+    const localToken = localStorage.getItem('token');
+    if(localToken) {
+      setToken(localToken);
+    }
   }, []);
 
   return <>
