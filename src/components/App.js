@@ -13,7 +13,8 @@ import {
   Checkout,
   ProductById,
   Orders,
-  Homepage
+  Homepage,
+  RegisteredUsers
 } from './';
 
 import {
@@ -61,7 +62,7 @@ const App = () => {
   return <>
     <div className="App">
 
-      <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword}/>
+      <Navigation token={token} setToken= {setToken} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} setUsername = {setUsername} setPassword = {setPassword} user={user}/>
 
       <div>
         <Switch>
@@ -96,6 +97,10 @@ const App = () => {
           
           <Route exact path = "/cart">
             <Orders user = {user} token = {token} setOrders = {setOrders} orders = {orders} products = {products}/>
+          </Route>
+
+          <Route exact path = "/users">
+            <RegisteredUsers token={token} user={user}/>
           </Route>
 
         </Switch>

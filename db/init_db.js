@@ -106,9 +106,9 @@ async function populateInitialData() {
   console.log('Starting to create users...');
   try {
     const usersToCreate = [
-      {firstName: 'chicken', lastName: 'sandwich', email: 'chickenSandwich@gmail.com', imageURL:'chicken', username:'chicken555', password:'sandwich555', isAdmin: false},
-      {firstName: 'dinosaur', lastName: 'sandwich', email: 'dinosaurSandwich@gmail.com', imageURL:'dinosaur', username:'dinosaur555', password:'sandwich555', isAdmin: false},
-      {firstName: 'bruce', lastName: 'wayne', email: 'darkKnight@gmail.com', imageURL:'batman', username:'batman555', password:'sandwich555', isAdmin: true}
+      {firstName: 'Daniel', lastName: 'Golub', email: 'daniel.golub@gmail.com', imageURL:'https://scontent-sjc3-1.xx.fbcdn.net/v/t1.6435-9/208451039_10226121111118813_3028390057029868711_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=G31ndLK5sHIAX9hm8QB&_nc_ht=scontent-sjc3-1.xx&oh=2bbe13171e5a2de4abab67584da712ae&oe=61B956E8', username:'Pleachy', password:'sandwich555', isAdmin: false},
+      {firstName: 'Peter', lastName: 'Baggins', email: 'hobbitfan42@gmail.com', imageURL:'https://upload.wikimedia.org/wikipedia/commons/2/2d/Pope-peter_pprubens.jpg', username:'Petebo', password:'sandwich555', isAdmin: false},
+      {firstName: 'Vernon', lastName: 'Dursely', email: 'magicisnotcool@gmail.com', imageURL:'https://www.tafce.com/images/7/7c/Uncle_Vernon_Dursley_HPATOOTP_-_Edited.png', username:'regularguy54', password:'sandwich555', isAdmin: true}
       
     ]
     const users = await Promise.all(usersToCreate.map(createUser));

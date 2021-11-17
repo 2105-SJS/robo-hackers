@@ -23,3 +23,7 @@ export {default as Orders} from './Orders';
 export {default as Homepage} from './Homepage';
 
 export {default as AddProduct} from './AddProduct';
+
+export {default as RegisteredUsers} from './RegisteredUsers';
+
+export {default as AdminEditUser} from './AdminEditUser';
