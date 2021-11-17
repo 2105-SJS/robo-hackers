@@ -8,11 +8,11 @@ const Homepage = ({ user }) => {
       </h3>
     </div>
     <br></br>
-    <div class= 'homepage-image'>
-      <img class = 'homepage-image' src='https://i.ebayimg.com/images/g/5GYAAOSw5CZhbYLF/s-l1600.jpg' class='img-thumbnail' class='w-25' alt=''></img>
-      <img class = 'homepage-image' src='https://i.ebayimg.com/images/g/QeEAAOSw7QphgHWm/s-l1600.jpg' class='img-thumbnail' class='w-25' alt=''></img>
-      <img class = 'homepage-image' src='https://www.collectiondx.com/gallery2/d/10743-10/SupertrainMegazord1.jpg' class='img-thumbnail' class='w-25' alt=''></img>
-      <img class = 'homepage-image' src='https://bbts1.azureedge.net/images/p/full/2019/02/8ace3bd8-1764-4af5-9439-7aacb8407b8d.jpg' class='img-thumbnail' class='w-25' alt=''></img>
+    <div className= 'homepage-image'>
+      <img className = 'homepage-image' src='https://i.ebayimg.com/images/g/5GYAAOSw5CZhbYLF/s-l1600.jpg' class='img-thumbnail' class='w-25' alt=''></img>
+      <img className = 'homepage-image' src='https://i.ebayimg.com/images/g/QeEAAOSw7QphgHWm/s-l1600.jpg' class='img-thumbnail' class='w-25' alt=''></img>
+      <img className = 'homepage-image' src='https://www.collectiondx.com/gallery2/d/10743-10/SupertrainMegazord1.jpg' class='img-thumbnail' class='w-25' alt=''></img>
+      <img className = 'homepage-image' src='https://bbts1.azureedge.net/images/p/full/2019/02/8ace3bd8-1764-4af5-9439-7aacb8407b8d.jpg' class='img-thumbnail' class='w-25' alt=''></img>
 
     </div>
     
