@@ -30,15 +30,18 @@ const RegisteredUsers = ({token, user}) => {
             console.log("ALL USERS after after useEffect function", allUsers)
         
             return <>
-            <h1>ALL USERS :----</h1>
+            <h1 className='registered-users-title'>Currently Registered Users</h1>
             {
                 allUsers.length > 0 ? allUsers.map((user) => <>
                 <div className = 'users-admin'>
-                    <span>{user.firstName} {user.lastName}</span>
-                    <span>{user.email}</span>
-                    <img src = {user.imageURL} width = '75' height = '75'></img>
+                    <span>User Name: {user.firstName} {user.lastName}</span>
+                    <span>Email: {user.email}</span>
+                    <span>User ID: {user.id}</span>
+                    <span>User Username: {user.username}</span>
+                    <span>User Adminstrator Status: {user.isAdmin.toString()}</span>
+                    <img src = {user.imageURL} width = '150' height = '150'></img>
+                    <AdminEditUser user={user} token={token}/>
                 </div>
-                <AdminEditUser user={user} token={token}/>
                 </>) : null
             }
             </>

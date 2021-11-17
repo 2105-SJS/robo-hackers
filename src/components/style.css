@@ -58,20 +58,63 @@
 
 .homepage-image {
   
-    background:url(https://dlcdnwebimgs.asus.com/files/media/316F3135-E3DA-4CFA-B659-496E1A98051B/img/bg_intel_wifi6_s.jpg);
-    height: 95vh;
+    background:url(https://pbs.twimg.com/media/FEZYDhOXwA8er6f?format=jpg&name=large);
+    height: 100vh;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment:unset;
     background-position: 50% 20%;
     background-size: cover;
 }
+
+.headertext-homepage {
+    color: white;
+    margin-right: 20%;
+    margin-left: 10%;
+    padding-top: 44px;
+}
+
+.login-title {
+}
+
+.login-page {
+    background:url(https://livewallpaperhd.com/wp-content/uploads/2020/05/Wallpaper-Gundam-HD-1536x864.jpg);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: 75% 20%;
+    background-size: cover;
+}
+
+.login-form {
+    color:white;
+    margin-right:80%;
+    padding-top:10%;
+    padding-left: 30px;
+}
+
+.register-page {
+    background:url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c35b83dd-a118-4c6b-9bb2-ff772939e071/dc7t7nl-c6156f73-464f-4452-874b-27effa7047c9.png/v1/fill/w_1024,h_559,q_80,strp/gundam_minimalist_wallpaper_by_mr_turtles_dc7t7nl-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTU5IiwicGF0aCI6IlwvZlwvYzM1YjgzZGQtYTExOC00YzZiLTliYjItZmY3NzI5MzllMDcxXC9kYzd0N25sLWM2MTU2ZjczLTQ2NGYtNDQ1Mi04NzRiLTI3ZWZmYTcwNDdjOS5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.iHTpLYn4XNWUiEUJDXe77a4y_35pWy83psGOp9QqgPY);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: 75% 20%;
+    background-size: cover;
+}
+
+.register-form {
+    color:white;
+    margin-right:80%;
+    padding-top:5%;
+    padding-left: 30px;
+}
+
 
 .details-link {
     text-decoration: none;
 }
 
 body {
-    background: url(https://www.signetcoffee.com/test/online-store/shopsite-images/en-GB/backgrounds/flex-build/lights-blue.jpg);
+    background: url(https://c4.wallpaperflare.com/wallpaper/138/182/484/rx-unicorn-gundam-simple-mobile-suit-gundam-mobile-suit-gundam-unicorn-wallpaper-preview.jpg);
     min-height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -87,8 +130,56 @@ body {
     color: white;
 }
 
+.add-product-form {
+    display:flex;
+    flex-direction: row;
+}
+
 .users-admin {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    border: solid rgb(22, 18, 51);
+    color: white;
+    background-color: rgb(33, 37, 58);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 500px;
+    margin-right: 500px;
+    padding: 10px;
+}
+
+.admin-change-option-form {
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+}
+
+.registered-users-title {
+    display:flex;
+    justify-content: center;
+}
+
+.single-product-display {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    border: solid rgb(22, 18, 51);
+    background-color: rgb(33, 37, 58);
+    color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.single-product-display-content {
+    display:flex;
+    flex-direction:column;
+    padding: 20px;
+}
+
+.product-details-addtocart {
+    display:flex;
+    justify-content:space-between;
 }

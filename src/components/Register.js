@@ -44,39 +44,31 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
   }
     
   return <>
-    <h1 className = 'login-header'>Register</h1>
-      <br></br>
-    <form className = 'form-input' onSubmit = {handleSubmit}>
+  <div className='register-page'>
+    <form className = 'register-form' onSubmit = {handleSubmit}>
+      <h1>Register</h1>
       <div class="form-group">
         <label className = 'user-input' for="inputFirstName6">First Name:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={firstName} onChange={(event) => setFirstName(event.target.value)}></input>
-        <br></br>
         <label className = 'user-input' for="inputLastName6">Last Name:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={lastName} onChange={(event) => setLastName(event.target.value)}></input>
-        <br></br>
         <label className = 'user-input' for="inputEmail6">Email:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={email} onChange={(event) => setEmail(event.target.value)}></input>
-        <br></br>
         <label className = 'user-input' for="inputUsername6">Username:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
-        <br></br>
         <label className = 'user-input' for="inputPassword6">Password:</label>
         <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
         <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small>
-        <br></br>
-        <br></br>
         <label className = 'user-input' for="inputPassword6">Re-type password:</label>
         <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={secondPassword} onChange={(event) => setSecondPassword(event.target.value)}></input>
-        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword} class="btn btn-info">Submit</button>
-        
+        <br></br>
+        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword} class="btn btn-info">Submit</button> 
         {
           password !== secondPassword && <span>Passwords do not match!</span>
         }
-        
-        <br></br>
-
       </div>
     </form>
+  </div>
   </>
 }
 

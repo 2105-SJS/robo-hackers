@@ -32,23 +32,22 @@ const Login = ({setLoggedIn, setToken, setUsername, setPassword, username, passw
   }
 
   return <>
-    <h1 className = 'login-header'>Login</h1>
-    <br></br>
-    <form className = 'form-input' onSubmit = {handleSubmit}>
-    <div class="form-group">
-      <label className = 'user-input' for="inputUsername6">Username:</label>
-      <input className = 'form-input' type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
-      
-      <br></br>
-      <label className = 'user-input' for="inputPassword6">Password:</label>
-      <input className = 'form-input' type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-      
-      
-      <button type="submit" disabled={!password || !username} class="btn btn-info">Submit</button>
+    <div className='login-page'>
+        <form onSubmit = {handleSubmit} className='login-form'>
+            <h1 className='login-title'>Login</h1>
+            <label className = 'user-input' for="inputUsername6">Username:</label>
+            <input className = 'form-input' type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
+            
+            <br></br>
+            <label className = 'user-input' for="inputPassword6">Password:</label>
+            <input className = 'form-input' type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+            <br></br>
+            
+            <button type="submit" disabled={!password || !username} class="btn btn-info">Submit</button>
+            <br></br>
+            <div id = 'link-to-register'>New? Click here to <Link to = '/register'>register</Link> </div>
+        </form>
     </div>
-      <br></br>
-      <div id = 'link-to-register'>New? Click here to <Link to = '/register'>register</Link> </div>
-    </form>
   </>
 }
 
