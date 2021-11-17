@@ -39,7 +39,7 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
         <div>Add a product</div>
         <form onSubmit = {handleAdd}>
 
-        div class="form-group">
+        <div class="form-group">
         <label className = 'user-input' for="inputProductName6">Product name:</label>
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={name} onChange={(event) => setName(event.target.value)}></input>
         <br></br>
@@ -67,9 +67,9 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
             <option value='false'>No</option>
             </select>
             <br></br>
-
-            <button type='submit'>Add new product</button>
-
+        
+        <button type='submit'>Add new product</button>
+        </div>
         </form>
     </>
 }
