@@ -72,7 +72,7 @@ const CheckoutForm = () => {
             <PaymentElement id = "payment-element" />
             <button disabled = {isLoading || !stripe || !elements} id = "submit">
                 <span id = "button-text">
-                    {isLoading ? <div classname = "spinner" id = "spinner"></div> : "Pay now"}
+                    {isLoading ? <div className = "spinner" id = "spinner"></div> : "Pay now"}
                 </span>
             </button>
             {message && <div id = "payment-message">{message}</div>}

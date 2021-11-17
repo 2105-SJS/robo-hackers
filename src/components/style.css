@@ -1,7 +1,9 @@
 .form-input {
-    max-width: 55%;
     display: flex;
+    max-width: 100%;
     flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
 }
 .store-item {
     margin: 30px;
@@ -42,9 +44,12 @@
 } 
 
 .login-header {
-    padding-left: 35px;
+    display: flex;
+    padding-left: 1px;
     background-color: rgb(114, 218, 221);
-    max-width: 5em;
+    flex-direction: column;
+    align-items: center;
+  
 }
 
 .user-input {
@@ -52,13 +57,32 @@
 }
 
 .homepage-image {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
+  
+    background:url(https://dlcdnwebimgs.asus.com/files/media/316F3135-E3DA-4CFA-B659-496E1A98051B/img/bg_intel_wifi6_s.jpg);
+    height: 95vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 20%;
+    background-size: cover;
 }
 
 .details-link {
     text-decoration: none;
+}
+
+body {
+    background: url(https://www.signetcoffee.com/test/online-store/shopsite-images/en-GB/backgrounds/flex-build/lights-blue.jpg);
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+#navbar {
+    color: white;
+}
+
+.headertext{
+    color: white;
 }

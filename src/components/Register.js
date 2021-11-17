@@ -45,7 +45,6 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
     
   return <>
     <h1 className = 'login-header'>Register</h1>
-    <h4>Complete form below to create a new account.</h4>
       <br></br>
     <form className = 'form-input' onSubmit = {handleSubmit}>
       <div class="form-group">
@@ -68,15 +67,13 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
         <br></br>
         <label className = 'user-input' for="inputPassword6">Re-type password:</label>
         <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={secondPassword} onChange={(event) => setSecondPassword(event.target.value)}></input>
-        {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
+        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword} class="btn btn-info">Submit</button>
+        
         {
           password !== secondPassword && <span>Passwords do not match!</span>
         }
-        {/* {
-          password.length < 8 && <div>Password must be at least 8 characters!</div>
-        } */}
+        
         <br></br>
-        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword}>Submit</button>
 
       </div>
     </form>
@@ -84,29 +81,3 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
 }
 
 export default Register;
-
-{/* <h1>| Register User |</h1>
-    <form onSubmit = {handleSubmit} >
-      <div>
-        <input type="text" placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)}></input>
-        <hr></hr>
-        <input type="text" placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)}></input>
-        <hr></hr>
-        <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}></input>
-        <hr></hr>
-        <input type="text" placeholder="Username" value={username} onChange={(event) => setUsername(event.target.value)}></input>
-        <hr></hr>
-        <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-        <hr></hr>
-        <input type="password" placeholder="Re-type Password" value={secondPassword} onChange={(event) => setSecondPassword(event.target.value)}></input>
-        <hr></hr>
-        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword}>Submit</button>
-        <hr></hr>
-        {
-          password !== secondPassword && <span>Passwords do not match!</span>
-        }
-        {
-          password.length < 8 && <div>Password must be at least 8 characters!</div>
-        }
-      </div>
-    </form> */}

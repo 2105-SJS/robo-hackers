@@ -41,7 +41,7 @@ const Orders = ({token, setOrders, orders, products, user}) => {
          </>)
         }
     </div>
-    <h2>${total}</h2>
+    <h2>${Math.floor(total)}</h2>
     <div>
         <Checkout />
     </div>

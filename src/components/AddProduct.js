@@ -26,7 +26,7 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
                 active: true
             }
         })
-        console.log(respObj)
+        
         if(respObj) {
             setPrice(0);
             setToken(localStorage.getItem('token'));
@@ -36,8 +36,9 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
     } 
 
     return <>
-        <div>Add a product</div>
-        <form classname = 'form-input' onSubmit = {handleAdd}>
+        <div className = 'login-header'>Add a product</div>
+        <div>Welcome, {user.username}!</div>
+        <form className = 'form-input' onSubmit = {handleAdd}>
 
         <div class="form-group">
         <label className = 'user-input' for="inputProductName6">Product name:</label>
@@ -68,50 +69,10 @@ const AddProduct = ({user, setToken, fetchProducts}) => {
             </select>
             <br></br>
         
-        <button type='submit'>Add new product</button>
+        <button type='submit' class="btn btn-info">Add new product</button>
         </div>
         </form>
     </>
 }
 
 export default AddProduct;
-
-{/* <form onSubmit = {handleAdd}>
-
-            <label className='label'>Product: </label>
-            <input type="text" required placeholder="name" value={name} onChange = {(event) => setName(event.target.value)}/>
-            <hr></hr>
-
-            <label className='label'>Description:</label>
-            <input type="text" required placeholder="description" value={description} onChange = {(event) => setDescription(event.target.value)}/>
-            <hr></hr>
-
-            <label className='label'>Price: </label>
-            <input type="text" required placeholder="price" value={price} onChange = {(event) => setPrice(event.target.value)}/>
-            <hr></hr>
-
-            <label className='label'>Image?: </label>
-            <input type="text" required placeholder="image url" value={imgURL} onChange = {(event) => setImgURL(event.target.value)}/>
-            <hr></hr>
-
-            <label className='label'>In Stock?: </label>
-            <select onChange= {(event) => setInStock(event.target.value)}>
-            <option value='true'>Yes</option>
-            <option value='false'>No</option>
-            </select>
-            <hr></hr>
-
-            <label className='label'>Category: </label>
-            <input type="text" required placeholder="category" value={category} onChange = {(event) => setCategory(event.target.value)}/>
-            <hr></hr>
-
-            <label className='label'>Active?: </label>
-            <select onChange= {(event) => setActive(event.target.value)}>
-            <option value='true'>Yes</option>
-            <option value='false'>No</option>
-            </select>
-            <hr></hr>
-
-            <button type='submit'>Add new product</button>
-
-        </form> */}

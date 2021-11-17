@@ -13,7 +13,7 @@ const Navigation = ({username, token, setToken, setUsername}) => {
   }
 
   return <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id = "navbar" className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
         <h1 className='nav_title'>Robo Hackers: The Shop</h1>
         <ul id = 'links' className="nav nav-pills">
