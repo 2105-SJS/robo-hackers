@@ -6,7 +6,7 @@ const AddProduct = ({user, setToken}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
-    const [imageURL, setImageURL] = useState('');
+    const [imgURL, setImgURL] = useState('');
     const [inStock, setInStock] = useState(false);
     const [category, setCategory] = useState('');
     const [active, setActive] = useState(true);
@@ -50,7 +50,7 @@ const AddProduct = ({user, setToken}) => {
         <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={price} onChange={(event) => setPrice(event.target.value)}></input>
         <br></br>
         <label className = 'user-input' for="inputImage6">Image?:</label>
-        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={imageURL} onChange={(event) => setImageURL(event.target.value)}></input>
+        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={imgURL} onChange={(event) => setImgURL(event.target.value)}></input>
         <br></br>
         <label className='user-input'>In Stock?: </label>
             <select onChange= {(event) => setInStock(event.target.value)}>
