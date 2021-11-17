@@ -6,7 +6,7 @@ import {
   callAPI
 } from '../api';
 
-const Products = ({products, setProducts, token}) => {
+const Products = ({products, setProducts, token, fetchProducts}) => {
   const history = useHistory();
 
   const handleAddToCart = async (product) => {
@@ -23,12 +23,29 @@ const Products = ({products, setProducts, token}) => {
       throw error;
     }
   }
+
+  const handleDelete = async (product) => {
+    try {
+      await callAPI({
+        url: `products/${ product.productId}`,
+        method: 'DELETE',
+        token
+
+      });
+      await fetchProducts();
+      
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return <>
   {
     products ?
       products.map (product => (
         <SingleProduct key={product.id} product={product} >
           <Link to={`/products/${product.id}`}>Details</Link>
+          isAdmin ? <button onClick ={() => handleDelete}>DELETE</button> : null
           <button onClick={() => {handleAddToCart(product)}}>Add to cart</button>
         </SingleProduct>
       )) : null

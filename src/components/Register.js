@@ -8,6 +8,7 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
+  const [message, setMessage] = useState('');
   const handleSubmit = async (ev) => {
     try {
       ev.preventDefault();
@@ -44,8 +45,39 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
   }
     
   return <>
-    <h1>| Register User |</h1>
-    <form onSubmit = {handleSubmit} >
+    <h1 className = 'login-header'>Register</h1>
+    <h4>Complete form below to create a new account.</h4>
+      <br></br>
+    <form onSubmit = {handleSubmit}>
+      <div class="form-group">
+        <label className = 'username-input' for="inputUsername6">Username:</label>
+        <input type="text" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={username} onChange={(event) => setUsername(event.target.value)}></input>
+        <br></br>
+        <label className = 'password-input' for="inputPassword6">Password:</label>
+        <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+        <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small>
+        <br></br>
+        <br></br>
+        <label className = 'password-input' for="inputPassword6">Re-type password:</label>
+        <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" value={secondPassword} onChange={(event) => setSecondPassword(event.target.value)}></input>
+        {/* <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small> */}
+        {
+          password !== secondPassword && <span>Passwords do not match!</span>
+        }
+        {/* {
+          password.length < 8 && <div>Password must be at least 8 characters!</div>
+        } */}
+        <br></br>
+        <button type="submit" disabled={!password || !username || password.length <8 || password !== secondPassword}>Submit</button>
+
+      </div>
+    </form>
+  </>
+}
+
+export default Register;
+
+{/* <form onSubmit = {handleSubmit} >
       <div>
         <input type="text" placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)}></input>
         <hr></hr>
@@ -68,8 +100,4 @@ const Register = ({setLoggedIn, setToken, setUsername, setPassword, username, pa
           password.length < 8 && <div>Password must be at least 8 characters!</div>
         }
       </div>
-    </form>
-  </>
-}
-
-export default Register;
+    </form> */}
