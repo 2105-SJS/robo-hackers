@@ -82,7 +82,7 @@ const App = () => {
           </Route>
 
           <Route exact path = "/products/:productId">
-            <ProductById products={products} token={token} setProducts={setProducts}/>
+              <ProductById products={products} token={token} setProducts={setProducts} />
           </Route>
           
           <Route exact path = "/account">
